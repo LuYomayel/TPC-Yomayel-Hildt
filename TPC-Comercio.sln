@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPC-Comercio", "TPC-Comercio\TPC-Comercio.csproj", "{1EEB40B2-3793-4AE0-A708-A84C89AF51FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Dominio\Dominio.csproj", "{4E94CA27-655E-41E8-9433-F76C24D2664D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Negocio", "Negocio\Negocio.csproj", "{EADE540C-9B68-40AE-8A80-EFA85A95D576}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1EEB40B2-3793-4AE0-A708-A84C89AF51FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EEB40B2-3793-4AE0-A708-A84C89AF51FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EEB40B2-3793-4AE0-A708-A84C89AF51FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EEB40B2-3793-4AE0-A708-A84C89AF51FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E94CA27-655E-41E8-9433-F76C24D2664D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E94CA27-655E-41E8-9433-F76C24D2664D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E94CA27-655E-41E8-9433-F76C24D2664D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E94CA27-655E-41E8-9433-F76C24D2664D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EADE540C-9B68-40AE-8A80-EFA85A95D576}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EADE540C-9B68-40AE-8A80-EFA85A95D576}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EADE540C-9B68-40AE-8A80-EFA85A95D576}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EADE540C-9B68-40AE-8A80-EFA85A95D576}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {546D0199-8E7C-4D37-9BCE-80740FA17FA2}
+	EndGlobalSection
+EndGlobal

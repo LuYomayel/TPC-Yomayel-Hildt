@@ -1,0 +1,6 @@
+F:\Luciano\Github\TPC-Comercio\Dominio\bin\Debug\Dominio.dll
+F:\Luciano\Github\TPC-Comercio\Dominio\bin\Debug\Dominio.pdb
+F:\Luciano\Github\TPC-Comercio\Dominio\obj\Debug\Dominio.csprojAssemblyReference.cache
+F:\Luciano\Github\TPC-Comercio\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
+F:\Luciano\Github\TPC-Comercio\Dominio\obj\Debug\Dominio.dll
+F:\Luciano\Github\TPC-Comercio\Dominio\obj\Debug\Dominio.pdb
