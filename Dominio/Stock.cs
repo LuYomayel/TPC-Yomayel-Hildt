@@ -8,7 +8,8 @@ namespace Dominio
 {
     public class Stock
     {
-        public int stockMinimo { get; set; }
-        public int stockActual { get; set; }
+        public int Id { get; set; }
+        public int StockMinimo { get; set; }
+        public int StockActual { get; set; }
     }
 }

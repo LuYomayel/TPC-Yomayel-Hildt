@@ -14,7 +14,6 @@ namespace Dominio
         public decimal UltPrecio { get; set; }
         public decimal PorcGanancia { get; set; }
         public string UrlImagen { get; set; }
-        public Proveedor Proveedor { get; set; }
         public Marca Marca { get; set; }
         public Categoria Categoria { get; set; }
         public Stock Stock { get; set; }

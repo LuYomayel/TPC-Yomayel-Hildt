@@ -35,3 +35,51 @@ GO
 SET IDENTITY_INSERT [dbo].[Clientes] OFF
 
 delete FechaNac from Clientes
+
+USE Yomayel_Hildt_DB
+GO
+select * from clientes
+
+use Yomayel_Hildt_DB
+go
+create table Productos(
+	Id int not null identity(1,1) primary key,
+	Nombre varchar(20) not null,
+	Descripcion varchar(200) not null,
+	UltPrecio date not null,
+	PorcGanancia varchar(100) not null,
+	UrlImagen varchar(500) null,
+	IdStock int not null foreign key references Stock(id),
+	IdMarca int not null foreign key references Marcas(id),
+	IdCategoria int not null foreign key references Categorias(id)
+)
+
+use Yomayel_Hildt_DB
+go
+create table Marcas(
+	id int not null primary key identity(1,1),
+	Nombre varchar(20) not null
+)
+
+create table Categorias(
+	id int not null primary key identity(1,1),
+	Nombre varchar(20) not null
+)
+
+create table Stock(
+	id int not null primary key identity(1,1),
+	StockMinimo int not null check(StockMinimo > 0),
+	StockActual int not null
+)
+
+create table Proveedores(
+	id int not null primary key identity(1,1),
+	RazonSocial varchar(100) not null,
+	Descripcion varchar(200) null
+)
+
+create table Proveedores_X_Producto(
+	IdProveedores int not null  foreign key references Proveedores(id),
+	IdProducto int not null  foreign key references Productos(id)
+)
+ALTER table Proveedores_X_Producto ADD PRIMARY KEY (IdProveedores, IdProducto)
