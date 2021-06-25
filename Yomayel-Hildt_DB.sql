@@ -79,3 +79,9 @@ create table Proveedores_X_Producto(
 	IdProducto int not null  foreign key references Productos(id)
 )
 ALTER table Proveedores_X_Producto ADD PRIMARY KEY (IdProveedores, IdProducto)
+
+insert into Marcas (Nombre) values('Samsung')
+insert into Categorias (Nombre) values('Televisor')
+insert into Stock (StockActual, StockMinimo) values (10, 2)
+
+select * from marcas
