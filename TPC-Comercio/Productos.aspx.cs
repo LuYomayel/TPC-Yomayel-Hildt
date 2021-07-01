@@ -10,9 +10,11 @@ namespace TPC_Comercio
 {
     public partial class Productos : System.Web.UI.Page
     {
-        
+        public List<Producto> listaProductos;
         protected void Page_Load(object sender, EventArgs e)
         {
+            ProductoNegocio productoNegocio = new ProductoNegocio();
+            listaProductos = productoNegocio.listar();
 
         }
 

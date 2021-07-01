@@ -80,8 +80,38 @@ create table Proveedores_X_Producto(
 )
 ALTER table Proveedores_X_Producto ADD PRIMARY KEY (IdProveedores, IdProducto)
 
+use Yomayel_Hildt_DB
 insert into Marcas (Nombre) values('Samsung')
+insert into Marcas (Nombre) values('Lenovo')
+insert into Marcas (Nombre) values('Logitech')
+insert into Marcas (Nombre) values('Razer')
+insert into Marcas (Nombre) values('Redragon')
+insert into Marcas (Nombre) values('Motorola')
 insert into Categorias (Nombre) values('Televisor')
+insert into Categorias (Nombre) values('Celular')
+insert into Categorias (Nombre) values('Teclado')
+insert into Categorias (Nombre) values('Mouse')
+insert into Categorias (Nombre) values('Monitor')
+
 insert into Stock (StockActual, StockMinimo) values (10, 2)
 
 select * from marcas
+
+alter table Productos
+add StockMinimo int not null
+
+alter table Productos
+add StockActual int not null
+
+alter table Productos 
+alter column idStock int not null
+
+alter table Productos 
+drop column idStock 
+
+drop table Stock
+
+alter table Productos
+alter column StockActual int null
+
+select * from Productos

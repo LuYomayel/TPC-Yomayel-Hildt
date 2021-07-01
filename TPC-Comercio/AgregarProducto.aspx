@@ -22,30 +22,40 @@
             <label >Porcentaje de ganancia</label>
             <asp:TextBox TextMode="Number" class="form-control" id="txtPorcGanancia" runat="server"></asp:TextBox>
         </div>
-        <div class="form-group">
+        <div class="form-group" runat="server">
             <label >Marca</label>
             
-        
-            <% foreach (Dominio.Marca item in listaMarcas)
-                    { %>
-            <select class="form-control">
+            <asp:Repeater ID="Repeater1" runat="server"></asp:Repeater>
+            
+            
+            <select class="form-control" name="marcaSeleccionada">
+                <% 
+                    foreach (Dominio.Marca item in listaMarcas)
+                    {
+                        %>
+                <option  value="<% =item.Nombre %>">   <% = item.Nombre %></option>
                 
-                <option><% = item.Nombre %></option>
-                
-            </select>
+            
             <% } %>
-        </div>
+            </select>
 
+
+        </div>
+        
         <div class="form-group">
             <label >Categoria</label>
-            <% foreach (Dominio.Categoria item in listaCategorias)
-                    { %>
             
-                <select class="form-control" >
-                <option><% = item.Nombre %></option>
+            
+                <select class="form-control" name="categoriaSeleccionada">
+                    <% 
+                        foreach (Dominio.Categoria item in listaCategorias)
+                        {
+                            %>
+                <option value="<% =item.Nombre %>"> <% = item.Nombre %> </option>
                 
-            </select>
+            
             <% } %>
+                    </select>
         </div>
         
         <asp:button  runat="server" Text="Agregar Producto" ID="btnAgregar" OnClick="btnAgregar_Click"/> 

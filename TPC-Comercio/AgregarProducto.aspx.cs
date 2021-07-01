@@ -11,6 +11,7 @@ namespace TPC_Comercio
 {
     public partial class AgregarProducto : System.Web.UI.Page
     {
+        
         public List<Marca> listaMarcas;
         public List<Categoria> listaCategorias;
         protected void Page_Load(object sender, EventArgs e)
@@ -19,6 +20,7 @@ namespace TPC_Comercio
             CategoriaNegocio categoria = new Negocio.CategoriaNegocio();
             try
             {
+                
                 listaMarcas = marcaNegocio.listar();
                 listaCategorias = categoria.listar();
             }
@@ -36,11 +38,14 @@ namespace TPC_Comercio
             Producto nuevo = new Producto();
             nuevo.Nombre = txtNombre.Text;
             nuevo.Descripcion = txtDescripcion.Text;
-            //nuevo.Marca = parseInt(txtMarca.Text);
-            //nuevo.Categoria = parseInt(txtCategoria.Text);
+            
+            
+
+            //nuevo.Marca.Id = marcaSeleccionada.SelectedIndex;
+            
 
             var cantidad = ((TextBox)sender).Text;
-
+            nuevo.Categoria.Id = Convert.ToInt32(cantidad);
             //nuevo.PorcGanancia =  cantidad;
             nuevo.UrlImagen = txtPorcGanancia.Text;
         }
