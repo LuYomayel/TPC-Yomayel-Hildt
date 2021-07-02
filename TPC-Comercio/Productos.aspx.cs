@@ -14,18 +14,19 @@ namespace TPC_Comercio
         protected void Page_Load(object sender, EventArgs e)
         {
             ProductoNegocio productoNegocio = new ProductoNegocio();
+            
             listaProductos = productoNegocio.listar();
 
         }
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("AgregarProducto.aspx");            
+                      
         }
 
         protected void btnAgregar_Click1(object sender, EventArgs e)
         {
-            Response.Redirect("AgregarProducto.aspx");
+            
         }
     }
 }

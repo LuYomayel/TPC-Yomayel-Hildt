@@ -1,0 +1,6 @@
+F:\Luciano\Github\TPC-Comercio\Dominio\bin\Release\Dominio.dll
+F:\Luciano\Github\TPC-Comercio\Dominio\bin\Release\Dominio.pdb
+F:\Luciano\Github\TPC-Comercio\Dominio\obj\Release\Dominio.csprojAssemblyReference.cache
+F:\Luciano\Github\TPC-Comercio\Dominio\obj\Release\Dominio.csproj.CoreCompileInputs.cache
+F:\Luciano\Github\TPC-Comercio\Dominio\obj\Release\Dominio.dll
+F:\Luciano\Github\TPC-Comercio\Dominio\obj\Release\Dominio.pdb

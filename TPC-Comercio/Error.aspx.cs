@@ -11,7 +11,7 @@ namespace TPC_Comercio
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Lblerror.Text = Session["Error"] == null ? "No hay error" : (string)Session["Error"];
         }
     }
 }

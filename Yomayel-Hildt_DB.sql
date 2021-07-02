@@ -114,4 +114,7 @@ drop table Stock
 alter table Productos
 alter column StockActual int null
 
-select * from Productos
+alter table Productos
+alter column PorcGanancia int not null
+
+

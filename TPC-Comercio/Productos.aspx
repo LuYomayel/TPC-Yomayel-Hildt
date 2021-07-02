@@ -5,7 +5,7 @@
     <%foreach (Dominio.Producto item in listaProductos)
         { %>
         <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
+            <img src="<% = item.UrlImagen %>" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title"><% =item.Nombre %></h5>
                 <p class="card-text"><% =item.Descripcion  %></p>
@@ -13,6 +13,6 @@
             </div>
         </div>
     <% } %>
-    <a class="btn btn-primary" href="AgregarProducto.aspx" role="button">Agregar Producto</a>
+    <a class="btn btn-primary" href="AgregarProducto.aspx" role="button" >Agregar Producto</a>
     
 </asp:Content>

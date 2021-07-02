@@ -13,5 +13,10 @@ namespace TPC_Comercio
         {
             
         }
+
+        protected void Unnamed_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AgregarProducto.aspx");
+        }
     }
 }

@@ -4,36 +4,41 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <form>
+    <form method="post">
         <div class="form-group">
             <label >Nombre del producto</label>
-            <asp:TextBox class="form-control" id="txtNombre" runat="server"></asp:TextBox>
+            <input type="text" name="nombre" class="form-control">
+            <%--<asp:TextBox class="form-control" id="txtNombre" runat="server"></asp:TextBox>--%>
             
         </div>
         <div class="form-group">
             <label >Descripcion</label>
-            <asp:TextBox class="form-control" id="txtDescripcion" runat="server"></asp:TextBox>
+            <input type="text" name="descripcion" class="form-control">
+            
         </div>
         <div class="form-group">
             <label >Url Imagen</label>
-            <asp:TextBox class="form-control" id="txtUrlImagen" runat="server"></asp:TextBox>
+            <input type="text" name="urlImagen" class="form-control">
+            
         </div>
         <div class="form-group">
             <label >Porcentaje de ganancia</label>
-            <asp:TextBox TextMode="Number" class="form-control" id="txtPorcGanancia" runat="server"></asp:TextBox>
+            <input type="number" name="porcGanancia" class="form-control">
+        </div>
+        <div class="form-group">
+            <label >Stock Minimo</label>
+            <input type="number" name="stock" class="form-control">
         </div>
         <div class="form-group" runat="server">
             <label >Marca</label>
             
-            <asp:Repeater ID="Repeater1" runat="server"></asp:Repeater>
-            
-            
-            <select class="form-control" name="marcaSeleccionada">
+            <select class="form-control" name="marcaSeleccionada" >
+                
                 <% 
                     foreach (Dominio.Marca item in listaMarcas)
                     {
                         %>
-                <option  value="<% =item.Nombre %>">   <% = item.Nombre %></option>
+                <option value="<% =item.Id %>">   <% = item.Nombre %></option>
                 
             
             <% } %>
@@ -51,14 +56,21 @@
                         foreach (Dominio.Categoria item in listaCategorias)
                         {
                             %>
-                <option value="<% =item.Nombre %>"> <% = item.Nombre %> </option>
+                <option value="<% =item.Id %>"> <% = item.Nombre %> </option>
                 
             
             <% } %>
                     </select>
         </div>
         
-        <asp:button  runat="server" Text="Agregar Producto" ID="btnAgregar" OnClick="btnAgregar_Click"/> 
-    </form>
+        <div>
+            <label>&nbsp;</label>
+            <input type="submit" value="Agregar Producto" class="btn btn-primary" />
+            
+        </div> 
 
+
+        </form>
+
+        
 </asp:Content>

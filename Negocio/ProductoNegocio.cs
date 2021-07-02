@@ -26,7 +26,7 @@ namespace Negocio
                     
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    aux.UrlImagen = (string)datos.Lector["ImagenUrl"];
+                    aux.UrlImagen = (string)datos.Lector["UrlImagen"];
 
                     lista.Add(aux);
                 }
@@ -45,8 +45,8 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                string valores = "values( '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "', '" + nuevo.UrlImagen + "', '" + nuevo.PorcGanancia + "', " + nuevo.Marca.Id + ", " + nuevo.Categoria.Id + ")";
-                datos.setearConsulta("insert into ARTICULOS (Nombre, Descripcion, ImagenUrl, PorcGanancia, IdMarca, IdCategoria) " + valores);
+                string valores = "values( '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "', '" + nuevo.UrlImagen + "', " + nuevo.PorcGanancia + ", " + nuevo.Marca + ", " + nuevo.Categoria + ", "+ nuevo.StockMinimo +")";
+                datos.setearConsulta("insert into Productos (Nombre, Descripcion, UrlImagen, PorcGanancia, IdMarca, IdCategoria, StockMinimo) " + valores);
 
                 datos.ejectutarAccion();
 

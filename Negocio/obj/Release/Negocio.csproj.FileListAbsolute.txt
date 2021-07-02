@@ -1,0 +1,9 @@
+F:\Luciano\Github\TPC-Comercio\Negocio\bin\Release\Negocio.dll
+F:\Luciano\Github\TPC-Comercio\Negocio\bin\Release\Negocio.pdb
+F:\Luciano\Github\TPC-Comercio\Negocio\bin\Release\Dominio.dll
+F:\Luciano\Github\TPC-Comercio\Negocio\bin\Release\Dominio.pdb
+F:\Luciano\Github\TPC-Comercio\Negocio\obj\Release\Negocio.csprojAssemblyReference.cache
+F:\Luciano\Github\TPC-Comercio\Negocio\obj\Release\Negocio.csproj.CoreCompileInputs.cache
+F:\Luciano\Github\TPC-Comercio\Negocio\obj\Release\Negocio.csproj.CopyComplete
+F:\Luciano\Github\TPC-Comercio\Negocio\obj\Release\Negocio.dll
+F:\Luciano\Github\TPC-Comercio\Negocio\obj\Release\Negocio.pdb
