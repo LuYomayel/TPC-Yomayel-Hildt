@@ -29,23 +29,7 @@ namespace TPC_Comercio
             var porcGanancia = Request.Form["porcGanancia"];
             var idMarca = (Request.Form["marcaSeleccionada"]);
             var idCategoria = (Request.Form["categoriaSeleccionada"]);
-            /*
-            nuevo.Nombre = Request.Form["nombre"];
-
-            nuevo.Descripcion = Request.Form["descripcion"];
-
-            nuevo.UrlImagen = Request.Form["urlImagen"];
-
-            nuevo.StockMinimo = Convert.ToInt32(Request.Form["stock"]); 
-
-            nuevo.PorcGanancia = Convert.ToInt32(Request.Form["porcGanancia"]);
             
-            nuevo.Marca.Id = Convert.ToInt32(Request.Form["marcaSeleccionada"]);
-            nuevo.Categoria.Id = Convert.ToInt32(Request.Form["categoriaSeleccionada"]);
-            */
-
-
-            lbl1.Text = nuevo.PorcGanancia.ToString();
 
             try
             {
@@ -87,48 +71,7 @@ namespace TPC_Comercio
             
         }
 
-        protected void btnAgregar_Click(object sender, EventArgs e)
-        {
-            
-            
-            /*
-                ProductoNegocio negocio = new ProductoNegocio();
-                Producto nuevo = new Producto();
-                nuevo.Nombre = txtNombre.Text;
-                nuevo.Descripcion = txtDescripcion.Text;
-                nuevo.PorcGanancia = Convert.ToInt32(txtPorcGanancia.Text);
-                nuevo.StockMinimo = Convert.ToInt32(txtStock.Text);
-
-                nuevo.Marca.Id = Convert.ToInt32(Request.Form["marcaSeleccionada"]);
-                nuevo.Categoria.Id = Convert.ToInt32(Request.Form["categoriaSeleccionada"]);
-                try
-                {
-                    negocio.agregar(nuevo);
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
-            */
-
-            
-        }
-
-        protected void Button1_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        protected void btnAgregar_Load(object sender, EventArgs e)
-        {
-            
-        }
-
-        protected void btnAgregar_Click1(object sender, EventArgs e)
-        {
-            
-        }
+        
 
         public bool validarCampos()
         {

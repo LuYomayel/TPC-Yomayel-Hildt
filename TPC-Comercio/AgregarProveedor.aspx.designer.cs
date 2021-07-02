@@ -11,7 +11,7 @@ namespace TPC_Comercio
 {
 
 
-    public partial class Proveedores
+    public partial class AgregarProveedor
     {
     }
 }
