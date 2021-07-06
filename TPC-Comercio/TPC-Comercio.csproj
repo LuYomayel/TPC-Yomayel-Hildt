@@ -107,6 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AgregarCliente.aspx" />
     <Content Include="AgregarProducto.aspx" />
     <Content Include="AgregarProveedor.aspx" />
     <Content Include="Clientes.aspx" />
@@ -264,6 +265,13 @@
     <Content Include="Scripts\popper-utils.js.map" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgregarCliente.aspx.cs">
+      <DependentUpon>AgregarCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AgregarCliente.aspx.designer.cs">
+      <DependentUpon>AgregarCliente.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AgregarProducto.aspx.cs">
       <DependentUpon>AgregarProducto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

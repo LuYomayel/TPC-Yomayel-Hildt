@@ -3,17 +3,38 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    
-    <table class="table ">
+    <asp:GridView ID="gvClientes" runat="server" OnRowDataBound="gvClientes_RowDataBound" OnRowDeleting="gvClientes_RowDeleting" CssClass="form">
+        <Columns>
+            <asp:ButtonField ButtonType="Button" CommandName="Delete" Text="Eliminar" ControlStyle-CssClass="btn btn-primary"/>
+        </Columns>
+        
+    </asp:GridView>
+    <asp:Label ID="Message" ForeColor="Red" runat="server" />
+    <%--<table class="table ">
       <thead class="thead-dark">
           <tr>
           <th scope="col">#</th>
           <th scope="col">Nombre</th>
           <th scope="col">Apellido</th>
           <th scope="col">Telefono</th>
+          <th scope="col">Eliminar</th>
         </tr>
       </thead>
         <tbody>
+            <asp:Repeater ID="Repeater1" runat="server">
+                <ItemTemplate>
+                    <tr>
+                        <th scope="row"><%#Eval("Id")%></th>
+                        <td><%#Eval("Nombre")%></td>
+                        <td><%#Eval("Apellido")%></td>
+                        <td><%#Eval("Telefono")%></td>
+                        <td><asp:Button ID="btnEliminar" runat="server" Text="Eliminar" OnClick="btnEliminar_Click" CommandArgument='<%#Eval("Id")%>' CssClass="btn btn-primary" AutoPostBack="true"/></td>
+                    </tr>
+                </ItemTemplate>
+            </asp:Repeater>
+        </tbody>
+    </table>--%>
+    <%--
           <%foreach (Negocio.Cliente item in lista)
               { %>
         <tr>
@@ -21,10 +42,12 @@
           <td><% = item.Nombre %></td>
           <td><% = item.Apellido %></td>
           <td><% = item.Telefono %></td>
+            
+          <td></td>
         </tr>
       <%} %>
-    </table>
+    </table>--%>
+    
 
-
-    <asp:GridView ID="gvClientes" runat="server"></asp:GridView>
+    <a href="AgregarCliente.aspx" class="btn btn-primary">Agregar Cliente</a>
 </asp:Content>

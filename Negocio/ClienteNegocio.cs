@@ -42,5 +42,47 @@ namespace Negocio
             }
 
         }
+        public void agregar(Cliente nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                
+                string valores = "values( '" + nuevo.Nombre + "', '" + nuevo.Apellido + "',CAST('" + nuevo.FechaNac + "' AS DATE), " + nuevo.Telefono + ", '" + nuevo.Direccion + "')";
+                datos.setearConsulta("insert into Clientes (Nombre, Apellido, FechaNac, Telefono, Direccion) " + valores);
+
+                datos.ejectutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public void eliminar(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+
+                
+                datos.setearConsulta("delete Clientes where id=" + id);
+
+                datos.ejectutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

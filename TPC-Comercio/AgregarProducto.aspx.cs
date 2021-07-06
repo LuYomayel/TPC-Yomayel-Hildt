@@ -39,13 +39,7 @@ namespace TPC_Comercio
                 listaCategorias = categoria.listar();
 
                 
-                if (nombre != null ) nuevo.Nombre = nombre;
-                if (descripcion != null) nuevo.Descripcion = descripcion;
-                if (urlImagen != null) nuevo.UrlImagen = urlImagen;
-                if (stock != null && stock != "") nuevo.StockMinimo = int.Parse(stock);
-                if (porcGanancia != null && porcGanancia != "") nuevo.PorcGanancia = int.Parse(porcGanancia);
-                if (idMarca != null && idMarca != "") nuevo.Marca = new Marca(idMarca);
-                if (idCategoria != null && idCategoria != "") nuevo.Categoria = new Categoria(idCategoria);
+                
 
                 if (validarCampos())
                 {

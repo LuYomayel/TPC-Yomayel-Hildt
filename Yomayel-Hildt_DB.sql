@@ -118,3 +118,4 @@ alter table Productos
 alter column PorcGanancia int not null
 
 
+
