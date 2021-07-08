@@ -58,6 +58,7 @@ namespace TPC_Comercio
 
         protected void gvClientes_RowDataBound(object sender, GridViewRowEventArgs e)
         {
+            /*
             if (e.Row.RowType == DataControlRowType.Header)
             {
                 
@@ -71,6 +72,7 @@ namespace TPC_Comercio
                 e.Row.Cells[5].Visible = false;
                 e.Row.Cells[4].Visible = false;
             }
+            */
         }
 
         

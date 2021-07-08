@@ -3,12 +3,24 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <asp:GridView ID="gvClientes" runat="server" OnRowDataBound="gvClientes_RowDataBound" OnRowDeleting="gvClientes_RowDeleting" CssClass="form">
-        <Columns>
-            <asp:ButtonField ButtonType="Button" CommandName="Delete" Text="Eliminar" ControlStyle-CssClass="btn btn-primary"/>
-        </Columns>
+
+
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
+            <asp:GridView ID="gvClientes" runat="server" OnRowDataBound="gvClientes_RowDataBound" OnRowDeleting="gvClientes_RowDeleting" CssClass="table table-bordered" AutoGenerateColumns="false" >
+                <Columns>
+                    <asp:BoundField HeaderText="Nombre" DataField="Nombre"/>
+                    <asp:BoundField HeaderText="Apellido" DataField="Apellido"/>
+                    <asp:BoundField HeaderText="Telefono" DataField="Telefono"/>
+                    <asp:ButtonField ButtonType="Button" CommandName="Delete" Text="Eliminar" ControlStyle-CssClass="btn btn-primary">
+                    <ControlStyle CssClass="btn btn-primary"></ControlStyle>
+                    </asp:ButtonField>
+                    
+                </Columns>
         
-    </asp:GridView>
+            </asp:GridView>
+        </ContentTemplate>
+    </asp:UpdatePanel>
     <asp:Label ID="Message" ForeColor="Red" runat="server" />
     <%--<table class="table ">
       <thead class="thead-dark">

@@ -4,29 +4,24 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
+            <asp:GridView ID="gvProveedores" runat="server" CssClass="table table-bordered" AutoGenerateColumns="false" >
+                <Columns>
+                    <asp:BoundField HeaderText="Razon Social" DataField="razonSocial"/>
+                    <asp:BoundField HeaderText="Descripcion" DataField="Descripcion"/>
+                    <asp:ButtonField ButtonType="Button" CommandName="Delete" Text="Eliminar" ControlStyle-CssClass="btn btn-primary">
+                    <ControlStyle CssClass="btn btn-primary"></ControlStyle>
+                    </asp:ButtonField>
+                    
+                </Columns>
+        
+            </asp:GridView>
+        </ContentTemplate>
+    </asp:UpdatePanel>
 
-    <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Razon Social</th>
-      <th scope="col">Descripcion</th>
-    </tr>
-  </thead>
-  <tbody>
-      <%foreach (Dominio.Proveedor proveedor in listaProveedores)
-          {
-              %>
-    <tr>
-      <th scope="row"><% = proveedor.Id %></th>
-      <td><% = proveedor.RazonSocial %></td>
-      <td><% = proveedor.Descripcion %></td>
-      
-    </tr>
-      <% }%>
+
     
-  </tbody>
-</table>
 
     <a class="btn btn-primary left" href="AgregarProveedor.aspx" role="button" >Agregar Proveedor</a>
 

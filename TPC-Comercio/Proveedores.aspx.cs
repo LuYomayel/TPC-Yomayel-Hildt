@@ -15,6 +15,9 @@ namespace TPC_Comercio
         {
             ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
             listaProveedores = proveedorNegocio.listar();
+
+            gvProveedores.DataSource = listaProveedores;
+            gvProveedores.DataBind();
         }
     }
 }
