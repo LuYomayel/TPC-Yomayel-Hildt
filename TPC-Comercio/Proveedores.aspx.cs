@@ -19,5 +19,26 @@ namespace TPC_Comercio
             gvProveedores.DataSource = listaProveedores;
             gvProveedores.DataBind();
         }
+
+        protected void gvProveedores_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            try
+            {
+
+                int id = Convert.ToInt32(e.Values[0]);
+                ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
+
+                if (id != 0)
+                    proveedorNegocio.eliminar(id);
+                listaProveedores = proveedorNegocio.listar();
+                gvProveedores.DataSource = listaProveedores;
+                gvProveedores.DataBind();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
     }
 }

@@ -45,8 +45,12 @@ namespace TPC_Comercio
                 
                 int id = Convert.ToInt32(e.Values[0]);
                 ClienteNegocio clienteNegocio = new ClienteNegocio();
+                Message.Text = id.ToString();
                 if(id != 0)
                 clienteNegocio.eliminar(id);
+                lista = clienteNegocio.listar();
+                gvClientes.DataSource = lista;
+                gvClientes.DataBind();
             }
             catch (Exception ex)
             {

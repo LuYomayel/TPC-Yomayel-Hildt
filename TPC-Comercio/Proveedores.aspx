@@ -6,8 +6,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
-            <asp:GridView ID="gvProveedores" runat="server" CssClass="table table-bordered" AutoGenerateColumns="false" >
+            <asp:GridView ID="gvProveedores" runat="server" CssClass="table table-bordered" AutoGenerateColumns="false" OnRowDeleting="gvProveedores_RowDeleting">
                 <Columns>
+                    <asp:BoundField HeaderText="Id" DataField="Id"/>
                     <asp:BoundField HeaderText="Razon Social" DataField="razonSocial"/>
                     <asp:BoundField HeaderText="Descripcion" DataField="Descripcion"/>
                     <asp:ButtonField ButtonType="Button" CommandName="Delete" Text="Eliminar" ControlStyle-CssClass="btn btn-primary">
