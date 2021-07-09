@@ -34,5 +34,47 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public void agregar(Marca marca)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                string valores = "values( '" + marca.Nombre + "')";
+                datos.setearConsulta("insert into Marcas(Nombre) " + valores);
+
+                datos.ejectutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void actualizar(Marca marca)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                string consulta = "update marcas set nombre = '" + marca.Nombre + "' where id = " + marca.Id.ToString() + ";";
+                datos.setearConsulta(consulta);
+
+                datos.ejectutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
