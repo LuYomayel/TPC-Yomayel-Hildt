@@ -7,16 +7,18 @@
 
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
-            <asp:GridView ID="gvClientes" runat="server" OnRowDataBound="gvClientes_RowDataBound" OnRowDeleting="gvClientes_RowDeleting" CssClass="table table-bordered" AutoGenerateColumns="false">
+            <asp:GridView ID="gvClientes" runat="server" OnRowDataBound="gvClientes_RowDataBound" OnRowDeleting="gvClientes_RowDeleting" CssClass="table table-bordered" AutoGenerateColumns="False" OnRowEditing="gvClientes_RowEditing">
                 <Columns>
-                    <asp:BoundField HeaderText="Id" DataField="Id"/>
+                    <asp:BoundField HeaderText="Id" DataField="Id" />
                     <asp:BoundField HeaderText="Nombre" DataField="Nombre"/>
                     <asp:BoundField HeaderText="Apellido" DataField="Apellido"/>
                     <asp:BoundField HeaderText="Telefono" DataField="Telefono"/>
                     <asp:ButtonField ButtonType="Button" CommandName="Delete" Text="Eliminar" ControlStyle-CssClass="btn btn-primary">
+                    
                     <ControlStyle CssClass="btn btn-primary"></ControlStyle>
                     </asp:ButtonField>
                     
+                    <asp:ButtonField ButtonType="Button" CommandName="Edit" Text="Editar" />
                 </Columns>
         
             </asp:GridView>

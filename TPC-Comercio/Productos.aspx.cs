@@ -16,7 +16,9 @@ namespace TPC_Comercio
             ProductoNegocio productoNegocio = new ProductoNegocio();
             
             listaProductos = productoNegocio.listar();
-
+            Session.Add("listaProductos", listaProductos);
+            var id = Request.Form["id"];
+            lblEjemplo.InnerText = id;
         }
 
         protected void btnAgregar_Click(object sender, EventArgs e)
@@ -31,7 +33,8 @@ namespace TPC_Comercio
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
-
-        }
+            
+            Response.Redirect("index.aspx");
+        }   
     }
 }

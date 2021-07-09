@@ -79,6 +79,22 @@ namespace TPC_Comercio
             */
         }
 
-        
+        protected void gvClientes_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            try
+            {
+
+                //gvClientes.EditIndex = e.NewEditIndex;
+                //gvClientes.DataBind();
+                int id = int.Parse(gvClientes.Rows[e.NewEditIndex].Cells[0].Text);
+                Session.Add("idCliente", id);
+                Response.Redirect("ModificarCliente.aspx");
+            }
+            catch (Exception ex)
+            {
+                Message.Text = ex.ToString();
+                throw;
+            }
+        }
     }
 }

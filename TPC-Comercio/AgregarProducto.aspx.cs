@@ -13,12 +13,12 @@ namespace TPC_Comercio
     {
         
         public List<Marca> listaMarcas;
-        public List<Categoria> listaCategorias;
+        public List<Dominio.Categoria> listaCategorias;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             MarcaNegocio marcaNegocio = new MarcaNegocio();
-            CategoriaNegocio categoria = new Negocio.CategoriaNegocio();
+            CategoriaNegocio categoria = new CategoriaNegocio();
             ProductoNegocio producto = new ProductoNegocio();
             Producto nuevo = new Producto();
             var nombre = Request.Form["nombre"];
@@ -38,9 +38,6 @@ namespace TPC_Comercio
                 listaMarcas = marcaNegocio.listar();
                 listaCategorias = categoria.listar();
 
-                
-                
-
                 if (validarCampos())
                 {
                     nuevo.Nombre = nombre;
@@ -50,7 +47,7 @@ namespace TPC_Comercio
                     nuevo.PorcGanancia = int.Parse(porcGanancia);
                     
                     nuevo.Marca = new Marca(idMarca);
-                    nuevo.Categoria = new Categoria(idCategoria);
+                    nuevo.Categoria = new Dominio.Categoria(idCategoria);
                    
                     producto.agregar(nuevo);
                 }

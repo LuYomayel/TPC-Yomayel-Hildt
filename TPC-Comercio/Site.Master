@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - Mi aplicación ASP.NET</title>
+    <%--<title><%: Page.Title %> - Mi aplicación ASP.NET</title>--%>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -52,12 +52,18 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="Clientes.aspx">Clientes</a>
-                        </li
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="Proveedores.aspx">Proveedores</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="Productos.aspx">Productos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Marcas.aspx">Marcas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Categorias.aspx">Categorias</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownTra" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -70,10 +76,10 @@
                         </li>
                           
                     </ul>
-                    <form class="form-inline my-2 my-lg-0">
+                    <%--<form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-                    </form>
+                    </form>--%>
               </div>
         </nav>
         <div class="container body-content">
