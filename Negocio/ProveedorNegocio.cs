@@ -15,7 +15,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("select * from Proveedores where estado = 1");
+                datos.setearConsulta("select id, descripcion, razonsocial from Proveedores where estado = 1");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -98,6 +98,37 @@ namespace Negocio
             finally
             {
                 datos.cerrarConexion();
+            }
+        }
+
+        public Proveedor GetProveedor(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("select id, descripcion, razonsocial from proveedores where estado = 1 and id= " + id);
+                datos.ejecutarLectura();
+
+                Proveedor proveedor = new Proveedor();
+
+                while (datos.Lector.Read())
+                {
+                    proveedor.Id = (int)datos.Lector["Id"];
+
+                    proveedor.Descripcion = (string)datos.Lector["Descripcion"];
+                    proveedor.RazonSocial = (string)datos.Lector["RazonSocial"];
+                }
+
+                if (proveedor.Id != 0)
+                {
+                    return proveedor;
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
     }

@@ -101,5 +101,36 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public Producto GetProducto(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("select id, nombre, descripcion, urlimagen from Productos where estado = 1 and id= " + id );
+                datos.ejecutarLectura();
+
+                Producto producto = new Producto();
+
+                while (datos.Lector.Read())
+                {
+                    producto.Id = (int)datos.Lector["Id"];
+                    producto.Nombre = (string)datos.Lector["Nombre"];
+                    producto.Descripcion = (string)datos.Lector["Descripcion"];
+                    producto.UrlImagen = (string)datos.Lector["UrlImagen"];
+                }
+
+                if(producto.Id != 0)
+                {
+                    return producto;
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
