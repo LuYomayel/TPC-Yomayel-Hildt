@@ -28,5 +28,10 @@ namespace TPC_Comercio
         {
             
         }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -53,7 +53,7 @@ create table Productos(
 	Id int not null identity(1,1) primary key,
 	Nombre varchar(20) not null,
 	Descripcion varchar(200) not null,
-	UltPrecio date not null,
+	UltPrecio int null,
 	PorcGanancia int not null,
 	UrlImagen varchar(500) null,
 	StockActual int not null,
@@ -90,7 +90,11 @@ insert into Categorias (Nombre) values('Teclado')
 insert into Categorias (Nombre) values('Mouse')
 insert into Categorias (Nombre) values('Monitor')
 
+Alter table Productos
+drop column UltPrecio 
 
+Alter table Productos
+add  UltPrecio int null
 
 
 

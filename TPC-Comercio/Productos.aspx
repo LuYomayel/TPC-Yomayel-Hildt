@@ -10,8 +10,8 @@
                 <img src="<% = item.UrlImagen %>" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title"><% =item.Nombre %></h5>
-                    <p class="card-text"><% =item.Descripcion  %></p>
-                
+                    <p class="card-text" hidden="hidden"><% =item.Descripcion  %></p>
+                    <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" OnClick="btnEliminar_Click" />
                 </div>
             </div>
         

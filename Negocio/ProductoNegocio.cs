@@ -60,6 +60,7 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+<<<<<<< HEAD
 
         public void actualizar(Producto producto)
         {
@@ -82,11 +83,14 @@ namespace Negocio
             }
         }
 
+=======
+>>>>>>> bb68070 (wipwip)
         public void eliminar(int id)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
+<<<<<<< HEAD
                 datos.setearConsulta("update productos set estado = 0 where id=" + id.ToString());
 
                 datos.ejectutarAccion();
@@ -95,6 +99,15 @@ namespace Negocio
             catch (Exception ex)
             {
                 throw ex;
+=======
+                datos.setearConsulta("delete Productos where id= " + id);
+                datos.ejectutarAccion();
+            }
+            catch (Exception)
+            {
+
+                throw;
+>>>>>>> bb68070 (wipwip)
             }
             finally
             {
