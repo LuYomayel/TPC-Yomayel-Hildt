@@ -15,7 +15,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("select * from Proveedores");
+                datos.setearConsulta("select * from Proveedores where estado = 1");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -45,7 +45,7 @@ namespace Negocio
             try
             {
                 string valores = "values( '" + nuevo.Descripcion + "', '" + nuevo.RazonSocial + "')";
-                datos.setearConsulta("insert into Proveedores (Descripcion, RazonSocial) " + valores);
+                datos.setearConsulta("insert into proveedores (Descripcion, RazonSocial) " + valores);
 
                 datos.ejectutarAccion();
 
@@ -59,14 +59,34 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public void actualizar(Proveedor proveedor)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                string consulta = "update proveedores set descripcion = '" + proveedor.Descripcion + "', razonsocial = '" + proveedor.RazonSocial + "' where id = " + proveedor.Id.ToString() + ";";
+                datos.setearConsulta(consulta);
+
+                datos.ejectutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public void eliminar(int id)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-
-
-                datos.setearConsulta("delete Proveedores where id=" + id);
+                datos.setearConsulta("update proveedores set estado = 0 where id=" + id.ToString() + ";");
 
                 datos.ejectutarAccion();
 

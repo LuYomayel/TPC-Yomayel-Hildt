@@ -15,7 +15,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("select id, nombre from Marcas");
+                datos.setearConsulta("select id, nombre from Marcas where estado = 1");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -63,6 +63,27 @@ namespace Negocio
             {
                 string consulta = "update marcas set nombre = '" + marca.Nombre + "' where id = " + marca.Id.ToString() + ";";
                 datos.setearConsulta(consulta);
+
+                datos.ejectutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+
+        public void eliminar(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("update marcas set estado = 0 where id=" + id.ToString());
 
                 datos.ejectutarAccion();
 

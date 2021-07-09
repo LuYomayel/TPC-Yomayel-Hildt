@@ -16,14 +16,14 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("select * from Clientes");
+                datos.setearConsulta("select id, nombre, apellido, fechanac, direccion, telefono from Clientes where estado = 1");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
                     Cliente aux = new Cliente();
-                    aux.Id = (int)datos.Lector["Id"];
 
+                    aux.Id = (int)datos.Lector["Id"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Apellido = (string)datos.Lector["Apellido"];
                     aux.FechaNac = (DateTime)datos.Lector["FechaNac"];
@@ -63,14 +63,34 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public void actualizar(Cliente cliente)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                string consulta = "update clientes set nombre = '" + cliente.Nombre + "', apellido = '" + cliente.Apellido + "', FechaNac = CAST('" + cliente.FechaNac + "' AS DATE), Telefono = '" + cliente.Telefono + "', Direccion = '" + cliente.Direccion + "' where id = " + cliente.Id.ToString() + ";";
+                datos.setearConsulta(consulta);
+
+                datos.ejectutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public void eliminar(int id)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-
-                
-                datos.setearConsulta("delete Clientes where id=" + id);
+                datos.setearConsulta("update clientes set estado = 0 where id=" + id.ToString());
 
                 datos.ejectutarAccion();
 
