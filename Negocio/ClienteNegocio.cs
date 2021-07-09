@@ -104,5 +104,39 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public Cliente getCliente(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            Cliente cliente = new Cliente();
+
+            try
+            {
+                datos.setearConsulta("select id, nombre, apellido, fechanac, direccion, telefono from Clientes where estado = 1 and id= " + id);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    cliente.Id = (int)datos.Lector["Id"];
+                    cliente.Nombre = (string)datos.Lector["Nombre"];
+                    cliente.Apellido = (string)datos.Lector["Apellido"];
+                    cliente.FechaNac = (DateTime)datos.Lector["FechaNac"];
+                    cliente.Direccion = (string)datos.Lector["Direccion"];
+                    cliente.Telefono = (int)datos.Lector["Telefono"];
+                }
+
+                if(cliente.Id != 0)
+                {
+                    return cliente;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
     }
 }

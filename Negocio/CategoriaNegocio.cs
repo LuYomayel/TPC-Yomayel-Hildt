@@ -98,5 +98,34 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public Marca GetCategoria(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("select id, nombre from categorias where estado = 1 and id= " + id);
+                datos.ejecutarLectura();
+
+                Categoria categoria = new Categoria();
+
+                while (datos.Lector.Read())
+                {
+                    categoria.Id = (int)datos.Lector["id"];
+                    categoria.Nombre = (string)datos.Lector["nombre"];
+                }
+
+                if (categoria.Id != 0)
+                {
+                    return categoria;
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
