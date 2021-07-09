@@ -7,3 +7,12 @@ F:\Luciano\Github\TPC-Comercio\Negocio\obj\Debug\Negocio.csproj.CoreCompileInput
 F:\Luciano\Github\TPC-Comercio\Negocio\obj\Debug\Negocio.csproj.CopyComplete
 F:\Luciano\Github\TPC-Comercio\Negocio\obj\Debug\Negocio.dll
 F:\Luciano\Github\TPC-Comercio\Negocio\obj\Debug\Negocio.pdb
+C:\Users\Tadeo-PC\Desktop\Repo\Negocio\bin\Debug\Negocio.dll
+C:\Users\Tadeo-PC\Desktop\Repo\Negocio\bin\Debug\Negocio.pdb
+C:\Users\Tadeo-PC\Desktop\Repo\Negocio\bin\Debug\Dominio.dll
+C:\Users\Tadeo-PC\Desktop\Repo\Negocio\bin\Debug\Dominio.pdb
+C:\Users\Tadeo-PC\Desktop\Repo\Negocio\obj\Debug\Negocio.csproj.AssemblyReference.cache
+C:\Users\Tadeo-PC\Desktop\Repo\Negocio\obj\Debug\Negocio.csproj.CoreCompileInputs.cache
+C:\Users\Tadeo-PC\Desktop\Repo\Negocio\obj\Debug\Negocio.csproj.CopyComplete
+C:\Users\Tadeo-PC\Desktop\Repo\Negocio\obj\Debug\Negocio.dll
+C:\Users\Tadeo-PC\Desktop\Repo\Negocio\obj\Debug\Negocio.pdb

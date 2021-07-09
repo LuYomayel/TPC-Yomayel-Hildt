@@ -4,3 +4,9 @@ F:\Luciano\Github\TPC-Comercio\Dominio\obj\Debug\Dominio.csprojAssemblyReference
 F:\Luciano\Github\TPC-Comercio\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
 F:\Luciano\Github\TPC-Comercio\Dominio\obj\Debug\Dominio.dll
 F:\Luciano\Github\TPC-Comercio\Dominio\obj\Debug\Dominio.pdb
+C:\Users\Tadeo-PC\Desktop\Repo\Dominio\bin\Debug\Dominio.dll
+C:\Users\Tadeo-PC\Desktop\Repo\Dominio\bin\Debug\Dominio.pdb
+C:\Users\Tadeo-PC\Desktop\Repo\Dominio\obj\Debug\Dominio.csproj.AssemblyReference.cache
+C:\Users\Tadeo-PC\Desktop\Repo\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\Tadeo-PC\Desktop\Repo\Dominio\obj\Debug\Dominio.dll
+C:\Users\Tadeo-PC\Desktop\Repo\Dominio\obj\Debug\Dominio.pdb

@@ -47,20 +47,17 @@ create table Categorias(
 	Nombre varchar(20) not null
 )
 
-create table Stock(
-	id int not null primary key identity(1,1),
-	StockMinimo int not null check(StockMinimo > 0),
-	StockActual int not null
-)
+
 go
 create table Productos(
 	Id int not null identity(1,1) primary key,
 	Nombre varchar(20) not null,
 	Descripcion varchar(200) not null,
 	UltPrecio date not null,
-	PorcGanancia varchar(100) not null,
+	PorcGanancia int not null,
 	UrlImagen varchar(500) null,
-	IdStock int not null foreign key references Stock(id),
+	StockActual int not null,
+	StockMinimo int not null,
 	IdMarca int not null foreign key references Marcas(id),
 	IdCategoria int not null foreign key references Categorias(id)
 )
@@ -93,29 +90,9 @@ insert into Categorias (Nombre) values('Teclado')
 insert into Categorias (Nombre) values('Mouse')
 insert into Categorias (Nombre) values('Monitor')
 
-insert into Stock (StockActual, StockMinimo) values (10, 2)
 
-select * from marcas
 
-alter table Productos
-add StockMinimo int not null
 
-alter table Productos
-add StockActual int not null
-
-alter table Productos 
-alter column idStock int not null
-
-alter table Productos 
-drop column idStock 
-
-drop table Stock
-
-alter table Productos
-alter column StockActual int null
-
-alter table Productos
-alter column PorcGanancia int not null
 
 
 
