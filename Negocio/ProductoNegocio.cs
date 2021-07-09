@@ -16,7 +16,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("select * from Productos");
+                datos.setearConsulta("select id, nombre, descripcion, urlimagen from Productos where estado = 1");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -47,6 +47,47 @@ namespace Negocio
             {
                 string valores = "values( '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "', '" + nuevo.UrlImagen + "', " + nuevo.PorcGanancia + ", " + nuevo.Marca + ", " + nuevo.Categoria + ", "+ nuevo.StockMinimo +")";
                 datos.setearConsulta("insert into Productos (Nombre, Descripcion, UrlImagen, PorcGanancia, IdMarca, IdCategoria, StockMinimo) " + valores);
+
+                datos.ejectutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void actualizar(Producto producto)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                string consulta = "update clientes set nombre = '" + producto.Nombre + "', Descripcion = '" + producto.Descripcion + "', UrlImagen = '" + producto.UrlImagen + "', PorcGanancia = '" + producto.PorcGanancia + "', IdMarca = '" + producto.Marca + "', IdCategoria = '" + producto.Categoria + "', StockMinimo = '" + producto.StockMinimo + "' where id = " + producto.Id.ToString() + ";";
+                datos.setearConsulta(consulta);
+
+                datos.ejectutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void eliminar(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("update productos set estado = 0 where id=" + id.ToString());
 
                 datos.ejectutarAccion();
 
