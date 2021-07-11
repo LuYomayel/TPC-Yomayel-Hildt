@@ -132,7 +132,12 @@ insert into Proveedores (RazonSocial,Descripcion) values('GtripleL','Televisores
 insert into Proveedores (RazonSocial,Descripcion) values('Solja','Teclados y celulares')
 insert into Proveedores (RazonSocial,Descripcion) values('Delz1k','Mouse y teclados')
 
-
+--update categorias set estado = 1 
+--update Marcas set estado = 1
+--update Clientes set estado = 1
+--update Proveedores set estado = 1
+--update Productos set estado = 1
+select * from categorias
 
 
 
