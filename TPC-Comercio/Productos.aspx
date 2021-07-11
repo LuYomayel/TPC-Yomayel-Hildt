@@ -3,21 +3,30 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     
-        <%foreach (Dominio.Producto item in listaProductos)
-            { %>
-        
-            <div class="card" style="width: 18rem;">
-                <img src="<% = item.UrlImagen %>" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title"><% =item.Nombre %></h5>
-                    <p class="card-text"><% =item.Descripcion  %></p>
-                
-                </div>
-            </div>
-        
-        <% } %>
+    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+        <ContentTemplate>
+            <asp:GridView ID="gvProductos" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered" OnRowDeleting="gvProductos_RowDeleting" OnRowEditing="gvProductos_RowEditing">
+                <Columns>
+                    <asp:BoundField HeaderText="Id" DataField="Id" />
+                    <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
+                    <asp:BoundField HeaderText="Descripcion" DataField="Descripcion" />
+                    <asp:BoundField HeaderText="% de ganancia" DataField="porcGanancia" />
+                    <asp:BoundField HeaderText="Stock Minimo" DataField="stockMinimo"/>
+                    <asp:BoundField HeaderText="Marca" DataField="Marca.Nombre"/>
+                    <asp:BoundField HeaderText="Categoria" DataField="Categoria.Nombre" />
+                    
+                    <asp:ButtonField ButtonType="Button" CommandName="Delete" HeaderText="Eliminar" ShowHeader="True" Text="Eliminar" ControlStyle-CssClass="btn btn-primary"/>
+                    <asp:ButtonField ButtonType="Button" CommandName="Edit" Text="Editar" />
+                </Columns>
+            </asp:GridView>
+        </ContentTemplate>
+    </asp:UpdatePanel>
     
 
     <a class="btn btn-primary" href="AgregarProducto.aspx" role="button" >Agregar Producto</a>
     
+
+
+
+
 </asp:Content>

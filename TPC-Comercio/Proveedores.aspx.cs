@@ -40,5 +40,24 @@ namespace TPC_Comercio
                 throw;
             }
         }
+
+        protected void gvProveedores_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            try
+            {
+
+                //gvClientes.EditIndex = e.NewEditIndex;
+                //gvClientes.DataBind();
+                int id = int.Parse(gvProveedores.Rows[e.NewEditIndex].Cells[0].Text);
+                Session.Add("idProveedor", id);
+                Response.Redirect("ModificarProveedor.aspx");
+
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
     }
 }

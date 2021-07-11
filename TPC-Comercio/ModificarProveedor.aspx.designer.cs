@@ -11,25 +11,25 @@ namespace TPC_Comercio
 {
 
 
-    public partial class Productos
+    public partial class ModificarProveedor
     {
 
         /// <summary>
-        /// Control UpdatePanel2.
+        /// Control razonSocial.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText razonSocial;
 
         /// <summary>
-        /// Control gvProductos.
+        /// Control descripcion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvProductos;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText descripcion;
     }
 }
