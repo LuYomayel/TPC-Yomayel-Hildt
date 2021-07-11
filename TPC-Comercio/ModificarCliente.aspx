@@ -7,33 +7,34 @@
     
         <div class="form-group">
             <label >Nombre</label>
-            <input type="text" name="nombre" class="form-control" id="nombre" runat="server">
             
+            <asp:TextBox ID="txtNombre" runat="server" class="form-control"></asp:TextBox>
             
         </div>
         <div class="form-group">
             <label >Apellido</label>
-            <input type="text" name="apellido" class="form-control" runat="server" id="apellido">
             
+            <asp:TextBox ID="txtApellido" runat="server" class="form-control"></asp:TextBox>
         </div>
         <div class="form-group">
             <label >Fecha de Nacimiento</label>
-            <input type="date" name="fechaNac" class="form-control"  runat="server" id="fechaNac">
+            <asp:TextBox ID="txtFecha" runat="server" class="form-control" TextMode="Date"></asp:TextBox>
             
         </div>
         <div class="form-group">
             <label >Direccion</label>
-            <input type="text" name="direccion" class="form-control" runat="server" id="direccion">
+            
+            <asp:TextBox ID="txtDireccion" runat="server" class="form-control"></asp:TextBox>
         </div>
+    
         <div class="form-group">
             <label >Telefono</label>
-            <input type="tel" name="telefono" class="form-control" runat="server" id="telefono">
+            
+            <asp:TextBox ID="txtTelefono" runat="server" class="form-control"></asp:TextBox>
         </div>
         
         <div>
-            <label>&nbsp;</label>
-            <input type="submit" value="Editar Cliente" class="btn btn-primary" name="editar"/>
-            <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click"/>
+            <asp:Button ID="btnModificar" runat="server" Text="Modificar" OnClick="btnModificar_Click" CssClass="btn btn-primary"/>
         </div> 
 
 

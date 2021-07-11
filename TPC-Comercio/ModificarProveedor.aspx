@@ -4,22 +4,21 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <form method="post" class="form-group">
+    
 
         <div class="form-group">
             <label >Razon Social</label>
-            <input type="text" name="razonSocial" class="form-control" runat="server" id="razonSocial">
             
+            <asp:TextBox ID="txtRazon" runat="server"></asp:TextBox>
         </div>
         <div class="form-group">
             <label >Descripcion</label>
-            <input type="text" name="descripcion" class="form-control" runat="server" id="descripcion">
             
+            <asp:TextBox ID="txtDescripcion" runat="server"></asp:TextBox>
         </div>
         <div>
-            <label>&nbsp;</label>
-            <input type="submit" value="Editar Proveedor" class="btn btn-primary" />
             
+            <asp:Button ID="btnModificar" runat="server" Text="Modificar" OnClick="btnModificar_Click" CssClass="btn btn-primary"/>
         </div> 
-    </form>
+    
 </asp:Content>

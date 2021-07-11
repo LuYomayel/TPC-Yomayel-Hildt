@@ -24,17 +24,28 @@ namespace TPC_Comercio
             Request.Form["direccion"] = cliente.Direccion;
             Request.Form["telefono"] = cliente.Telefono.ToString();
             */
-            nombre.Value = cliente.Nombre;
-            apellido.Value = cliente.Apellido;
-            fechaNac.Value = cliente.FechaNac.ToString();
-            direccion.Value = cliente.Direccion;
-            telefono.Value = cliente.Telefono.ToString();
+            if (!Page.IsPostBack)
+            {
+                txtNombre.Text = cliente.Nombre;
+                txtApellido.Text = cliente.Apellido;
+                txtFecha.Text = String.Format("{0:yyyy-MM-dd}", cliente.FechaNac);
+                txtDireccion.Text = cliente.Direccion;
+                txtTelefono.Text = cliente.Telefono.ToString();
+            }
             
         }
-
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void btnModificar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("index.aspx");
+            Cliente cliente = new Cliente();
+            ClienteNegocio clienteNegocio = new ClienteNegocio();
+            cliente.Id = (int)Session["idCliente"];
+            cliente.Nombre = txtNombre.Text;
+            cliente.Apellido = txtApellido.Text;
+            cliente.FechaNac = DateTime.Parse(txtFecha.Text);
+            cliente.Telefono = int.Parse(txtTelefono.Text);
+            cliente.Direccion = txtDireccion.Text;
+            clienteNegocio.actualizar(cliente);
+            Response.Redirect("Clientes.aspx");
         }
     }
 }

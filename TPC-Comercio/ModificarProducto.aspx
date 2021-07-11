@@ -35,6 +35,6 @@
         </div>
         
         <div>
-            <asp:Button ID="btnModificar" runat="server" Text="Modificar" OnClick="btnModificar_Click"/>
+            <asp:Button ID="btnModificar" runat="server" Text="Modificar" OnClick="btnModificar_Click" CssClass="btn btn-primary"/>
         </div> 
 </asp:Content>

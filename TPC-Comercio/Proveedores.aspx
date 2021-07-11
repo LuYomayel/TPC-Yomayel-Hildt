@@ -15,7 +15,7 @@
                     <ControlStyle CssClass="btn btn-primary"></ControlStyle>
                     </asp:ButtonField>
                     
-                    <asp:ButtonField ButtonType="Button" CommandName="Edit" Text="Botón" />
+                    <asp:ButtonField ButtonType="Button" CommandName="Edit" Text="Editar" ControlStyle-CssClass="btn btn-primary"/>
                     
                 </Columns>
         
