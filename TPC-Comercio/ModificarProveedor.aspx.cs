@@ -16,8 +16,22 @@ namespace TPC_Comercio
             ProveedorNegocio negocio = new ProveedorNegocio();
             Proveedor proveedor = new Proveedor();
             proveedor = negocio.GetProveedor(id);
-            razonSocial.Value = proveedor.RazonSocial;
-            descripcion.Value = proveedor.Descripcion;
+            if (!Page.IsPostBack)
+            {
+                txtDescripcion.Text = proveedor.Descripcion;
+                txtRazon.Text = proveedor.RazonSocial;
+            }
+        }
+
+        protected void btnModificar_Click(object sender, EventArgs e)
+        {
+            Proveedor proveedor = new Proveedor();
+            ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
+            proveedor.Id = (int)Session["idProveedor"];
+            proveedor.RazonSocial = txtRazon.Text;
+            proveedor.Descripcion = txtDescripcion.Text;
+            proveedorNegocio.actualizar(proveedor);
+            Response.Redirect("Proveedores.aspx");
 
         }
     }

@@ -1,14 +1,14 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Marcas.aspx.cs" Inherits="TPC_Comercio.Marcas" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Categorias.aspx.cs" Inherits="TPC_Comercio.Categorias" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <asp:UpdatePanel runat="server">
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
-            <asp:GridView ID="gvMarcas" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered" OnRowEditing="gvMarcas_RowEditing" OnRowDeleting="gvMarcas_RowDeleting">
+            <asp:GridView ID="gvCategorias" runat="server" OnRowDeleting="gvCategorias_RowDeleting" OnRowEditing="gvCategorias_RowEditing" CssClass="table table-bordered" AutoGenerateColumns="false">
                 <Columns>
-            
-                    <asp:BoundField DataField="Id" HeaderText="Id" />
-                    <asp:BoundField DataField="Nombre" HeaderText="Marca" />
+                    <asp:BoundField HeaderText="Id" DataField="Id" />
+                    <asp:BoundField HeaderText="Categoria" DataField="Nombre" />
                     <asp:ButtonField CommandName="Delete" ButtonType="Button"  Text="Eliminar" ControlStyle-CssClass="btn btn-primary"/>
                     <asp:ButtonField CommandName="Edit" ButtonType="Button" Text="Editar" ControlStyle-CssClass="btn btn-primary"/>
+            
                 </Columns>
             </asp:GridView>
         </ContentTemplate>

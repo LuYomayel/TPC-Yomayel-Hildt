@@ -16,7 +16,7 @@
                     <asp:BoundField HeaderText="Categoria" DataField="Categoria.Nombre" />
                     
                     <asp:ButtonField ButtonType="Button" CommandName="Delete" HeaderText="Eliminar" ShowHeader="True" Text="Eliminar" ControlStyle-CssClass="btn btn-primary"/>
-                    <asp:ButtonField ButtonType="Button" CommandName="Edit" Text="Editar" />
+                    <asp:ButtonField ButtonType="Button" CommandName="Edit" Text="Editar" ControlStyle-CssClass="btn btn-primary"/>
                 </Columns>
             </asp:GridView>
         </ContentTemplate>
