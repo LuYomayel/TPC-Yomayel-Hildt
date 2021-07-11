@@ -134,8 +134,8 @@ insert into Proveedores (RazonSocial,Descripcion) values('Delz1k','Mouse y tecla
 
 
 
-delete from Clientes
-select * from Proveedores
+
+
 
 
 
