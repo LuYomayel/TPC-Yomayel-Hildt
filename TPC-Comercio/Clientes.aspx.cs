@@ -32,10 +32,7 @@ namespace TPC_Comercio
             }
         }
 
-        protected void btnEliminar_Click(object sender, EventArgs e)
-        {
-            
-        }
+        
         protected void gvClientes_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             
@@ -45,7 +42,6 @@ namespace TPC_Comercio
                 
                 int id = Convert.ToInt32(e.Values[0]);
                 ClienteNegocio clienteNegocio = new ClienteNegocio();
-                Message.Text = id.ToString();
                 if(id != 0)
                 clienteNegocio.eliminar(id);
                 lista = clienteNegocio.listar();
