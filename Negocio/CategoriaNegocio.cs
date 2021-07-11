@@ -61,7 +61,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                string consulta = "update categorias set nombre = '" + categoria.Nombre + "' where id = " + categoria.Id.ToString() + ";";
+                string consulta = "update categorias set nombre = '" + categoria.Nombre + "' where id = " + categoria.Id + ";";
                 datos.setearConsulta(consulta);
 
                 datos.ejectutarAccion();
@@ -84,7 +84,7 @@ namespace Negocio
             {
 
 
-                datos.setearConsulta("update categorias set estado = 0 where id=" + id.ToString());
+                datos.setearConsulta("update categorias set estado = 0 where id=" + id);
 
                 datos.ejectutarAccion();
 

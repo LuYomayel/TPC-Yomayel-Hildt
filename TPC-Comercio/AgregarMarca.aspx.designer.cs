@@ -11,17 +11,17 @@ namespace TPC_Comercio
 {
 
 
-    public partial class Marcas
+    public partial class AgregarMarca
     {
 
         /// <summary>
-        /// Control gvMarcas.
+        /// Control txtNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvMarcas;
+        protected global::System.Web.UI.WebControls.TextBox txtNombre;
 
         /// <summary>
         /// Control btnAgregar.
