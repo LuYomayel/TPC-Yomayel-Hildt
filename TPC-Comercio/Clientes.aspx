@@ -7,7 +7,7 @@
 
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
-            <asp:GridView ID="gvClientes" runat="server" OnRowDataBound="gvClientes_RowDataBound" OnRowDeleting="gvClientes_RowDeleting" CssClass="table table-bordered" AutoGenerateColumns="False" OnRowEditing="gvClientes_RowEditing">
+            <asp:GridView ID="gvClientes" runat="server" OnRowDeleting="gvClientes_RowDeleting" CssClass="table table-bordered" AutoGenerateColumns="False" OnRowEditing="gvClientes_RowEditing">
                 <Columns>
                     <asp:BoundField HeaderText="Id" DataField="Id" />
                     <asp:BoundField HeaderText="Nombre" DataField="Nombre"/>

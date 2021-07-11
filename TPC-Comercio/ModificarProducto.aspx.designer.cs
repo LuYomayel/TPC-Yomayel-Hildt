@@ -11,61 +11,79 @@ namespace TPC_Comercio
 {
 
 
-    public partial class DetalleProducto
+    public partial class ModificarProducto
     {
 
         /// <summary>
-        /// Control imgseleccionado.
+        /// Control txtNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage imgseleccionado;
+        protected global::System.Web.UI.WebControls.TextBox txtNombre;
 
         /// <summary>
-        /// Control lblNombre.
+        /// Control txtDescripcion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNombre;
+        protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
 
         /// <summary>
-        /// Control lblMarca.
+        /// Control txtUrl.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMarca;
+        protected global::System.Web.UI.WebControls.TextBox txtUrl;
 
         /// <summary>
-        /// Control lblCategoria.
+        /// Control txtPorc.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCategoria;
+        protected global::System.Web.UI.WebControls.TextBox txtPorc;
 
         /// <summary>
-        /// Control lblStockMinimo.
+        /// Control txtStock.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStockMinimo;
+        protected global::System.Web.UI.WebControls.TextBox txtStock;
 
         /// <summary>
-        /// Control lblPorcGanancia.
+        /// Control Marcas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPorcGanancia;
+        protected global::System.Web.UI.WebControls.DropDownList Marcas;
+
+        /// <summary>
+        /// Control Categorias.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList Categorias;
+
+        /// <summary>
+        /// Control btnModificar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModificar;
     }
 }

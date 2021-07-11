@@ -60,24 +60,7 @@ namespace TPC_Comercio
             
         }
 
-        protected void gvClientes_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            /*
-            if (e.Row.RowType == DataControlRowType.Header)
-            {
-                
-                e.Row.Cells[1].Visible = false;
-                e.Row.Cells[4].Visible = false;
-                e.Row.Cells[5].Visible = false;
-            }
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                e.Row.Cells[1].Visible = false;
-                e.Row.Cells[5].Visible = false;
-                e.Row.Cells[4].Visible = false;
-            }
-            */
-        }
+        
 
         protected void gvClientes_RowEditing(object sender, GridViewEditEventArgs e)
         {

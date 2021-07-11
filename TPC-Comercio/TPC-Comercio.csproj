@@ -110,7 +110,6 @@
     <Content Include="AgregarCliente.aspx" />
     <Content Include="AgregarProducto.aspx" />
     <Content Include="AgregarProveedor.aspx" />
-    <Content Include="Categoria.aspx" />
     <Content Include="Clientes.aspx" />
     <Content Include="Compras.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -121,12 +120,12 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\Styles.css" />
-    <Content Include="DetalleProducto.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Marcas.aspx" />
     <Content Include="ModificarCliente.aspx" />
+    <Content Include="ModificarProducto.aspx" />
     <Content Include="ModificarProveedor.aspx" />
     <Content Include="Productos.aspx" />
     <Content Include="Proveedores.aspx" />
@@ -293,13 +292,6 @@
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Categoria.aspx.cs">
-      <DependentUpon>Categoria.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Categoria.aspx.designer.cs">
-      <DependentUpon>Categoria.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Clientes.aspx.cs">
       <DependentUpon>Clientes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -313,13 +305,6 @@
     </Compile>
     <Compile Include="Compras.aspx.designer.cs">
       <DependentUpon>Compras.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="DetalleProducto.aspx.cs">
-      <DependentUpon>DetalleProducto.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DetalleProducto.aspx.designer.cs">
-      <DependentUpon>DetalleProducto.aspx</DependentUpon>
     </Compile>
     <Compile Include="Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>
@@ -344,6 +329,13 @@
     </Compile>
     <Compile Include="ModificarCliente.aspx.designer.cs">
       <DependentUpon>ModificarCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModificarProducto.aspx.cs">
+      <DependentUpon>ModificarProducto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModificarProducto.aspx.designer.cs">
+      <DependentUpon>ModificarProducto.aspx</DependentUpon>
     </Compile>
     <Compile Include="ModificarProveedor.aspx.cs">
       <DependentUpon>ModificarProveedor.aspx</DependentUpon>

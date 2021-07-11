@@ -16,7 +16,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("select id, nombre, descripcion, urlimagen from Productos where estado = 1");
+                datos.setearConsulta("select p.id, p.nombre, p.descripcion, p.urlimagen,p.PorcGanancia,p.StockMinimo, m.Nombre Marca,m.id idMarca, c.id idCategoria, c.Nombre Categoria from Productos p join Categorias c on c.id = p.idCategoria join Marcas m on m.id = p.IdMarca where p.estado = 1 ");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -27,7 +27,14 @@ namespace Negocio
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
                     aux.UrlImagen = (string)datos.Lector["UrlImagen"];
-
+                    aux.StockMinimo = (int)datos.Lector["StockMinimo"];
+                    aux.PorcGanancia = (int)datos.Lector["PorcGanancia"];
+                    aux.Marca = new Marca();
+                    aux.Marca.Id = (int)datos.Lector["idMarca"];
+                    aux.Marca.Nombre = (string)datos.Lector["Marca"];
+                    aux.Categoria = new Categoria();
+                    aux.Categoria.Id = (int)datos.Lector["idCategoria"];
+                    aux.Categoria.Nombre = (string)datos.Lector["Categoria"];
                     lista.Add(aux);
                 }
 
@@ -66,7 +73,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                string consulta = "update clientes set nombre = '" + producto.Nombre + "', Descripcion = '" + producto.Descripcion + "', UrlImagen = '" + producto.UrlImagen + "', PorcGanancia = '" + producto.PorcGanancia + "', IdMarca = '" + producto.Marca + "', IdCategoria = '" + producto.Categoria + "', StockMinimo = '" + producto.StockMinimo + "' where id = " + producto.Id.ToString() + ";";
+                string consulta = "update Productos set nombre = '" + producto.Nombre + "', Descripcion = '" + producto.Descripcion + "', UrlImagen = '" + producto.UrlImagen + "', PorcGanancia = '" + producto.PorcGanancia + "', IdMarca = '" + producto.Marca.Id + "', IdCategoria = '" + producto.Categoria.Id + "', StockMinimo = '" + producto.StockMinimo + "' where id = " + producto.Id + ";";
                 datos.setearConsulta(consulta);
 
                 datos.ejectutarAccion();
