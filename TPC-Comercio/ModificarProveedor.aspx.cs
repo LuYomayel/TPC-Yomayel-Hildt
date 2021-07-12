@@ -17,12 +17,13 @@ namespace TPC_Comercio
             Proveedor proveedor = new Proveedor();
             try
             {
-                int id = (int)Session["idProveedor"];
-                proveedor = negocio.GetProveedor(id);
+                string cuit = (string)Session["cuitProveedor"];
+                proveedor = negocio.GetProveedor(cuit);
                 if (!Page.IsPostBack)
                 {
                     txtDescripcion.Text = proveedor.Descripcion;
                     txtRazon.Text = proveedor.RazonSocial;
+                    txtEmail.Text = proveedor.Email;
                 }
             }
             catch (Exception ex)
@@ -40,11 +41,12 @@ namespace TPC_Comercio
             ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
             try
             {
-                proveedor.Id = (int)Session["idProveedor"];
+                proveedor.Cuit = (string)Session["cuitProveedor"];
                 proveedor.RazonSocial = txtRazon.Text;
                 proveedor.Descripcion = txtDescripcion.Text;
+                proveedor.Email = txtEmail.Text;
                 proveedorNegocio.actualizar(proveedor);
-                Response.Redirect("Proveedores.aspx");
+                Response.Redirect("Proveedores.aspx", false);
                 Context.ApplicationInstance.CompleteRequest();
             }
             catch (Exception ex)

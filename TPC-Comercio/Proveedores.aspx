@@ -8,9 +8,10 @@
         <ContentTemplate>
             <asp:GridView ID="gvProveedores" runat="server" CssClass="table table-bordered" AutoGenerateColumns="False" OnRowDeleting="gvProveedores_RowDeleting" OnRowEditing="gvProveedores_RowEditing">
                 <Columns>
-                    <asp:BoundField HeaderText="Id" DataField="Id"/>
+                    <asp:BoundField HeaderText="Cuit" DataField="Cuit"/>
                     <asp:BoundField HeaderText="Razon Social" DataField="razonSocial"/>
                     <asp:BoundField HeaderText="Descripcion" DataField="Descripcion"/>
+                    <asp:BoundField HeaderText="Email" DataField="Email"/>
                     <asp:ButtonField ButtonType="Button" CommandName="Delete" Text="Eliminar" ControlStyle-CssClass="btn btn-primary">
                     <ControlStyle CssClass="btn btn-primary"></ControlStyle>
                     </asp:ButtonField>

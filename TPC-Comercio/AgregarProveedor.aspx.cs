@@ -18,10 +18,14 @@ namespace TPC_Comercio
         bool validarCampos()
         {
             bool hola=true;
+            var cuit = txtCuit.Text;
             var razonSocial = txtRazon.Text;
             var descripcion = txtDescripcion.Text;
+            var email = txtEmail.Text;
 
+            if (cuit == null || cuit == "") hola = false;
             if (razonSocial == null || razonSocial == "") hola = false;
+            if (email == null || email == "") hola = false;
             if (descripcion == null || descripcion == "") hola = false;
 
             return hola;
@@ -31,15 +35,18 @@ namespace TPC_Comercio
         {
             Proveedor proveedor = new Proveedor();
             ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
+            var cuit = txtCuit.Text;
             var razonSocial = txtRazon.Text;
             var descripcion = txtDescripcion.Text;
+            var email = txtEmail.Text;
             try
             {
                 if (validarCampos())
                 {
+                    proveedor.Cuit = cuit;
                     proveedor.RazonSocial = razonSocial;
                     proveedor.Descripcion = descripcion;
-
+                    proveedor.Email = email;
                     proveedorNegocio.agregar(proveedor);
                     Response.Redirect("Proveedores.aspx", false);
                     Context.ApplicationInstance.CompleteRequest();

@@ -35,11 +35,11 @@ namespace TPC_Comercio
             try
             {
 
-                int id = Convert.ToInt32(e.Values[0]);
+                string cuit = e.Values[0].ToString();
                 ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
 
-                if (id != 0)
-                    proveedorNegocio.eliminar(id);
+                if (cuit != null || cuit != "")
+                    proveedorNegocio.eliminar(cuit);
                 listaProveedores = proveedorNegocio.listar();
                 gvProveedores.DataSource = listaProveedores;
                 gvProveedores.DataBind();
@@ -56,11 +56,8 @@ namespace TPC_Comercio
         {
             try
             {
-
-                //gvClientes.EditIndex = e.NewEditIndex;
-                //gvClientes.DataBind();
-                int id = int.Parse(gvProveedores.Rows[e.NewEditIndex].Cells[0].Text);
-                Session.Add("idProveedor", id);
+                string cuit = gvProveedores.Rows[e.NewEditIndex].Cells[0].Text;
+                Session.Add("cuitProveedor", cuit);
                 Response.Redirect("ModificarProveedor.aspx", false);
                 Context.ApplicationInstance.CompleteRequest();
 
