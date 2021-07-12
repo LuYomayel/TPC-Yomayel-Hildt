@@ -12,26 +12,48 @@ namespace TPC_Comercio
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            int id = (int)Session["idProveedor"];
+            
             ProveedorNegocio negocio = new ProveedorNegocio();
             Proveedor proveedor = new Proveedor();
-            proveedor = negocio.GetProveedor(id);
-            if (!Page.IsPostBack)
+            try
             {
-                txtDescripcion.Text = proveedor.Descripcion;
-                txtRazon.Text = proveedor.RazonSocial;
+                int id = (int)Session["idProveedor"];
+                proveedor = negocio.GetProveedor(id);
+                if (!Page.IsPostBack)
+                {
+                    txtDescripcion.Text = proveedor.Descripcion;
+                    txtRazon.Text = proveedor.RazonSocial;
+                }
             }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
+            }
+            
         }
 
         protected void btnModificar_Click(object sender, EventArgs e)
         {
             Proveedor proveedor = new Proveedor();
             ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
-            proveedor.Id = (int)Session["idProveedor"];
-            proveedor.RazonSocial = txtRazon.Text;
-            proveedor.Descripcion = txtDescripcion.Text;
-            proveedorNegocio.actualizar(proveedor);
-            Response.Redirect("Proveedores.aspx");
+            try
+            {
+                proveedor.Id = (int)Session["idProveedor"];
+                proveedor.RazonSocial = txtRazon.Text;
+                proveedor.Descripcion = txtDescripcion.Text;
+                proveedorNegocio.actualizar(proveedor);
+                Response.Redirect("Proveedores.aspx");
+                Context.ApplicationInstance.CompleteRequest();
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
+            }
+            
 
         }
     }

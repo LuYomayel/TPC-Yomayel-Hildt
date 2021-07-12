@@ -12,18 +12,42 @@ namespace TPC_Comercio
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
+            Categoria categoria = new Categoria();
+            try
+            {
+                int id = (int)Session["idCategoria"];
+                categoria = categoriaNegocio.GetCategoria(id);
+                txtNombre.Text = categoria.Nombre;
+            }
+            catch (Exception ex)
+            {
 
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
+            }
         }
 
         protected void btnModificar_Click(object sender, EventArgs e)
         {
             Categoria categoria = new Categoria();
             CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
-            categoria.Id = (int)Session["idCategoria"];
-            categoria.Nombre = txtNombre.Text;
+            try
+            {
+                categoria.Id = (int)Session["idCategoria"];
+                categoria.Nombre = txtNombre.Text;
 
-            categoriaNegocio.actualizar(categoria);
-            Response.Redirect("Categorias.aspx");
+                categoriaNegocio.actualizar(categoria);
+                Response.Redirect("Categorias.aspx",false);
+                Context.ApplicationInstance.CompleteRequest();
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
+            }
+            
         }
     }
 }

@@ -50,10 +50,11 @@ namespace TPC_Comercio
             }
             catch (Exception ex)
             {
-                Message.Text = ex.ToString();
-                throw;
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
-            
+
         }
 
         
@@ -67,12 +68,14 @@ namespace TPC_Comercio
                 //gvClientes.DataBind();
                 int id = int.Parse(gvClientes.Rows[e.NewEditIndex].Cells[0].Text);
                 Session.Add("idCliente", id);
-                Response.Redirect("ModificarCliente.aspx");
+                Response.Redirect("ModificarCliente.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
             }
             catch (Exception ex)
             {
-                Message.Text = ex.ToString();
-                throw;
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
         }
     }

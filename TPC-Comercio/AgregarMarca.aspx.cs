@@ -19,9 +19,20 @@ namespace TPC_Comercio
         {
             Marca marca = new Marca();
             MarcaNegocio marcaNegocio = new MarcaNegocio();
-            marca.Nombre = txtNombre.Text;
-            marcaNegocio.agregar(marca);
-            Response.Redirect("Marcas.aspx");
+            try
+            {
+                marca.Nombre = txtNombre.Text;
+                marcaNegocio.agregar(marca);
+                Response.Redirect("Marcas.aspx",false);
+                Context.ApplicationInstance.CompleteRequest();
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
+            }
+            
         }
     }
 }

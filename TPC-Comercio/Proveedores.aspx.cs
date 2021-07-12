@@ -14,10 +14,20 @@ namespace TPC_Comercio
         protected void Page_Load(object sender, EventArgs e)
         {
             ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
-            listaProveedores = proveedorNegocio.listar();
+            try
+            {
+                listaProveedores = proveedorNegocio.listar();
 
-            gvProveedores.DataSource = listaProveedores;
-            gvProveedores.DataBind();
+                gvProveedores.DataSource = listaProveedores;
+                gvProveedores.DataBind();
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
+            }
+            
         }
 
         protected void gvProveedores_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -34,10 +44,11 @@ namespace TPC_Comercio
                 gvProveedores.DataSource = listaProveedores;
                 gvProveedores.DataBind();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
-                throw;
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
         }
 
@@ -50,13 +61,15 @@ namespace TPC_Comercio
                 //gvClientes.DataBind();
                 int id = int.Parse(gvProveedores.Rows[e.NewEditIndex].Cells[0].Text);
                 Session.Add("idProveedor", id);
-                Response.Redirect("ModificarProveedor.aspx");
+                Response.Redirect("ModificarProveedor.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
-                throw;
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
         }
     }

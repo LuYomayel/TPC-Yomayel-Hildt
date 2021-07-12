@@ -12,6 +12,22 @@ namespace TPC_Comercio
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            MarcaNegocio marcaNegocio = new MarcaNegocio();
+            Marca marca = new Marca();
+            
+            try
+            {
+                int id = (int)Session["idMarca"];
+                marca = marcaNegocio.GetMarca(id);
+                txtNombre.Text = marca.Nombre;
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
+            }
+            
 
         }
 
@@ -19,11 +35,22 @@ namespace TPC_Comercio
         {
             Marca marca = new Marca();
             MarcaNegocio marcaNegocio = new MarcaNegocio();
-            marca.Id = (int)Session["idMarca"];
-            marca.Nombre = txtNombre.Text;
+            try
+            {
+                marca.Id = (int)Session["idMarca"];
+                marca.Nombre = txtNombre.Text;
 
-            marcaNegocio.actualizar(marca);
-            Response.Redirect("Marcas.aspx");
+                marcaNegocio.actualizar(marca);
+                Response.Redirect("Marcas.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
+            }
+            
         }
     }
 }

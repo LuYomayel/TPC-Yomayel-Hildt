@@ -14,9 +14,19 @@ namespace TPC_Comercio
         protected void Page_Load(object sender, EventArgs e)
         {
             CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
-            listaCategorias = categoriaNegocio.listar();
-            gvCategorias.DataSource = listaCategorias;
-            gvCategorias.DataBind();
+            try
+            {
+                listaCategorias = categoriaNegocio.listar();
+                gvCategorias.DataSource = listaCategorias;
+                gvCategorias.DataBind();
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
+            }
+            
         }
 
         protected void gvCategorias_RowEditing(object sender, GridViewEditEventArgs e)
@@ -28,14 +38,16 @@ namespace TPC_Comercio
                 //gvClientes.DataBind();
                 int id = int.Parse(gvCategorias.Rows[e.NewEditIndex].Cells[0].Text);
                 Session.Add("idCategoria", id);
-                Response.Redirect("ModificarCategoria.aspx");
+                Response.Redirect("ModificarCategoria.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
-            
+
         }
 
         protected void gvCategorias_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -55,9 +67,11 @@ namespace TPC_Comercio
                     gvCategorias.DataBind();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
         }
     }

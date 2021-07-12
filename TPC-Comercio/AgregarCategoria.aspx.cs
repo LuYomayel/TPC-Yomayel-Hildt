@@ -19,9 +19,20 @@ namespace TPC_Comercio
         {
             Categoria categoria = new Categoria();
             CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
-            categoria.Nombre = txtNombre.Text;
-            categoriaNegocio.agregar(categoria);
-            Response.Redirect("Categorias.aspx");
+            try
+            {
+                categoria.Nombre = txtNombre.Text;
+                categoriaNegocio.agregar(categoria);
+                Response.Redirect("Categorias.aspx",false);
+                Context.ApplicationInstance.CompleteRequest();
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
+            }
+            
         }
     }
 }

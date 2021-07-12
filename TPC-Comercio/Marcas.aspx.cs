@@ -14,9 +14,19 @@ namespace TPC_Comercio
         protected void Page_Load(object sender, EventArgs e)
         {
             MarcaNegocio marcaNegocio = new MarcaNegocio();
-            listaMarcas = marcaNegocio.listar();
-            gvMarcas.DataSource = listaMarcas;
-            gvMarcas.DataBind();
+            try
+            {
+                listaMarcas = marcaNegocio.listar();
+                gvMarcas.DataSource = listaMarcas;
+                gvMarcas.DataBind();
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
+            }
+            
         }
 
         
@@ -30,14 +40,16 @@ namespace TPC_Comercio
                 //gvClientes.DataBind();
                 int id = int.Parse(gvMarcas.Rows[e.NewEditIndex].Cells[0].Text);
                 Session.Add("idMarca", id);
-                Response.Redirect("ModificarMarca.aspx");
+                Response.Redirect("ModificarMarca.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
-                throw;
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
-            
+
         }
 
         protected void gvMarcas_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -57,9 +69,11 @@ namespace TPC_Comercio
                     gvMarcas.DataBind();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
         }
     }
