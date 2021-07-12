@@ -118,8 +118,6 @@ insert into Proveedores (RazonSocial,Descripcion,Email,Cuit) values('Delz1k','Mo
 --update Clientes set estado = 1
 --update Proveedores set estado = 1
 --update Productos set estado = 1
-select * from Proveedores
-
 
 
 

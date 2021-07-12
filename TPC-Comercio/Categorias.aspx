@@ -6,12 +6,12 @@
                 <Columns>
                     <asp:BoundField HeaderText="Id" DataField="Id" />
                     <asp:BoundField HeaderText="Categoria" DataField="Nombre" />
-                    <asp:ButtonField CommandName="Delete" ButtonType="Button"  Text="Eliminar" ControlStyle-CssClass="btn btn-primary"/>
-                    <asp:ButtonField CommandName="Edit" ButtonType="Button" Text="Editar" ControlStyle-CssClass="btn btn-primary"/>
+                    <asp:ButtonField CommandName="Delete" ButtonType="Button"  Text="Eliminar" ControlStyle-CssClass="btn btn-primary" HeaderText="Eliminar"/>
+                    <asp:ButtonField CommandName="Edit" ButtonType="Button" Text="Editar" ControlStyle-CssClass="btn btn-primary" HeaderText="Editar"/>
             
                 </Columns>
             </asp:GridView>
         </ContentTemplate>
     </asp:UpdatePanel>
-    <asp:Button ID="btnAgregar" runat="server" Text="Agregar Categoria" CssClass="btn btn-primary"/>
+    <asp:Button ID="btnAgregar" runat="server" Text="Agregar Categoria" CssClass="btn btn-primary" OnClick="btnAgregar_Click"/>
 </asp:Content>
