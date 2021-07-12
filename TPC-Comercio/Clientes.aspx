@@ -12,6 +12,8 @@
                     <asp:BoundField HeaderText="Id" DataField="Id" />
                     <asp:BoundField HeaderText="Nombre" DataField="Nombre"/>
                     <asp:BoundField HeaderText="Apellido" DataField="Apellido"/>
+                    <asp:BoundField HeaderText="Fecha de nacimiento" DataField="FechaNac"/>
+                    <asp:BoundField HeaderText="Direccion" DataField="Direccion"/>
                     <asp:BoundField HeaderText="Telefono" DataField="Telefono"/>
                     <asp:ButtonField ButtonType="Button" CommandName="Delete" Text="Eliminar" ControlStyle-CssClass="btn btn-primary">
                     

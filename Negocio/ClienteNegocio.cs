@@ -49,7 +49,7 @@ namespace Negocio
             {
                 
                 string valores = "values( '" + nuevo.Nombre + "', '" + nuevo.Apellido + "',CAST('" + nuevo.FechaNac + "' AS DATE), " + nuevo.Telefono + ", '" + nuevo.Direccion + "')";
-                datos.setearConsulta("insert into Clientes (Nombre, Apellido, FechaNac, Telefono, Direccion) " + valores);
+                datos.setearConsulta("set dateformat dmy insert into Clientes (Nombre, Apellido, FechaNac, Telefono, Direccion) " + valores);
 
                 datos.ejectutarAccion();
 
