@@ -13,12 +13,12 @@ namespace TPC_Comercio
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            int id = (int)Session["idCliente"];
+            string cuit = (string)Session["cuitCliente"];
             ClienteNegocio negocio = new ClienteNegocio();
             Cliente cliente = new Cliente();
             try
             {
-                cliente = negocio.getCliente(id);
+                cliente = negocio.getCliente(cuit);
 
                 if (!Page.IsPostBack)
                 {
@@ -27,6 +27,7 @@ namespace TPC_Comercio
                     txtFecha.Text = String.Format("{0:yyyy-MM-dd}", cliente.FechaNac);
                     txtDireccion.Text = cliente.Direccion;
                     txtTelefono.Text = cliente.Telefono.ToString();
+                    txtEmail.Text = cliente.Email;
                 }
             }
             catch (Exception ex)
@@ -44,12 +45,13 @@ namespace TPC_Comercio
             ClienteNegocio clienteNegocio = new ClienteNegocio();
             try
             {
-                cliente.Id = (int)Session["idCliente"];
+                cliente.Cuit = (string)Session["cuitCliente"];
                 cliente.Nombre = txtNombre.Text;
                 cliente.Apellido = txtApellido.Text;
                 cliente.FechaNac = DateTime.Parse(txtFecha.Text);
                 cliente.Telefono = int.Parse(txtTelefono.Text);
                 cliente.Direccion = txtDireccion.Text;
+                cliente.Email = txtEmail.Text;
                 clienteNegocio.actualizar(cliente);
                 Response.Redirect("Clientes.aspx", false);
                 Context.ApplicationInstance.CompleteRequest();

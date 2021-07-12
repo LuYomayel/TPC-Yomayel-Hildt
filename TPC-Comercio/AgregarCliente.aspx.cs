@@ -18,12 +18,14 @@ namespace TPC_Comercio
         public bool validarCampos()
         {
             bool hola = true;
+            var cuit = txtCuit.Text;
             var nombre = txtNombre.Text;
             var apellido = txtApellido.Text;
             var fechaNac = txtFecha.Text;
             var telefono = txtTelefono.Text;
             var direccion = txtDireccion.Text;
 
+            if (!(cuit != null && cuit != "")) hola = false;
             if (!(nombre != null && nombre != "")) hola = false;
             if (!(apellido != null && apellido != "")) hola = false;
             if (!(fechaNac != null && fechaNac != "")) hola = false;
@@ -40,20 +42,24 @@ namespace TPC_Comercio
         {
             ClienteNegocio clienteNegocio = new ClienteNegocio();
             Cliente cliente = new Cliente();
+            var cuit = txtCuit.Text;
             var nombre = txtNombre.Text;
             var apellido = txtApellido.Text;
             var fechaNac = txtFecha.Text;
             var telefono = txtTelefono.Text;
             var direccion = txtDireccion.Text;
+            var email = txtEmail.Text;
             try
             {
                 if (validarCampos())
                 {
+                    cliente.Cuit = cuit;
                     cliente.Nombre = nombre;
                     cliente.Apellido = apellido;
                     cliente.FechaNac = DateTime.Parse(fechaNac);
                     cliente.Telefono = int.Parse(telefono);
                     cliente.Direccion = direccion;
+                    cliente.Email = email;
                     clienteNegocio.agregar(cliente);
                     Response.Redirect("Clientes.aspx", false);
                     Context.ApplicationInstance.CompleteRequest();

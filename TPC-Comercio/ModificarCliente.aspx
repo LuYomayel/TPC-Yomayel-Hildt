@@ -32,6 +32,11 @@
             
             <asp:TextBox ID="txtTelefono" runat="server" class="form-control"></asp:TextBox>
         </div>
+        <div class="form-group">
+            <label >Email</label>
+            
+            <asp:TextBox ID="txtEmail" runat="server" class="form-control" TextMode="Email"></asp:TextBox>
+        </div>
         
         <div>
             <asp:Button ID="btnModificar" runat="server" Text="Modificar" OnClick="btnModificar_Click" CssClass="btn btn-primary"/>

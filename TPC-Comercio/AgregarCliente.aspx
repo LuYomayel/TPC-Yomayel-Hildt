@@ -3,7 +3,12 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    
+         <div class="form-group">
+            <label >Cuit</label>
+            
+            <asp:TextBox class="form-control" id="txtCuit" runat="server" CssClass="form-control"></asp:TextBox>
+            
+        </div>
         <div class="form-group">
             <label >Nombre</label>
             
@@ -30,7 +35,11 @@
             
             <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control"></asp:TextBox>
         </div>
-    
+        <div class="form-group">
+            <label >Email</label>
+            
+            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox>
+        </div>
         
         <div>
             <asp:Button ID="btnAgregar" runat="server" Text="Agregar" CssClass="btn btn-primary" OnClick="btnAgregar_Click"/>

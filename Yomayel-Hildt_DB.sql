@@ -1,16 +1,17 @@
 go
---drop database Yomayel_Hildt_DB
+drop database Yomayel_Hildt_DB
 create database Yomayel_Hildt_DB
 go 
 use Yomayel_Hildt_DB
 go
 create table Clientes(
-	Id int not null identity(1,1) primary key,
+	Cuit varchar(20) not null primary key,
 	Nombre varchar(20) not null,
 	Apellido varchar(20) not null,
 	FechaNac date not null,
 	Direccion varchar(100) not null,
 	Telefono int not null,
+	Email varchar(200) null, 
 	Estado bit default 1
 )
 
@@ -46,16 +47,17 @@ create table Productos(
 
 use Yomayel_Hildt_DB
 go
-Alter table Productos alter column Nombre varchar(100) not null
+
 create table Proveedores(
-	id int not null primary key identity(1,1),
+	Cuit varchar(20) not null primary key,
 	RazonSocial varchar(100) not null,
 	Descripcion varchar(200) null,
+	Email varchar(200) null, 
 	Estado bit default 1
 )
 
 create table Proveedores_X_Producto(
-	IdProveedores int not null  foreign key references Proveedores(id),
+	IdProveedores varchar(20) not null  foreign key references Proveedores(Cuit),
 	IdProducto int not null  foreign key references Productos(id)
 )
 ALTER table Proveedores_X_Producto ADD PRIMARY KEY (IdProveedores, IdProducto)
@@ -88,56 +90,35 @@ insert into Productos(Nombre ,Descripcion,UltPrecio,PorcGanancia,UrlImagen,Stock
 
 
 set dateformat dmy
-insert into Clientes(Nombre,Apellido,FechaNac,Direccion,Telefono) values ('PEDRO ','CONSTANTIN GASPAR',Cast(N'28/09/1993' as date),'COLON 8111',1189076217)
-insert into Clientes(Nombre,Apellido,FechaNac,Direccion,Telefono) values ('LORENZO ','LUENGO AGUSTI',Cast('24/12/1963' as date),'Juan B Justo 18033',1187578217)
-insert into Clientes(Nombre,Apellido,FechaNac,Direccion,Telefono) values ('CARLOS ','JUNQUERA DE OLIVEIRA',Cast('03/04/1957' as date),'Emilio Conesa 986 Piso 20âº Dpto G Colegiales',1190612202)
-insert into Clientes(Nombre,Apellido,FechaNac,Direccion,Telefono) values ('FELIX','BARCO AMOROS',Cast('08/02/1988' as date),'Av E Perón 42 PB',1172924092)
-insert into Clientes(Nombre,Apellido,FechaNac,Direccion,Telefono) values ('FELIX ','SARABIA POPA',Cast('13/11/1964' as date),'Buenos Aires 1127 P.D .A',1118062293)
-insert into Clientes(Nombre,Apellido,FechaNac,Direccion,Telefono) values ('DIEGO ','MOLTO PAJARES',Cast('18/01/1960' as date),'Melian 3199',1173320453)
-insert into Clientes(Nombre,Apellido,FechaNac,Direccion,Telefono) values ('JOSEFA ','ARMENGOL ARGUELLES',Cast('28/11/1987' as date),'Bernardo De Irigoyen 387',1153263214)
-insert into Clientes(Nombre,Apellido,FechaNac,Direccion,Telefono) values ('JOSEFA ','CONSTANTIN SAUCEDO',Cast('26/09/1991' as date),'Paso 26136',1140285085)
-insert into Clientes(Nombre,Apellido,FechaNac,Direccion,Telefono) values ('CAROLINA ','CASTILLO FERREIRA',Cast('28/10/1981' as date),'San Lorenzo 2484',1154974222)
-insert into Clientes(Nombre,Apellido,FechaNac,Direccion,Telefono) values ('ANA ','MILAN LOMAS',Cast('10/03/1968' as date),'Avellaneda 372',1145042913)
-insert into Clientes(Nombre,Apellido,FechaNac,Direccion,Telefono) values ('MARIA ','JOSEFA NIEVES MULERO',Cast('14/01/2001' as date),'Martin Miguel De Guemes 3049',1123091584)
+insert into Clientes(Nombre,Apellido,FechaNac,Direccion,Telefono,Cuit,Email) values ('PEDRO ','CONSTANTIN GASPAR',Cast(N'28/09/1993' as date),'COLON 8111',1189076217,'20-38508234-8','PEDROCONSTANTINGASPAR@gmail.com')
+insert into Clientes(Nombre,Apellido,FechaNac,Direccion,Telefono,Cuit,Email) values ('LORENZO','LUENGO AGUSTI',Cast(N'24/12/1963' as date),'Juan B Justo 18033',1187578217,'20-33581386-4','LORENZOLUENGOAGUSTI@gmail.com')
+insert into Clientes(Nombre,Apellido,FechaNac,Direccion,Telefono,Cuit,Email) values ('CARLOS ','JUNQUERA DE OLIVEIRA',Cast(N'03/04/1957' as date),'Emilio Conesa 986 Piso 20âº Dpto G Colegiales',1190612202,'20-21465875-6','CARLOSJUNQUERADEOLIVEIRA@gmail.com')
+insert into Clientes(Nombre,Apellido,FechaNac,Direccion,Telefono,Cuit,Email) values ('FELIX','BARCO AMOROS',Cast(N'08/02/1988' as date),'Av E Perón 42 PB',1172924092,'20-23708016-6','FELIXBARCOAMOROS@gmail.com')
+insert into Clientes(Nombre,Apellido,FechaNac,Direccion,Telefono,Cuit,Email) values ('FELIX ','SARABIA POPA',Cast(N'13/11/1964' as date),'Buenos Aires 1127 P.D .A',1118062293,'20-41628555-2','FELIXSARABIAPOPA@gmail.com')
+insert into Clientes(Nombre,Apellido,FechaNac,Direccion,Telefono,Cuit,Email) values ('DIEGO ','MOLTO PAJARES',Cast(N'18/01/1960' as date),'Melian 3199',1173320453,'20-49232417-6','DIEGOMOLTOPAJARES@gmail.com')
+insert into Clientes(Nombre,Apellido,FechaNac,Direccion,Telefono,Cuit,Email) values ('JOSEFA ','ARMENGOL ARGUELLES',Cast(N'28/11/1987' as date),'Bernardo De Irigoyen 387',1153263214,'23-51089852-4','JOSEFAARMENGOLARGUELLES@gmail.com')
+insert into Clientes(Nombre,Apellido,FechaNac,Direccion,Telefono,Cuit,Email) values ('JOSEFA ','CONSTANTIN SAUCEDO',Cast(N'26/09/1991' as date),'Paso 26136',1140285085,'23-16783331-4','JOSEFACONSTANTINSAUCEDO@gmail.com')
+insert into Clientes(Nombre,Apellido,FechaNac,Direccion,Telefono,Cuit,Email) values ('CAROLINA ','CASTILLO FERREIRA',Cast(N'28/10/1981' as date),'San Lorenzo 2484',1154974222,'23-12986046-4','CAROLINACASTILLOFERREIRA@gmail.com')
+insert into Clientes(Nombre,Apellido,FechaNac,Direccion,Telefono,Cuit,Email) values ('ANA ','MILAN LOMAS',Cast(N'10/03/1968' as date),'Avellaneda 372',1145042913,'27-15754535-9','ANAMILANLOMAS@gmail.com')
+insert into Clientes(Nombre,Apellido,FechaNac,Direccion,Telefono,Cuit,Email) values ('MARIA ','JOSEFA NIEVES MULERO',Cast(N'14/01/2001' as date),'Martin Miguel De Guemes 3049',1123091584,'27-43758850-9','MARIAJOSEFANIEVESMULERO@gmail.com')
 
 
-USE Yomayel_Hildt_DB
-GO
-SET IDENTITY_INSERT [dbo].[Clientes] ON 
-GO
-INSERT [dbo].[Clientes] ([ID], [Nombre], [Apellido], [FechaNac], [Direccion], [Telefono]) VALUES (1, N'Luciano', N'Yomayel', CAST(N'2000-12-20' AS Date), N'C Pellegrini 1388', 1123905295)
-GO
-INSERT [dbo].[Clientes] ([ID], [Nombre], [Apellido], [FechaNac], [Direccion], [Telefono]) VALUES (2, N'Franco', N'Hildt', CAST(N'1990-12-20' AS Date), N'Av H Yrigoyen 4108', 1164037219)
-GO
-INSERT [dbo].[Clientes] ([ID], [Nombre], [Apellido], [FechaNac], [Direccion], [Telefono]) VALUES (3, N'Tadeo', N'Gomez', CAST(N'1991-10-01' AS Date), N'Darwin 22103', 1121670391)
-GO
-INSERT [dbo].[Clientes] ([ID], [Nombre], [Apellido], [FechaNac], [Direccion], [Telefono]) VALUES (4, N'Lautaro', N'Arostegui', CAST(N'2004-08-19' AS Date), N'ULamadrid 101', 1174077019)
-GO
-INSERT [dbo].[Clientes] ([ID], [Nombre], [Apellido], [FechaNac], [Direccion], [Telefono]) VALUES (5, N'Leandro', N'Fernandez', CAST(N'2001-03-15' AS Date), N'Bolivar Gral Simon 591', 1157492856)
-GO
-INSERT [dbo].[Clientes] ([ID], [Nombre], [Apellido], [FechaNac], [Direccion], [Telefono]) VALUES (6, N'Graciela', N'Ayala', CAST(N'1970-12-26' AS Date), N'Uruguay 328 Piso 03 Depto. 0045', 1135661664)
-GO
-INSERT [dbo].[Clientes] ([ID], [Nombre], [Apellido], [FechaNac], [Direccion], [Telefono]) VALUES (7, N'Roxana', N'Lopez', CAST(N'1966-01-11' AS Date), N'Alte Brown 13104', 1138655526)
-GO
-INSERT [dbo].[Clientes] ([ID], [Nombre], [Apellido], [FechaNac], [Direccion], [Telefono]) VALUES (8, N'Adriana', N'Zuidwijk', CAST(N'1994-05-20' AS Date), N'Espejo 114', 1122596288)
-GO
-SET IDENTITY_INSERT [dbo].[Clientes] OFF
+insert into Proveedores (RazonSocial,Descripcion,Email,Cuit) values('TecnoSolucion','Mouse y monitores','TecnoSolucion@gmail.com','23-17606071-9')
+insert into Proveedores (RazonSocial,Descripcion,Email,Cuit) values('FullH4rd','Teclados','FullH4rd@gmail.com','20-40485816-6')
+insert into Proveedores (RazonSocial,Descripcion,Email,Cuit) values('CompraGamer','Mouse, teclados y monitores','CompraGamer@gmail.com','20-55204244-2')
+insert into Proveedores (RazonSocial,Descripcion,Email,Cuit) values('Garbarino','Celulares','Garbarino@gmail.com','20-44408344-2')
+insert into Proveedores (RazonSocial,Descripcion,Email,Cuit) values('Compumundo','Celulares','Compumundo@gmail.com','20-27366697-5')
+insert into Proveedores (RazonSocial,Descripcion,Email,Cuit) values('GtripleL','Televisores y monitores','GtripleL@gmail.com','20-25020905-4')
+insert into Proveedores (RazonSocial,Descripcion,Email,Cuit) values('Solja','Teclados y celulares','Solja@gmail.com','20-24487622-7')
+insert into Proveedores (RazonSocial,Descripcion,Email,Cuit) values('Delz1k','Mouse y teclados','Delz1k@gmail.com','23-40238597-9')
 
-insert into Proveedores (RazonSocial,Descripcion) values('TecnoSolucion','Mouse y monitores')
-insert into Proveedores (RazonSocial,Descripcion) values('FullH4rd','Teclados')
-insert into Proveedores (RazonSocial,Descripcion) values('CompraGamer','Mouse, teclados y monitores')
-insert into Proveedores (RazonSocial,Descripcion) values('Garbarino','Celulares')
-insert into Proveedores (RazonSocial,Descripcion) values('Compumundo','Celulares')
-insert into Proveedores (RazonSocial,Descripcion) values('GtripleL','Televisores y monitores')
-insert into Proveedores (RazonSocial,Descripcion) values('Solja','Teclados y celulares')
-insert into Proveedores (RazonSocial,Descripcion) values('Delz1k','Mouse y teclados')
 
 --update categorias set estado = 1 
 --update Marcas set estado = 1
 --update Clientes set estado = 1
 --update Proveedores set estado = 1
 --update Productos set estado = 1
-select * from categorias
+select * from Proveedores
 
 
 

@@ -40,10 +40,10 @@ namespace TPC_Comercio
             try
             {
                 
-                int id = Convert.ToInt32(e.Values[0]);
+                string cuit = e.Values[0].ToString();
                 ClienteNegocio clienteNegocio = new ClienteNegocio();
-                if(id != 0)
-                clienteNegocio.eliminar(id);
+                if(cuit != null || cuit != "")
+                clienteNegocio.eliminar(cuit);
                 lista = clienteNegocio.listar();
                 gvClientes.DataSource = lista;
                 gvClientes.DataBind();
@@ -64,10 +64,9 @@ namespace TPC_Comercio
             try
             {
 
-                //gvClientes.EditIndex = e.NewEditIndex;
-                //gvClientes.DataBind();
-                int id = int.Parse(gvClientes.Rows[e.NewEditIndex].Cells[0].Text);
-                Session.Add("idCliente", id);
+                
+                string cuit = gvClientes.Rows[e.NewEditIndex].Cells[0].Text;
+                Session.Add("cuitCliente", cuit);
                 Response.Redirect("ModificarCliente.aspx", false);
                 Context.ApplicationInstance.CompleteRequest();
             }
