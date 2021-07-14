@@ -1,5 +1,5 @@
 go
-drop database Yomayel_Hildt_DB
+--drop database Yomayel_Hildt_DB
 create database Yomayel_Hildt_DB
 go 
 use Yomayel_Hildt_DB
@@ -59,24 +59,26 @@ create table Proveedores(
 create table Proveedores_X_Producto(
 	IdProveedores varchar(20) not null  foreign key references Proveedores(Cuit),
 	IdProducto int not null  foreign key references Productos(id)
-	Cantidad int not null check(Cantidad > 0)
 )
 ALTER table Proveedores_X_Producto ADD PRIMARY KEY (IdProveedores, IdProducto)
 
 create table Transacciones(
 	Id int not null identity(1,1) primary key,
 	Tipo char not null Check(Tipo = 'C' or Tipo = 'V'),
-	Monto money not null
+	Monto money null,
+	IdProveedor varchar(20) null foreign key references Proveedores(Cuit),
+	IdCliente varchar(20) null foreign key references Clientes(Cuit)
 )
+
+
 
 create table Detalle(
 	Id int not null identity(1,1) primary key,
-	IdProducto int not null foreign key references Productos(id),
+	IdProducto int not null  foreign key references Productos(id),
 	Cantidad int not null,
-	IdTransaccion int not null foreign key references Transacciones(Id)
+	IdTransaccion int not null foreign key references Transacciones(Id),
+	PrecioUnitario money not null
 )
-
-
 
 use Yomayel_Hildt_DB
 insert into Marcas (Nombre) values('Samsung')
@@ -135,8 +137,25 @@ insert into Proveedores (RazonSocial,Descripcion,Email,Cuit) values('Delz1k','Mo
 --update Proveedores set estado = 1
 --update Productos set estado = 1
 
+insert into Transacciones (Tipo)values('C') 
+insert into Transacciones (Tipo)values('C') 
+insert into Transacciones (Tipo)values('V') 
+insert into Transacciones (Tipo)values('V') 
+
+insert into Detalle(IdProducto,Cantidad,IdTransaccion,PrecioUnitario) values (3,20,21,5000)
+insert into Detalle(IdProducto,Cantidad,IdTransaccion,PrecioUnitario) values (4,4,21,20000)
+insert into Detalle(IdProducto,Cantidad,IdTransaccion,PrecioUnitario) values (5,11,21,50000)
+insert into Detalle(IdProducto,Cantidad,IdTransaccion,PrecioUnitario) values (10,3,22,10000)
+insert into Detalle(IdProducto,Cantidad,IdTransaccion,PrecioUnitario) values (11,6,22,11500)
+insert into Detalle(IdProducto,Cantidad,IdTransaccion,PrecioUnitario) values (12,9,22,37000)
+insert into Detalle(IdProducto,Cantidad,IdTransaccion,PrecioUnitario) values (3,5,27,5000)
+insert into Detalle(IdProducto,Cantidad,IdTransaccion,PrecioUnitario) values (4,3,28,20000)
 
 
+insert into Transacciones(Tipo,Monto,IdProveedor,IdCliente) values ('C',Null,'23-17606071-9',null)
+insert into Transacciones(Tipo,Monto,IdProveedor,IdCliente) values ('C',Null,'20-40485816-6',null)
+insert into Transacciones(Tipo,Monto,IdProveedor,IdCliente) values ('V',Null,null,'20-38508234-8')
+insert into Transacciones(Tipo,Monto,IdProveedor,IdCliente) values ('V',Null,null,'20-33581386-4')
 
 
 
