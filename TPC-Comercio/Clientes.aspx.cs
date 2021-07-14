@@ -39,7 +39,6 @@ namespace TPC_Comercio
             
             try
             {
-                
                 string cuit = e.Values[0].ToString();
                 ClienteNegocio clienteNegocio = new ClienteNegocio();
                 if(cuit != null || cuit != "")

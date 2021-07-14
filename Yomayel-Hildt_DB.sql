@@ -59,8 +59,24 @@ create table Proveedores(
 create table Proveedores_X_Producto(
 	IdProveedores varchar(20) not null  foreign key references Proveedores(Cuit),
 	IdProducto int not null  foreign key references Productos(id)
+	Cantidad int not null check(Cantidad > 0)
 )
 ALTER table Proveedores_X_Producto ADD PRIMARY KEY (IdProveedores, IdProducto)
+
+create table Transacciones(
+	Id int not null identity(1,1) primary key,
+	Tipo char not null Check(Tipo = 'C' or Tipo = 'V'),
+	Monto money not null
+)
+
+create table Detalle(
+	Id int not null identity(1,1) primary key,
+	IdProducto int not null foreign key references Productos(id),
+	Cantidad int not null,
+	IdTransaccion int not null foreign key references Transacciones(Id)
+)
+
+
 
 use Yomayel_Hildt_DB
 insert into Marcas (Nombre) values('Samsung')
