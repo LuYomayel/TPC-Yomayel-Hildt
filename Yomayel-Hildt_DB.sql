@@ -37,7 +37,7 @@ create table Productos(
 	Descripcion varchar(200) not null,
 	UltPrecio int null,
 	PorcGanancia int not null,
-	UrlImagen varchar(500) null,
+	UrlImagen money null,
 	StockActual int null,
 	StockMinimo int not null,
 	IdMarca int not null foreign key references Marcas(id),
@@ -157,5 +157,14 @@ insert into Transacciones(Tipo,Monto,IdProveedor,IdCliente) values ('C',Null,'20
 insert into Transacciones(Tipo,Monto,IdProveedor,IdCliente) values ('V',Null,null,'20-38508234-8')
 insert into Transacciones(Tipo,Monto,IdProveedor,IdCliente) values ('V',Null,null,'20-33581386-4')
 
+select D.Id Id, d.IdProducto IdProducto, p.Nombre NombreP, d.Cantidad Cantidad, d.IdTransaccion IdTransaccion, d.PrecioUnitario PrecioUnitario, 
+(d.Cantidad * d.PrecioUnitario) PrecioParcial from Detalle D 
+join Productos p on p.Id=d.IdProducto 
+
+where IdTransaccion=21
+group by d.Id
 
 
+select t.id IdTransaccion, coalesce(t.monto,0) Monto, t.IdProveedor IdProveedor, p.RazonSocial RazonSocial from Transacciones t join Proveedores p on p.Cuit = t.idProveedor where t.Tipo = 'C'
+
+select id, nombre, descripcion, urlimagen, coalesce(ultprecio, 0) UltPrecio from Productos where estado = 1 and id= 1

@@ -11,4 +11,5 @@
         </Columns>
     </asp:GridView>
     <asp:Label ID="Message" runat="server"></asp:Label>
+    <asp:Button ID="btnAgregar" runat="server" Text="Agregar Compra" OnClick="btnAgregar_Click"/>
 </asp:Content>

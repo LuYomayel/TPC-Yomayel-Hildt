@@ -14,7 +14,7 @@ namespace TPC_Comercio
         protected void Page_Load(object sender, EventArgs e)
         {
             int id = (int)Session["idTransaccion"];
-            DetalleNegocio detalleNegocio = new Negocio.DetalleNegocio();
+            DetalleNegocio detalleNegocio = new DetalleNegocio();
             listaDetalles = detalleNegocio.listarComprasID(id);
             gvDetalles.DataSource = listaDetalles;
             gvDetalles.DataBind();

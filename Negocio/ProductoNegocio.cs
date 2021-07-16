@@ -114,7 +114,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("select id, nombre, descripcion, urlimagen from Productos where estado = 1 and id= " + id );
+                datos.setearConsulta("select id, nombre, descripcion, urlimagen, coalesce(ultprecio, 0) UltPrecio from Productos where estado = 1 and id= " + id );
                 datos.ejecutarLectura();
 
                 Producto producto = new Producto();
@@ -125,6 +125,7 @@ namespace Negocio
                     producto.Nombre = (string)datos.Lector["Nombre"];
                     producto.Descripcion = (string)datos.Lector["Descripcion"];
                     producto.UrlImagen = (string)datos.Lector["UrlImagen"];
+                    producto.UltPrecio = (decimal)datos.Lector["UltPrecio"];
                 }
 
                 if(producto.Id != 0)

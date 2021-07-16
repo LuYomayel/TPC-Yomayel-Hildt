@@ -35,5 +35,11 @@ namespace TPC_Comercio
                 Context.ApplicationInstance.CompleteRequest();
             }
         }
+
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AgregarCompra.aspx", false);
+            Context.ApplicationInstance.CompleteRequest();
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace Negocio
             
             try
             {
-                datos.setearConsulta("select t.id IdTransaccion, t.monto Monto, t.IdProveedor IdProveedor, p.RazonSocial RazonSocial from Transacciones t " +
+                datos.setearConsulta("select t.id IdTransaccion, coalesce(t.monto,0) Monto, t.IdProveedor IdProveedor, p.RazonSocial RazonSocial from Transacciones t " +
                                     "join Proveedores p on p.Cuit = t.idProveedor " +
                                     "where t.Tipo = 'C' ");
                 datos.ejecutarLectura();
@@ -25,7 +25,7 @@ namespace Negocio
                     Transaccion aux = new Transaccion();
 
                     aux.Id = (int)datos.Lector["IdTransaccion"];
-                    
+                    aux.Monto = (decimal)datos.Lector["Monto"];
                     aux.Proveedor = new Proveedor();
                     aux.Proveedor.Cuit = (string)datos.Lector["IdProveedor"];
                     aux.Proveedor.RazonSocial = (string)datos.Lector["RazonSocial"];
