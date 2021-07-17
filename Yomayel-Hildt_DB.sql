@@ -45,6 +45,7 @@ create table Productos(
 	Estado bit default 1
 )
 
+alter table Productos alter column UltPrecio money null
 use Yomayel_Hildt_DB
 go
 
