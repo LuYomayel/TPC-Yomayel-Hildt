@@ -16,3 +16,12 @@ C:\Users\Tadeo-PC\Desktop\Repo\Negocio\obj\Debug\Negocio.csproj.CoreCompileInput
 C:\Users\Tadeo-PC\Desktop\Repo\Negocio\obj\Debug\Negocio.csproj.CopyComplete
 C:\Users\Tadeo-PC\Desktop\Repo\Negocio\obj\Debug\Negocio.dll
 C:\Users\Tadeo-PC\Desktop\Repo\Negocio\obj\Debug\Negocio.pdb
+C:\Users\Migra\OneDrive\Escritorio\TSP\TpComercio\Negocio\bin\Debug\Negocio.dll
+C:\Users\Migra\OneDrive\Escritorio\TSP\TpComercio\Negocio\bin\Debug\Negocio.pdb
+C:\Users\Migra\OneDrive\Escritorio\TSP\TpComercio\Negocio\bin\Debug\Dominio.dll
+C:\Users\Migra\OneDrive\Escritorio\TSP\TpComercio\Negocio\bin\Debug\Dominio.pdb
+C:\Users\Migra\OneDrive\Escritorio\TSP\TpComercio\Negocio\obj\Debug\Negocio.csprojAssemblyReference.cache
+C:\Users\Migra\OneDrive\Escritorio\TSP\TpComercio\Negocio\obj\Debug\Negocio.csproj.CoreCompileInputs.cache
+C:\Users\Migra\OneDrive\Escritorio\TSP\TpComercio\Negocio\obj\Debug\Negocio.csproj.CopyComplete
+C:\Users\Migra\OneDrive\Escritorio\TSP\TpComercio\Negocio\obj\Debug\Negocio.dll
+C:\Users\Migra\OneDrive\Escritorio\TSP\TpComercio\Negocio\obj\Debug\Negocio.pdb
