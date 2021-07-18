@@ -13,21 +13,21 @@ namespace TPC_Comercio
 {
     public partial class AgregarCompra : System.Web.UI.Page
     {
-        public List<Producto> cantProductos;
+        public List<Detalle> listaDetalles;
         protected void Page_Load(object sender, EventArgs e)
         {
             
             if (!IsPostBack)
-            {
-                if (cantProductos == null)
-                {
-                    cantProductos = new List<Producto>();
-                    Producto producto = new Producto();
-                    cantProductos.Add(producto);
-                }
+            {   
+                if(listaDetalles == null)
+                listaDetalles = new List<Detalle>();
+                listaDetalles = (List<Detalle>)Session["listaDetalles"];
+                Detalle detalle = new Detalle();
+                detalle = (Detalle)Session["Detalle"];
+
                 List<Proveedor> listaProveedores;
                 List<Producto> listaProductos;
-
+                
                 ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
                 listaProveedores = proveedorNegocio.listar();
                 ddProveedor.DataSource = listaProveedores;
@@ -42,20 +42,43 @@ namespace TPC_Comercio
                 ddProductos.DataValueField = "Id";
                 ddProductos.DataBind();
             }
+
+            listaDetalles = (List<Detalle>)Session["listaDetalles"];
+            if (listaDetalles != null)
+            {
+                gvDetalle.DataSource = listaDetalles;
+                gvDetalle.DataBind();
+            }
             
-
-
         }
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
             
-            
+            listaDetalles = (List<Detalle>)Session["listaDetalles"];
+            if (listaDetalles == null) listaDetalles = new List<Detalle>();
+            Detalle detalle = new Detalle();
+            Producto producto = new Producto();
+            ProductoNegocio productoNegocio = new ProductoNegocio();
+            int id = int.Parse(ddProductos.SelectedValue);
+            producto = productoNegocio.GetProducto(id);
+            detalle.Cantidad = int.Parse(txtCantidad.Text);
+            detalle.Producto = new Producto();
+            detalle.Producto = producto;
+            detalle.PrecioParcial = decimal.Parse(txtSubtotal.Text);
+            detalle.PrecioUnitario = producto.UltPrecio;
+            listaDetalles.Add(detalle);
+            Session.Add("Detalle", detalle);
+            Session.Add("listaDetalles", listaDetalles);
+            txtCantidad.Text = "0";
+            txtSubtotal.Text = "0";
+            gvDetalle.DataSource = listaDetalles;
+            gvDetalle.DataBind();
         }
 
         protected void txtCantidad_TextChanged(object sender, EventArgs e)
         {
-            /*ProductoNegocio productoNegocio = new ProductoNegocio();
+            ProductoNegocio productoNegocio = new ProductoNegocio();
             Producto producto = new Producto();
 
             int id = int.Parse(ddProductos.SelectedItem.Value);
@@ -72,12 +95,12 @@ namespace TPC_Comercio
             {
                 txtSubtotal.Text = "0";
             }
-            */
+            
         }
 
         protected void ddProductos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            /*ProductoNegocio productoNegocio = new ProductoNegocio();
+            ProductoNegocio productoNegocio = new ProductoNegocio();
             Producto producto = new Producto();
 
             int id = int.Parse(ddProductos.SelectedItem.Value);
@@ -92,22 +115,29 @@ namespace TPC_Comercio
             else
             {
                 txtSubtotal.Text = "0";
-            }*/
+            }
         }
 
-        protected void txtCantProd_TextChanged(object sender, EventArgs e)
+        protected void btnAgregarTransaccion_Click(object sender, EventArgs e)
         {
-            int cantidad = int.Parse(txtCantProd.Text);
-            if (cantProductos == null)
-            {
-                cantProductos = new List<Producto>();
+            Transaccion transaccion = new Transaccion();
+            TransaccionNegocio transaccionNegocio = new TransaccionNegocio();
+            transaccion.Tipo = "C";
+            Proveedor proveedor = new Proveedor();
+            ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
+            string id = ddProveedor.SelectedValue;
+            proveedor = proveedorNegocio.GetProveedor(id);
+            transaccion.Proveedor = proveedor;
+            transaccionNegocio.agregar(transaccion);
+            transaccionNegocio.GetTransaccion(id);
+            transaccion.listaDetalles = (List<Detalle>)Session["listaDetalles"];
+            listaDetalles = (List<Detalle>)Session["listaDetalles"];
+            decimal PrecioTotal = 0;
+            foreach(Detalle item in listaDetalles){
+                PrecioTotal += item.PrecioParcial;
+            }
+            transaccion.Monto = PrecioTotal;
 
-            }
-            for (int i = 0; i < cantidad; i++)
-            {
-                Producto producto = new Producto();
-                cantProductos.Add(producto);
-            }
         }
     }
 }

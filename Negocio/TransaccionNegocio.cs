@@ -41,5 +41,27 @@ namespace Negocio
             }
 
         }
+
+        public void agregar(Transaccion transaccion)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+
+                string valores = "values( '" + transaccion.Tipo + "', '" + transaccion.Proveedor.Cuit +"' )";
+                datos.setearConsulta("Insert into Transacciones (Tipo, IdProveedor) " + valores);
+
+                datos.ejectutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

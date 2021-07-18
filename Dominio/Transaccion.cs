@@ -10,8 +10,9 @@ namespace Dominio
     {
         public int Id { get; set; }
         public decimal Monto { get; set; }
-        public char Tipo { get; set; }
+        public string Tipo { get; set; }
         public Cliente Cliente { get; set; }
         public Proveedor Proveedor { get; set; }
+        public List<Detalle> listaDetalles { get; set; }
     }
 }
