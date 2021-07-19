@@ -93,7 +93,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                string consulta = "update Productos set StockActual = " + producto.StockActual + ", UltPrecio = " + producto.UltPrecio + " where id=" + producto.Id;
+                string consulta = "update Productos set StockActual = " + producto.StockActual + ", UltPrecio = cast('" + producto.UltPrecio + "' as money) where id=" + producto.Id;
                 datos.setearConsulta(consulta);
 
                 datos.ejectutarAccion();

@@ -41,8 +41,69 @@ namespace Negocio
             }
 
         }
+        public List<Transaccion> listarTransacciones()
+        {
+            List<Transaccion> lista = new List<Transaccion>();
+            AccesoDatos datos = new AccesoDatos();
 
-        public void agregar(Transaccion transaccion)
+            try
+            {
+                datos.setearConsulta("select id, coalesce(cast(monto as money),0) Monto from Transacciones");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Transaccion aux = new Transaccion();
+
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Monto = (decimal)datos.Lector["Monto"];
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+        public List<Transaccion> listarVentas()
+        {
+            List<Transaccion> lista = new List<Transaccion>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("select t.id IdTransaccion, coalesce(t.monto,0) Monto, t.IdCliente IdCliente, c.Nombre Nombre from Transacciones t " +
+                                    "join Clientes c on c.Cuit=t.IdCliente " +
+                                    "where t.Tipo = 'V' ");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Transaccion aux = new Transaccion();
+
+                    aux.Id = (int)datos.Lector["IdTransaccion"];
+                    aux.Monto = (decimal)datos.Lector["Monto"];
+                    aux.Cliente = new Cliente();
+                    aux.Cliente.Cuit = (string)datos.Lector["IdCliente"];
+                    aux.Cliente.Nombre = (string)datos.Lector["Nombre"];
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+
+        public void agregarCompra(Transaccion transaccion)
         {
             AccesoDatos datos = new AccesoDatos();
             try
@@ -63,7 +124,27 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public void agregarVenta(Transaccion transaccion)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
 
+                string valores = "values(" + transaccion.Id + ",'" + transaccion.Tipo + "', '" + transaccion.Cliente.Cuit + "' )";
+                datos.setearConsulta("SET IDENTITY_INSERT [Transacciones] ON Insert into Transacciones (Id, Tipo, IdCliente) " + valores);
+
+                datos.ejectutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         public void update(Transaccion transaccion, int id)
         {
             AccesoDatos datos = new AccesoDatos();

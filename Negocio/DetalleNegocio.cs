@@ -47,6 +47,9 @@ namespace Negocio
             }
 
         }
+
+        
+
         public void agregar(Detalle nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
