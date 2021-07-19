@@ -48,8 +48,8 @@ namespace Negocio
             try
             {
 
-                string valores = "values( '" + transaccion.Tipo + "', '" + transaccion.Proveedor.Cuit +"' )";
-                datos.setearConsulta("Insert into Transacciones (Tipo, IdProveedor) " + valores);
+                string valores = "values(" + transaccion.Id + ",'" + transaccion.Tipo + "', '" + transaccion.Proveedor.Cuit +"' )";
+                datos.setearConsulta("SET IDENTITY_INSERT [Transacciones] ON Insert into Transacciones (Id, Tipo, IdProveedor) " + valores);
 
                 datos.ejectutarAccion();
 
@@ -62,6 +62,54 @@ namespace Negocio
             {
                 datos.cerrarConexion();
             }
+        }
+
+        public void update(Transaccion transaccion, int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+
+                
+                datos.setearConsulta("update Transacciones set Monto = cast('"+ transaccion.Monto +"' as money) where id =" + id);
+
+                datos.ejectutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public Transaccion GetCompra(int id)
+        {
+            Transaccion transaccion = new Transaccion();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(" select * from Transacciones where id= " + id);
+                datos.ejecutarLectura();
+                transaccion.Id = (int)datos.Lector["IdTransaccion"];
+                transaccion.Monto = (decimal)datos.Lector["Monto"];
+                transaccion.Proveedor = new Proveedor();
+                transaccion.Proveedor.Cuit = (string)datos.Lector["IdProveedor"];
+                transaccion.Proveedor.RazonSocial = (string)datos.Lector["RazonSocial"];
+                    
+
+                return transaccion;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
         }
     }
 }

@@ -170,3 +170,5 @@ group by d.Id
 select t.id IdTransaccion, coalesce(t.monto,0) Monto, t.IdProveedor IdProveedor, p.RazonSocial RazonSocial from Transacciones t join Proveedores p on p.Cuit = t.idProveedor where t.Tipo = 'C'
 
 select id, nombre, descripcion, urlimagen, coalesce(ultprecio, 0) UltPrecio from Productos where estado = 1 and id= 1
+use Yomayel_Hildt_DB
+select * from Ventas

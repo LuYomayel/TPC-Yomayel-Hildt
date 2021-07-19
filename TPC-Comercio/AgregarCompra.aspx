@@ -14,11 +14,15 @@
                     <div class="row">
                         <div class="col form-group">
                             <asp:Label ID="lblProducto" runat="server" Text="Producto:"></asp:Label>
-                            <asp:DropDownList ID="ddProductos" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddProductos_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                            <asp:DropDownList ID="ddProductos" runat="server" CssClass="form-control" AutoPostBack="true"></asp:DropDownList>
                         </div>
                         <div class="col form-group">
                             <asp:Label ID="lblCantidad" runat="server" Text="Cantidad:"></asp:Label>
                             <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control" OnTextChanged="txtCantidad_TextChanged" AutoPostBack="true" ></asp:TextBox>
+                        </div>
+                        <div class="col form-group">
+                            <asp:Label ID="lblPrecioUnitario" runat="server" Text="Precio Unitario:"></asp:Label>
+                            <asp:TextBox ID="txtPrecioUnitario" runat="server" CssClass="form-control" OnTextChanged="txtPrecioUnitario_TextChanged" AutoPostBack="true" ></asp:TextBox>
                         </div>
                         <div class="col form-group">
                             <asp:Label ID="lblSubtotal" runat="server" Text="Subtotal:"></asp:Label>

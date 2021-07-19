@@ -88,7 +88,26 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public void stock_precio(Producto producto)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                string consulta = "update Productos set StockActual = " + producto.StockActual + ", UltPrecio = " + producto.UltPrecio + " where id=" + producto.Id;
+                datos.setearConsulta(consulta);
 
+                datos.ejectutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         public void eliminar(int id)
         {
             AccesoDatos datos = new AccesoDatos();

@@ -47,5 +47,26 @@ namespace Negocio
             }
 
         }
+        public void agregar(Detalle nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+
+                string valores = "values(" + nuevo.Producto.Id + ", " + nuevo.Cantidad + ", " + nuevo.Transaccion.Id + ", cast('" + nuevo.PrecioUnitario + "' as money))";
+                datos.setearConsulta("insert into Detalle (IdProducto, Cantidad, IdTransaccion, PrecioUnitario) " + valores);
+
+                datos.ejectutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

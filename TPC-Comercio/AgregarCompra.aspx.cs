@@ -62,11 +62,14 @@ namespace TPC_Comercio
             ProductoNegocio productoNegocio = new ProductoNegocio();
             int id = int.Parse(ddProductos.SelectedValue);
             producto = productoNegocio.GetProducto(id);
+            producto.StockActual += int.Parse(txtCantidad.Text);
+            producto.UltPrecio = decimal.Parse(txtPrecioUnitario.Text);
+            
             detalle.Cantidad = int.Parse(txtCantidad.Text);
             detalle.Producto = new Producto();
             detalle.Producto = producto;
             detalle.PrecioParcial = decimal.Parse(txtSubtotal.Text);
-            detalle.PrecioUnitario = producto.UltPrecio;
+            detalle.PrecioUnitario = decimal.Parse(txtPrecioUnitario.Text);
             listaDetalles.Add(detalle);
             Session.Add("Detalle", detalle);
             Session.Add("listaDetalles", listaDetalles);
@@ -78,16 +81,14 @@ namespace TPC_Comercio
 
         protected void txtCantidad_TextChanged(object sender, EventArgs e)
         {
-            ProductoNegocio productoNegocio = new ProductoNegocio();
-            Producto producto = new Producto();
+            
 
-            int id = int.Parse(ddProductos.SelectedItem.Value);
+            
             var cantidad = txtCantidad.Text;
-            producto = productoNegocio.GetProducto(id);
-
-            if (cantidad != "" && cantidad != "0,0")
+            var precioUnitario = txtPrecioUnitario.Text;
+            if (cantidad != "" && precioUnitario != "")
             {
-                decimal subtotal = producto.UltPrecio * decimal.Parse(txtCantidad.Text);
+                decimal subtotal = decimal.Parse(txtPrecioUnitario.Text)* decimal.Parse(txtCantidad.Text);
 
                 txtSubtotal.Text = subtotal.ToString();
             }
@@ -98,46 +99,68 @@ namespace TPC_Comercio
             
         }
 
-        protected void ddProductos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ProductoNegocio productoNegocio = new ProductoNegocio();
-            Producto producto = new Producto();
-
-            int id = int.Parse(ddProductos.SelectedItem.Value);
-            var cantidad = txtCantidad.Text;
-            producto = productoNegocio.GetProducto(id);
-
-            if (cantidad != "") { 
-            decimal subtotal = producto.UltPrecio * decimal.Parse(txtCantidad.Text);
-
-            txtSubtotal.Text = subtotal.ToString();
-            }
-            else
-            {
-                txtSubtotal.Text = "0";
-            }
-        }
+        
 
         protected void btnAgregarTransaccion_Click(object sender, EventArgs e)
         {
             Transaccion transaccion = new Transaccion();
             TransaccionNegocio transaccionNegocio = new TransaccionNegocio();
+            List<Transaccion> listaTransacciones = new List<Transaccion>();
+            listaTransacciones = transaccionNegocio.listarCompras();
+            int idTransaccion = 1;
+            foreach(Transaccion item in listaTransacciones)
+            {
+                idTransaccion = item.Id + 1;
+            }
             transaccion.Tipo = "C";
+            if(idTransaccion != 0)
+            transaccion.Id = idTransaccion;
             Proveedor proveedor = new Proveedor();
             ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
             string id = ddProveedor.SelectedValue;
             proveedor = proveedorNegocio.GetProveedor(id);
             transaccion.Proveedor = proveedor;
             transaccionNegocio.agregar(transaccion);
-            transaccionNegocio.GetTransaccion(id);
+            DetalleNegocio detalleNegocio = new DetalleNegocio();
+
             transaccion.listaDetalles = (List<Detalle>)Session["listaDetalles"];
             listaDetalles = (List<Detalle>)Session["listaDetalles"];
+            Producto producto = new Producto();
+            ProductoNegocio productoNegocio = new ProductoNegocio();
+            foreach(Detalle item in listaDetalles)
+            {
+                producto = item.Producto;
+                producto.StockActual = item.Cantidad;
+                producto.UltPrecio = item.PrecioParcial;
+                productoNegocio.stock_precio(producto);
+                item.Transaccion = new Transaccion();
+                item.Transaccion.Id = idTransaccion;
+                detalleNegocio.agregar(item);
+            }
             decimal PrecioTotal = 0;
             foreach(Detalle item in listaDetalles){
                 PrecioTotal += item.PrecioParcial;
             }
             transaccion.Monto = PrecioTotal;
+            transaccionNegocio.update(transaccion, idTransaccion);
+            Response.Redirect("Compras.aspx", false);
+            Context.ApplicationInstance.CompleteRequest();
+        }
 
+        protected void txtPrecioUnitario_TextChanged(object sender, EventArgs e)
+        {
+            var cantidad = txtCantidad.Text;
+            var precioUnitario = txtPrecioUnitario.Text;
+            if (cantidad != "" && precioUnitario != "")
+            {
+                decimal subtotal = decimal.Parse(txtPrecioUnitario.Text) * decimal.Parse(txtCantidad.Text);
+
+                txtSubtotal.Text = subtotal.ToString();
+            }
+            else
+            {
+                txtSubtotal.Text = "0";
+            }
         }
     }
 }
