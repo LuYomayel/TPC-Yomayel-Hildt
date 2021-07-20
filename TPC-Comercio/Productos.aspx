@@ -11,7 +11,7 @@
                     <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
                     <asp:BoundField HeaderText="Descripcion" DataField="Descripcion" />
                     <asp:BoundField HeaderText="% de ganancia" DataField="porcGanancia" />
-                    <asp:BoundField HeaderText="Stock Minimo" DataField="stockMinimo"/>
+                    <asp:BoundField HeaderText="Stock Actual" DataField="stockActual"/>
                     <asp:BoundField HeaderText="Marca" DataField="Marca.Nombre"/>
                     <asp:BoundField HeaderText="Categoria" DataField="Categoria.Nombre" />
                     

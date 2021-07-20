@@ -127,18 +127,26 @@ namespace TPC_Comercio
             listaDetalles = (List<Detalle>)Session["listaDetalles"];
             Producto producto = new Producto();
             ProductoNegocio productoNegocio = new ProductoNegocio();
+
+            
             foreach(Detalle item in listaDetalles)
             {
                 producto = item.Producto;
+                
                 producto.StockActual += item.Cantidad;
                 producto.UltPrecio = item.PrecioParcial;
-                productoNegocio.stock_precio(producto);
+                
                 item.Transaccion = new Transaccion();
                 item.Transaccion.Id = idTransaccion;
-                detalleNegocio.agregar(item);
+                
+                
+                    productoNegocio.stock_precio(producto);
+                    detalleNegocio.agregar(item);
+                
             }
             decimal PrecioTotal = 0;
             foreach(Detalle item in listaDetalles){
+                
                 PrecioTotal += item.PrecioParcial;
             }
             transaccion.Monto = PrecioTotal;

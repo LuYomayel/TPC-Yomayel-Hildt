@@ -11,6 +11,8 @@ namespace TPC_Comercio
     public partial class AgregarVenta : System.Web.UI.Page
     {
         public List<Detalle> listaDetalles;
+        public List<Cliente> listaClientes;
+        public List<Producto> listaProductos;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -21,10 +23,11 @@ namespace TPC_Comercio
                 Detalle detalle = new Detalle();
                 detalle = (Detalle)Session["vDetalle"];
 
-                List<Cliente> listaClientes;
-                List<Producto> listaProductos;
-
+                
+                
                 ClienteNegocio clienteNegocio = new ClienteNegocio();
+                
+                listaClientes = new List<Cliente>();
                 listaClientes = clienteNegocio.listar();
                 ddClientes.DataSource = listaClientes;
                 ddClientes.DataTextField = "Nombre";
@@ -32,7 +35,18 @@ namespace TPC_Comercio
                 ddClientes.DataBind();
 
                 ProductoNegocio productoNegocio = new ProductoNegocio();
-                listaProductos = productoNegocio.listar();
+
+                if(listaProductos == null)
+                {
+                    listaProductos = new List<Producto>();
+                    listaProductos = productoNegocio.listar();
+                    Session.Add("listaProductos", listaProductos);
+                }
+                else
+                {
+                    listaProductos = (List<Producto>)Session["listaProductos"];
+                }
+                
                 ddProductos.DataSource = listaProductos;
                 ddProductos.DataTextField = "Nombre";
                 ddProductos.DataValueField = "Id";
@@ -45,6 +59,7 @@ namespace TPC_Comercio
                 gvDetalle.DataSource = listaDetalles;
                 gvDetalle.DataBind();
             }
+            
         }
         protected void txtCantidad_TextChanged(object sender, EventArgs e)
         {
@@ -76,14 +91,31 @@ namespace TPC_Comercio
             ProductoNegocio productoNegocio = new ProductoNegocio();
             int id = int.Parse(ddProductos.SelectedValue);
             producto = productoNegocio.GetProducto(id);
-            detalle.Cantidad = int.Parse(txtCantidad.Text);
-            detalle.Producto = new Producto();
-            detalle.Producto = producto;
-            detalle.PrecioParcial = decimal.Parse(txtSubtotal.Text);
-            detalle.PrecioUnitario = decimal.Parse(txtPrecioUnitario.Text);
-            listaDetalles.Add(detalle);
-            Session.Add("vDetalle", detalle);
-            Session.Add("detalleVenta", listaDetalles);
+            if(int.Parse(txtCantidad.Text) > producto.StockActual)
+            {
+                lblMessage.Text = "No se puede vender lo que no se tiene.";
+            }
+            else
+            {
+                detalle.Cantidad = int.Parse(txtCantidad.Text);
+                detalle.Producto = new Producto();
+                detalle.Producto = producto;
+                detalle.PrecioParcial = decimal.Parse(txtSubtotal.Text);
+                detalle.PrecioUnitario = decimal.Parse(txtPrecioUnitario.Text);
+                listaDetalles.Add(detalle);
+                Session.Add("vDetalle", detalle);
+                Session.Add("detalleVenta", listaDetalles);
+                listaProductos = (List<Producto>)Session["listaProductos"];
+                listaProductos.Remove(listaProductos.Find(x => x.Id == producto.Id));
+                
+                Session.Add("listaProductos", listaProductos);
+                ddProductos.DataSource = listaProductos;
+                ddProductos.DataTextField = "Nombre";
+                ddProductos.DataValueField = "Id";
+                ddProductos.DataBind();
+                lblMessage.Text = "";
+            }
+            
             txtCantidad.Text = "0";
             txtSubtotal.Text = "0";
             gvDetalle.DataSource = listaDetalles;
