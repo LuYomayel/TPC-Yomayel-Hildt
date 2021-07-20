@@ -17,9 +17,9 @@ namespace TPC_Comercio
             {
                 if (listaDetalles == null)
                     listaDetalles = new List<Detalle>();
-                listaDetalles = (List<Detalle>)Session["listaDetalles"];
+                listaDetalles = (List<Detalle>)Session["detalleVenta"];
                 Detalle detalle = new Detalle();
-                detalle = (Detalle)Session["Detalle"];
+                detalle = (Detalle)Session["vDetalle"];
 
                 List<Cliente> listaClientes;
                 List<Producto> listaProductos;
@@ -39,7 +39,7 @@ namespace TPC_Comercio
                 ddProductos.DataBind();
             }
 
-            listaDetalles = (List<Detalle>)Session["listaDetalles"];
+            listaDetalles = (List<Detalle>)Session["detalleVenta"];
             if (listaDetalles != null)
             {
                 gvDetalle.DataSource = listaDetalles;
@@ -69,7 +69,7 @@ namespace TPC_Comercio
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
-            listaDetalles = (List<Detalle>)Session["listaDetalles"];
+            listaDetalles = (List<Detalle>)Session["detalleVenta"];
             if (listaDetalles == null) listaDetalles = new List<Detalle>();
             Detalle detalle = new Detalle();
             Producto producto = new Producto();
@@ -82,8 +82,8 @@ namespace TPC_Comercio
             detalle.PrecioParcial = decimal.Parse(txtSubtotal.Text);
             detalle.PrecioUnitario = decimal.Parse(txtPrecioUnitario.Text);
             listaDetalles.Add(detalle);
-            Session.Add("Detalle", detalle);
-            Session.Add("listaDetalles", listaDetalles);
+            Session.Add("vDetalle", detalle);
+            Session.Add("detalleVenta", listaDetalles);
             txtCantidad.Text = "0";
             txtSubtotal.Text = "0";
             gvDetalle.DataSource = listaDetalles;
@@ -112,8 +112,8 @@ namespace TPC_Comercio
             transaccionNegocio.agregarVenta(transaccion);
             DetalleNegocio detalleNegocio = new DetalleNegocio();
 
-            transaccion.listaDetalles = (List<Detalle>)Session["listaDetalles"];
-            listaDetalles = (List<Detalle>)Session["listaDetalles"];
+            transaccion.listaDetalles = (List<Detalle>)Session["detalleVenta"];
+            listaDetalles = (List<Detalle>)Session["detalleVenta"];
             Producto producto = new Producto();
             ProductoNegocio productoNegocio = new ProductoNegocio();
             
@@ -122,7 +122,7 @@ namespace TPC_Comercio
                 producto = item.Producto;
                 producto.StockActual -= item.Cantidad;
                 if (producto.StockActual < 0) producto.StockActual = 0;
-                productoNegocio.stock_precio(producto);
+                productoNegocio.stock(producto);
                 item.Transaccion = new Transaccion();
                 item.Transaccion.Id = idTransaccion;
                 detalleNegocio.agregar(item);
@@ -134,7 +134,8 @@ namespace TPC_Comercio
             }
             transaccion.Monto = PrecioTotal;
             transaccionNegocio.update(transaccion, idTransaccion);
-            Response.Redirect("Compras.aspx", false);
+            Session.Remove("detalleVenta");
+            Response.Redirect("Ventas.aspx", false);
             Context.ApplicationInstance.CompleteRequest();
         }
 
@@ -157,6 +158,18 @@ namespace TPC_Comercio
             {
                 txtSubtotal.Text = "0";
             }
+        }
+
+        protected void gvDetalle_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            int index = Convert.ToInt32(e.RowIndex);
+            listaDetalles = (List<Detalle>)Session["detalleVenta"];
+            Detalle detalle = new Detalle();
+            detalle = listaDetalles[index];
+            listaDetalles.Remove(detalle);
+            Session.Add("detalleVenta", listaDetalles);
+            gvDetalle.DataSource = listaDetalles;
+            gvDetalle.DataBind();
         }
     }
 }

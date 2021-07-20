@@ -93,7 +93,27 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                string consulta = "update Productos set StockActual = " + producto.StockActual + ", UltPrecio = cast('" + producto.UltPrecio + "' as money) where id=" + producto.Id;
+                string consulta = "update Productos set StockActual = " + producto.StockActual + ", UltPrecio = replace('" + producto.UltPrecio + "', ',', '.') where id=" + producto.Id;
+                datos.setearConsulta(consulta);
+
+                datos.ejectutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public void stock(Producto producto)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                string consulta = "update Productos set StockActual = " + producto.StockActual + " where id=" + producto.Id;
                 datos.setearConsulta(consulta);
 
                 datos.ejectutarAccion();

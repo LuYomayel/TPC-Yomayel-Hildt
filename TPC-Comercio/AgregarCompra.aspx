@@ -34,11 +34,12 @@
                             <asp:Button ID="btnAgregar" runat="server" Text="Agregar Producto" OnClick="btnAgregar_Click" CssClass="btn btn-primary form-control"/>
                         </div>
                     </div>
-                <asp:GridView ID="gvDetalle" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered">
+                <asp:GridView ID="gvDetalle" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered" OnRowDeleting="gvDetalle_RowDeleting">
                     <Columns>
                         <asp:BoundField HeaderText="Producto" DataField="Producto.Nombre" />
                         <asp:BoundField HeaderText="Cantidad" DataField="Cantidad" />
                         <asp:BoundField HeaderText="Subtotal" DataField="PrecioParcial" />
+                        <asp:ButtonField CommandName="Delete" HeaderText="Eliminar" Text="Eliminar" ControlStyle-CssClass="btn btn-primary" />
                     </Columns>
                 </asp:GridView>
                 </div>

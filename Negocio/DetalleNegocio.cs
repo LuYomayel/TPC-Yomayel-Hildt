@@ -56,7 +56,7 @@ namespace Negocio
             try
             {
 
-                string valores = "values(" + nuevo.Producto.Id + ", " + nuevo.Cantidad + ", " + nuevo.Transaccion.Id + ", cast('" + nuevo.PrecioUnitario + "' as money))";
+                string valores = "values(" + nuevo.Producto.Id + ", " + nuevo.Cantidad + ", " + nuevo.Transaccion.Id + ", replace('" + nuevo.PrecioUnitario + "', ',', '.' ))";
                 datos.setearConsulta("insert into Detalle (IdProducto, Cantidad, IdTransaccion, PrecioUnitario) " + valores);
 
                 datos.ejectutarAccion();

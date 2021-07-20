@@ -152,7 +152,7 @@ namespace Negocio
             {
 
                 
-                datos.setearConsulta("update Transacciones set Monto = cast('"+ transaccion.Monto +"' as money) where id =" + id);
+                datos.setearConsulta("update Transacciones set Monto = replace('"+ transaccion.Monto +"', ',', '.') where id =" + id);
 
                 datos.ejectutarAccion();
 

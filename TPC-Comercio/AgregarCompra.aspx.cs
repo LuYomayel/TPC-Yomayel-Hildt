@@ -143,6 +143,7 @@ namespace TPC_Comercio
             }
             transaccion.Monto = PrecioTotal;
             transaccionNegocio.update(transaccion, idTransaccion);
+            Session.Remove("listaDetalles");
             Response.Redirect("Compras.aspx", false);
             Context.ApplicationInstance.CompleteRequest();
         }
@@ -160,6 +161,27 @@ namespace TPC_Comercio
             else
             {
                 txtSubtotal.Text = "0";
+            }
+        }
+
+        protected void gvDetalle_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            try
+            {
+                int index = Convert.ToInt32(e.RowIndex);
+                listaDetalles = (List<Detalle>)Session["listaDetalles"];
+                Detalle detalle = new Detalle();
+                detalle = listaDetalles[index];
+                listaDetalles.Remove(detalle);
+                Session.Add("listaDetalles", listaDetalles);
+                gvDetalle.DataSource = listaDetalles;
+                gvDetalle.DataBind();
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
         }
     }
