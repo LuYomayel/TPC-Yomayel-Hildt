@@ -14,10 +14,20 @@ namespace TPC_Comercio
         protected void Page_Load(object sender, EventArgs e)
         {
             ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
-            listaProveedores = proveedorNegocio.listar();
+            try
+            {
+                listaProveedores = proveedorNegocio.listar();
 
-            gvProveedores.DataSource = listaProveedores;
-            gvProveedores.DataBind();
+                gvProveedores.DataSource = listaProveedores;
+                gvProveedores.DataBind();
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
+            }
+            
         }
 
         protected void gvProveedores_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -25,19 +35,20 @@ namespace TPC_Comercio
             try
             {
 
-                int id = Convert.ToInt32(e.Values[0]);
+                string cuit = e.Values[0].ToString();
                 ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
 
-                if (id != 0)
-                    proveedorNegocio.eliminar(id);
+                if (cuit != null || cuit != "")
+                    proveedorNegocio.eliminar(cuit);
                 listaProveedores = proveedorNegocio.listar();
                 gvProveedores.DataSource = listaProveedores;
                 gvProveedores.DataBind();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
-                throw;
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
         }
 
@@ -45,19 +56,24 @@ namespace TPC_Comercio
         {
             try
             {
-
-                //gvClientes.EditIndex = e.NewEditIndex;
-                //gvClientes.DataBind();
-                int id = int.Parse(gvProveedores.Rows[e.NewEditIndex].Cells[0].Text);
-                Session.Add("idProveedor", id);
-                Response.Redirect("ModificarProveedor.aspx");
+                string cuit = gvProveedores.Rows[e.NewEditIndex].Cells[0].Text;
+                Session.Add("cuitProveedor", cuit);
+                Response.Redirect("ModificarProveedor.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
-                throw;
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
+        }
+
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AgregarProveedor.aspx", false);
+            Context.ApplicationInstance.CompleteRequest();
         }
     }
 }

@@ -9,3 +9,10 @@ C:\Users\Tadeo-PC\Desktop\Repo\Dominio\obj\Debug\Dominio.csproj.AssemblyReferenc
 C:\Users\Tadeo-PC\Desktop\Repo\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
 C:\Users\Tadeo-PC\Desktop\Repo\Dominio\obj\Debug\Dominio.dll
 C:\Users\Tadeo-PC\Desktop\Repo\Dominio\obj\Debug\Dominio.pdb
+F:\Luciano\Github\TPC-Comercio\Dominio\obj\Debug\Dominio.csprojAssemblyReference.cache
+C:\Users\Migra\OneDrive\Escritorio\TSP\TpComercio\Dominio\bin\Debug\Dominio.dll
+C:\Users\Migra\OneDrive\Escritorio\TSP\TpComercio\Dominio\bin\Debug\Dominio.pdb
+C:\Users\Migra\OneDrive\Escritorio\TSP\TpComercio\Dominio\obj\Debug\Dominio.csprojAssemblyReference.cache
+C:\Users\Migra\OneDrive\Escritorio\TSP\TpComercio\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\Migra\OneDrive\Escritorio\TSP\TpComercio\Dominio\obj\Debug\Dominio.dll
+C:\Users\Migra\OneDrive\Escritorio\TSP\TpComercio\Dominio\obj\Debug\Dominio.pdb

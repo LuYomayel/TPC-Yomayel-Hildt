@@ -16,28 +16,22 @@ namespace TPC_Comercio
             ProductoNegocio productoNegocio = new ProductoNegocio();
             CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
             MarcaNegocio marcaNegocio = new MarcaNegocio();
-            listaProductos = productoNegocio.listar();
-            Session.Add("listaProductos", listaProductos);
-            gvProductos.DataSource = listaProductos;
-            gvProductos.DataBind();
-            var id = Request.Form["id"];
-            
-        }
+            try
+            {
+                listaProductos = productoNegocio.listar();
+                Session.Add("listaProductos", listaProductos);
+                gvProductos.DataSource = listaProductos;
+                gvProductos.DataBind();
+                
+            }
+            catch (Exception ex)
+            {
 
-        protected void btnAgregar_Click(object sender, EventArgs e)
-        {
-                      
-        }
-
-        protected void btnAgregar_Click1(object sender, EventArgs e)
-        {
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
+            }
             
-        }
-
-        protected void btnEliminar_Click(object sender, EventArgs e)
-        {
             
-            Response.Redirect("index.aspx");
         }
 
         protected void gvProductos_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -54,10 +48,11 @@ namespace TPC_Comercio
                 gvProductos.DataSource = listaProductos;
                 gvProductos.DataBind();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
-                throw;
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
         }
 
@@ -70,13 +65,21 @@ namespace TPC_Comercio
                 //gvClientes.DataBind();
                 int id = int.Parse(gvProductos.Rows[e.NewEditIndex].Cells[0].Text);
                 Session.Add("idProducto", id);
-                Response.Redirect("ModificarProducto.aspx");
+                Response.Redirect("ModificarProducto.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
-                throw;
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
+        }
+
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AgregarProducto.aspx", false);
+            Context.ApplicationInstance.CompleteRequest();
         }
     }
 }

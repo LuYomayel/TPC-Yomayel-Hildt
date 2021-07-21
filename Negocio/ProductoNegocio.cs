@@ -16,7 +16,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("select p.id, p.nombre, p.descripcion, p.urlimagen,p.PorcGanancia,p.StockMinimo, m.Nombre Marca,m.id idMarca, c.id idCategoria, c.Nombre Categoria from Productos p join Categorias c on c.id = p.idCategoria join Marcas m on m.id = p.IdMarca where p.estado = 1 ");
+                datos.setearConsulta("select p.id, p.nombre, p.descripcion, p.urlimagen,p.PorcGanancia,p.StockMinimo, coalesce(p.StockActual, 0) StockActual, m.Nombre Marca,m.id idMarca, c.id idCategoria, c.Nombre Categoria from Productos p join Categorias c on c.id = p.idCategoria join Marcas m on m.id = p.IdMarca where p.estado = 1 ");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -28,7 +28,8 @@ namespace Negocio
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
                     aux.UrlImagen = (string)datos.Lector["UrlImagen"];
                     aux.StockMinimo = (int)datos.Lector["StockMinimo"];
-                    aux.PorcGanancia = (int)datos.Lector["PorcGanancia"];
+                    aux.StockActual = (int)datos.Lector["StockActual"];
+                    aux.PorcGanancia = (double)datos.Lector["PorcGanancia"];
                     aux.Marca = new Marca();
                     aux.Marca.Id = (int)datos.Lector["idMarca"];
                     aux.Marca.Nombre = (string)datos.Lector["Marca"];
@@ -88,7 +89,46 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public void stock_precio(Producto producto)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                string consulta = "update Productos set StockActual = " + producto.StockActual + ", UltPrecio = replace('" + producto.UltPrecio + "', ',', '.') where id=" + producto.Id;
+                datos.setearConsulta(consulta);
 
+                datos.ejectutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public void stock(Producto producto)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                string consulta = "update Productos set StockActual = " + producto.StockActual + " where id=" + producto.Id;
+                datos.setearConsulta(consulta);
+
+                datos.ejectutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         public void eliminar(int id)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -114,7 +154,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("select id, nombre, descripcion, urlimagen from Productos where estado = 1 and id= " + id );
+                datos.setearConsulta("select id, nombre, descripcion, urlimagen, coalesce(ultprecio, 0) UltPrecio, coalesce(stockActual, 0) stockActual from Productos where estado = 1 and id= " + id );
                 datos.ejecutarLectura();
 
                 Producto producto = new Producto();
@@ -124,7 +164,9 @@ namespace Negocio
                     producto.Id = (int)datos.Lector["Id"];
                     producto.Nombre = (string)datos.Lector["Nombre"];
                     producto.Descripcion = (string)datos.Lector["Descripcion"];
+                    producto.StockActual = (int)datos.Lector["stockActual"];
                     producto.UrlImagen = (string)datos.Lector["UrlImagen"];
+                    producto.UltPrecio = (decimal)datos.Lector["UltPrecio"];
                 }
 
                 if(producto.Id != 0)

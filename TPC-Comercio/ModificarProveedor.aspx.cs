@@ -12,26 +12,50 @@ namespace TPC_Comercio
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            int id = (int)Session["idProveedor"];
+            
             ProveedorNegocio negocio = new ProveedorNegocio();
             Proveedor proveedor = new Proveedor();
-            proveedor = negocio.GetProveedor(id);
-            if (!Page.IsPostBack)
+            try
             {
-                txtDescripcion.Text = proveedor.Descripcion;
-                txtRazon.Text = proveedor.RazonSocial;
+                string cuit = (string)Session["cuitProveedor"];
+                proveedor = negocio.GetProveedor(cuit);
+                if (!Page.IsPostBack)
+                {
+                    txtDescripcion.Text = proveedor.Descripcion;
+                    txtRazon.Text = proveedor.RazonSocial;
+                    txtEmail.Text = proveedor.Email;
+                }
             }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
+            }
+            
         }
 
         protected void btnModificar_Click(object sender, EventArgs e)
         {
             Proveedor proveedor = new Proveedor();
             ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
-            proveedor.Id = (int)Session["idProveedor"];
-            proveedor.RazonSocial = txtRazon.Text;
-            proveedor.Descripcion = txtDescripcion.Text;
-            proveedorNegocio.actualizar(proveedor);
-            Response.Redirect("Proveedores.aspx");
+            try
+            {
+                proveedor.Cuit = (string)Session["cuitProveedor"];
+                proveedor.RazonSocial = txtRazon.Text;
+                proveedor.Descripcion = txtDescripcion.Text;
+                proveedor.Email = txtEmail.Text;
+                proveedorNegocio.actualizar(proveedor);
+                Response.Redirect("Proveedores.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
+            }
+            
 
         }
     }

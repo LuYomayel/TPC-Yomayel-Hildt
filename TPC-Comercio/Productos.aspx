@@ -11,20 +11,20 @@
                     <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
                     <asp:BoundField HeaderText="Descripcion" DataField="Descripcion" />
                     <asp:BoundField HeaderText="% de ganancia" DataField="porcGanancia" />
-                    <asp:BoundField HeaderText="Stock Minimo" DataField="stockMinimo"/>
+                    <asp:BoundField HeaderText="Stock Actual" DataField="stockActual"/>
                     <asp:BoundField HeaderText="Marca" DataField="Marca.Nombre"/>
                     <asp:BoundField HeaderText="Categoria" DataField="Categoria.Nombre" />
                     
                     <asp:ButtonField ButtonType="Button" CommandName="Delete" HeaderText="Eliminar" ShowHeader="True" Text="Eliminar" ControlStyle-CssClass="btn btn-primary"/>
-                    <asp:ButtonField ButtonType="Button" CommandName="Edit" Text="Editar" ControlStyle-CssClass="btn btn-primary"/>
+                    <asp:ButtonField ButtonType="Button" CommandName="Edit" Text="Editar" ControlStyle-CssClass="btn btn-primary" HeaderText="Editar"/>
                 </Columns>
             </asp:GridView>
         </ContentTemplate>
     </asp:UpdatePanel>
     
 
-    <a class="btn btn-primary" href="AgregarProducto.aspx" role="button" >Agregar Producto</a>
     
+    <asp:Button ID="btnAgregar" runat="server" Text="Agregar Producto" OnClick="btnAgregar_Click" CssClass="btn btn-primary"/>
 
 
 

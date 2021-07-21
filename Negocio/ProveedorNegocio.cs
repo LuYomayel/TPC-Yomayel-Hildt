@@ -15,14 +15,14 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("select id, descripcion, razonsocial from Proveedores where estado = 1");
+                datos.setearConsulta("select cuit, descripcion, razonsocial, email from Proveedores where estado = 1");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
                     Proveedor aux = new Proveedor();
-                    aux.Id = (int)datos.Lector["Id"];
-
+                    aux.Cuit = (string)datos.Lector["Cuit"];
+                    aux.Email = (string)datos.Lector["Email"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
                     aux.RazonSocial = (string)datos.Lector["RazonSocial"];
                     
@@ -44,8 +44,8 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                string valores = "values( '" + nuevo.Descripcion + "', '" + nuevo.RazonSocial + "')";
-                datos.setearConsulta("insert into proveedores (Descripcion, RazonSocial) " + valores);
+                string valores = "values( '" + nuevo.Cuit + "' , '" + nuevo.Descripcion + "', '" + nuevo.RazonSocial + "', '"+ nuevo.Email+"')";
+                datos.setearConsulta("insert into proveedores (Cuit,Descripcion, RazonSocial,Email) " + valores);
 
                 datos.ejectutarAccion();
 
@@ -65,7 +65,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                string consulta = "update proveedores set descripcion = '" + proveedor.Descripcion + "', razonsocial = '" + proveedor.RazonSocial + "' where id = " + proveedor.Id.ToString() + ";";
+                string consulta = "update proveedores set descripcion = '" + proveedor.Descripcion + "', razonsocial = '" + proveedor.RazonSocial + "', email= '" + proveedor.Email + "' where cuit = '" + proveedor.Cuit + "';";
                 datos.setearConsulta(consulta);
 
                 datos.ejectutarAccion();
@@ -81,12 +81,12 @@ namespace Negocio
             }
         }
 
-        public void eliminar(int id)
+        public void eliminar(string cuit)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("update proveedores set estado = 0 where id=" + id.ToString() + ";");
+                datos.setearConsulta("update proveedores set estado = 0 where cuit='" + cuit + "';");
 
                 datos.ejectutarAccion();
 
@@ -101,25 +101,25 @@ namespace Negocio
             }
         }
 
-        public Proveedor GetProveedor(int id)
+        public Proveedor GetProveedor(string cuit)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("select id, descripcion, razonsocial from proveedores where estado = 1 and id= " + id);
+                datos.setearConsulta("select cuit, descripcion, razonsocial, email from proveedores where estado = 1 and cuit= '" + cuit +"'");
                 datos.ejecutarLectura();
 
                 Proveedor proveedor = new Proveedor();
 
                 while (datos.Lector.Read())
                 {
-                    proveedor.Id = (int)datos.Lector["Id"];
-
+                    proveedor.Cuit = (string)datos.Lector["Cuit"];
+                    proveedor.Email = (string)datos.Lector["Email"];
                     proveedor.Descripcion = (string)datos.Lector["Descripcion"];
                     proveedor.RazonSocial = (string)datos.Lector["RazonSocial"];
                 }
 
-                if (proveedor.Id != 0)
+                if (proveedor.Cuit != null || proveedor.Email != "")
                 {
                     return proveedor;
                 }

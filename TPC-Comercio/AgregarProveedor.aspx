@@ -3,24 +3,23 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
-    <form method="post" class="form-group">
-
+        <div class="form-group">
+            <label >Cuit</label>
+            <asp:TextBox ID="txtCuit" runat="server" class="form-control"></asp:TextBox>
+        </div>
         <div class="form-group">
             <label >Razon Social</label>
-            <input type="text" name="razonSocial" class="form-control">
-            
+            <asp:TextBox ID="txtRazon" runat="server" class="form-control"></asp:TextBox>
         </div>
         <div class="form-group">
             <label >Descripcion</label>
-            <input type="text" name="descripcion" class="form-control">
-            
+            <asp:TextBox ID="txtDescripcion" runat="server" class="form-control"></asp:TextBox>
+        </div>
+        <div class="form-group">
+            <label >Email</label>
+            <asp:TextBox ID="txtEmail" runat="server" class="form-control" TextMode="Email"></asp:TextBox>
         </div>
         <div>
-            <label>&nbsp;</label>
-            <input type="submit" value="Agregar Proveedor" class="btn btn-primary" />
-            
+            <asp:Button ID="btnAgregar" runat="server" Text="Agregar" OnClick="btnAgregar_Click" CssClass="btn btn-primary"/>
         </div> 
-    </form>
-
 </asp:Content>

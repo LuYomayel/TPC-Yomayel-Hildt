@@ -9,12 +9,17 @@
         <div class="form-group">
             <label >Razon Social</label>
             
-            <asp:TextBox ID="txtRazon" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtRazon" runat="server" CssClass="form-control"></asp:TextBox>
         </div>
         <div class="form-group">
             <label >Descripcion</label>
             
-            <asp:TextBox ID="txtDescripcion" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control"></asp:TextBox>
+        </div>
+        <div class="form-group">
+            <label >Email</label>
+            
+            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox>
         </div>
         <div>
             

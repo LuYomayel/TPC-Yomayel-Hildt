@@ -8,14 +8,15 @@
         <ContentTemplate>
             <asp:GridView ID="gvProveedores" runat="server" CssClass="table table-bordered" AutoGenerateColumns="False" OnRowDeleting="gvProveedores_RowDeleting" OnRowEditing="gvProveedores_RowEditing">
                 <Columns>
-                    <asp:BoundField HeaderText="Id" DataField="Id"/>
+                    <asp:BoundField HeaderText="Cuit" DataField="Cuit"/>
                     <asp:BoundField HeaderText="Razon Social" DataField="razonSocial"/>
                     <asp:BoundField HeaderText="Descripcion" DataField="Descripcion"/>
-                    <asp:ButtonField ButtonType="Button" CommandName="Delete" Text="Eliminar" ControlStyle-CssClass="btn btn-primary">
+                    <asp:BoundField HeaderText="Email" DataField="Email"/>
+                    <asp:ButtonField ButtonType="Button" CommandName="Delete" Text="Eliminar" ControlStyle-CssClass="btn btn-primary" HeaderText="Eliminar">
                     <ControlStyle CssClass="btn btn-primary"></ControlStyle>
                     </asp:ButtonField>
                     
-                    <asp:ButtonField ButtonType="Button" CommandName="Edit" Text="Editar" ControlStyle-CssClass="btn btn-primary"/>
+                    <asp:ButtonField ButtonType="Button" CommandName="Edit" Text="Editar" ControlStyle-CssClass="btn btn-primary" HeaderText="Editar"/>
                     
                 </Columns>
         
@@ -25,7 +26,6 @@
 
 
     
-
-    <a class="btn btn-primary left" href="AgregarProveedor.aspx" role="button" >Agregar Proveedor</a>
+    <asp:Button ID="btnAgregar" runat="server" Text="Agregar Proveedor" CssClass="btn btn-primary" OnClick="btnAgregar_Click"/>
 
 </asp:Content>

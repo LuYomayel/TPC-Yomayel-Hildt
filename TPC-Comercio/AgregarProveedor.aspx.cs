@@ -12,30 +12,52 @@ namespace TPC_Comercio
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Proveedor proveedor = new Proveedor();
-            ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
-            var razonSocial = Request.Form["razonSocial"];
-            var descripcion = Request.Form["descripcion"];
-
-            if (validarCampos())
-            {
-                proveedor.RazonSocial = razonSocial;
-                proveedor.Descripcion = descripcion;
-
-                proveedorNegocio.agregar(proveedor);
-            }
+            
         }
 
         bool validarCampos()
         {
             bool hola=true;
-            var razonSocial = Request.Form["razonSocial"];
-            var descripcion = Request.Form["descripcion"];
+            var cuit = txtCuit.Text;
+            var razonSocial = txtRazon.Text;
+            var descripcion = txtDescripcion.Text;
+            var email = txtEmail.Text;
 
+            if (cuit == null || cuit == "") hola = false;
             if (razonSocial == null || razonSocial == "") hola = false;
+            if (email == null || email == "") hola = false;
             if (descripcion == null || descripcion == "") hola = false;
 
             return hola;
+        }
+
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+            Proveedor proveedor = new Proveedor();
+            ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
+            var cuit = txtCuit.Text;
+            var razonSocial = txtRazon.Text;
+            var descripcion = txtDescripcion.Text;
+            var email = txtEmail.Text;
+            try
+            {
+                if (validarCampos())
+                {
+                    proveedor.Cuit = cuit;
+                    proveedor.RazonSocial = razonSocial;
+                    proveedor.Descripcion = descripcion;
+                    proveedor.Email = email;
+                    proveedorNegocio.agregar(proveedor);
+                    Response.Redirect("Proveedores.aspx", false);
+                    Context.ApplicationInstance.CompleteRequest();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx");
+            }
         }
     }
 }
