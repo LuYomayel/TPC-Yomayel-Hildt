@@ -10,8 +10,14 @@ namespace TPC_Comercio
 {
     public partial class ModificarMarca : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!(Session["usuario"] != null && ((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.TipoUsuario.ADMIN))
+            {
+                Session.Add("error", "Necesitas ser administrador.");
+                Response.Redirect("Error.aspx", false);
+            }
             MarcaNegocio marcaNegocio = new MarcaNegocio();
             Marca marca = new Marca();
             

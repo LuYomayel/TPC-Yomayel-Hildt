@@ -15,6 +15,11 @@ namespace TPC_Comercio
         public List<Producto> listaProductos;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["usuario"] == null)
+            {
+                Session.Add("error", "Debes iniciar sesión primero.");
+                Response.Redirect("Error.aspx", false);
+            }
             if (!IsPostBack)
             {
                 if (listaDetalles == null)

@@ -6,6 +6,7 @@
             
                 <div class="row">
                     <div class="col form-group">
+                            <asp:Label ID="lblProveedor" runat="server" Text="Cliente:"></asp:Label>
                             <asp:DropDownList ID="ddClientes" runat="server" CssClass="form-control"></asp:DropDownList>
                     </div>
                 </div>
@@ -28,7 +29,7 @@
                         </div>
                     
                     
-                        <div class="col form-group">
+                        <div class="col form-group mt-4">
                             <asp:Button ID="btnAgregar" runat="server" Text="Agregar Producto" OnClick="btnAgregar_Click" CssClass="btn btn-primary form-control"/>
                         </div>
                     </div>
@@ -37,7 +38,7 @@
                         <asp:BoundField HeaderText="Producto" DataField="Producto.Nombre" />
                         <asp:BoundField HeaderText="Cantidad" DataField="Cantidad" />
                         <asp:BoundField HeaderText="Subtotal" DataField="PrecioParcial" />
-                        <asp:ButtonField CommandName="Delete" HeaderText="Eliminar" Text="Eliminar" ItemStyle-CssClass="btn btn-primary" />
+                        <asp:ButtonField CommandName="Delete" HeaderText="Eliminar" Text="Eliminar" ControlStyle-CssClass="btn btn-primary" />
                     </Columns>
                 </asp:GridView>
                 </div>

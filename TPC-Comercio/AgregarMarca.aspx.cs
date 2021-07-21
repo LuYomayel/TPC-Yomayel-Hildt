@@ -12,7 +12,11 @@ namespace TPC_Comercio
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!(Session["usuario"] != null && ((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.TipoUsuario.ADMIN))
+            {
+                Session.Add("error", "Necesitas ser administrador.");
+                Response.Redirect("Error.aspx", false);
+            }
         }
 
         protected void btnAgregar_Click(object sender, EventArgs e)

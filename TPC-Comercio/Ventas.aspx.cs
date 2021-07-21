@@ -13,6 +13,11 @@ namespace TPC_Comercio
         public List<Transaccion> transacciones;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["usuario"] == null)
+            {
+                Session.Add("error", "Debes iniciar sesión primero.");
+                Response.Redirect("Error.aspx", false);
+            }
             TransaccionNegocio transaccionNegocio = new TransaccionNegocio();
             transacciones = transaccionNegocio.listarVentas();
             gvVentas.DataSource = transacciones;

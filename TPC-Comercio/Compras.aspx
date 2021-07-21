@@ -3,6 +3,7 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <h1>Compras</h1>
     <asp:GridView ID="gvCompras" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered" OnRowCommand="gvCompras_RowCommand">
         <Columns>
             <asp:BoundField DataField="Monto" HeaderText="Monto"/>
@@ -11,5 +12,5 @@
         </Columns>
     </asp:GridView>
     <asp:Label ID="Message" runat="server"></asp:Label>
-    <asp:Button ID="btnAgregar" runat="server" Text="Agregar Compra" OnClick="btnAgregar_Click"/>
+    <asp:Button ID="btnAgregar" runat="server" Text="Agregar Compra" OnClick="btnAgregar_Click" CssClass="btn btn-primary"/>
 </asp:Content>
