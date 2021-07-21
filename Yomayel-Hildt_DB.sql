@@ -78,7 +78,15 @@ create table Detalle(
 	IdTransaccion int not null foreign key references Transacciones(Id),
 	PrecioUnitario money not null
 )
-
+use Yomayel_Hildt_DB
+create table Usuarios(
+	Id int not null identity(1,1) primary key,
+	Usuario varchar(50) null,
+	Pass varchar(50) null,
+	TipoUser int null
+)
+insert into USUARIOS Values ('test', 'test', 1)
+insert into USUARIOS Values ('admin', 'admin', 2)
 use Yomayel_Hildt_DB
 insert into Marcas (Nombre) values('Samsung')
 insert into Marcas (Nombre) values('Lenovo')
@@ -166,6 +174,6 @@ join Productos p on p.Id=d.IdProducto
 where IdTransaccion=21
 group by d.Id
 
-
+select * from Productos
 select t.id IdTransaccion, coalesce(t.monto,0) Monto, t.IdProveedor IdProveedor, p.RazonSocial RazonSocial from Transacciones t join Proveedores p on p.Cuit = t.idProveedor where t.Tipo = 'C'
 

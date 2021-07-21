@@ -50,6 +50,17 @@
                         <li class="nav-item active">
                             <a class="nav-link" href="index.aspx">Inicio<span class="sr-only">(current)</span></a>
                         </li>
+                        <% if (Session["usuario"] != null)
+                            {  %>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownTra" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Transacciones
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="Ventas.aspx">Ventas</a>
+                                    <a class="dropdown-item" href="Compras.aspx">Compras</a>
+                            </div>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="Clientes.aspx">Clientes</a>
                         </li>
@@ -65,15 +76,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="Categorias.aspx">Categorias</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownTra" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Transacciones
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="Ventas.aspx">Ventas</a>
-                                    <a class="dropdown-item" href="Compras.aspx">Compras</a>
-                            </div>
-                        </li>
+                        <% } %>
                           
                     </ul>
                     <%--<form class="form-inline my-2 my-lg-0">
