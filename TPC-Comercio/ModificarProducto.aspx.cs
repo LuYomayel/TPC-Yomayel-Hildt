@@ -10,12 +10,18 @@ namespace TPC_Comercio
 {
     public partial class ModificarProducto : System.Web.UI.Page
     {
+
         public List<Producto> listaProductos;
         public List<Marca> listaMarcas;
         public List<Categoria> listaCategorias;
         Producto producto = new Producto();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!(Session["usuario"] != null && ((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.TipoUsuario.ADMIN))
+            {
+                Session.Add("error", "Necesitas ser administrador.");
+                Response.Redirect("Error.aspx", false);
+            }
             int id = (int)Session["idProducto"];
             MarcaNegocio marcaNegocio = new MarcaNegocio();
             CategoriaNegocio categoriaNegocio = new CategoriaNegocio();

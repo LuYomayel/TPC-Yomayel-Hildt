@@ -8,7 +8,8 @@
             
                 <div class="row">
                     <div class="col form-group">
-                            <asp:DropDownList ID="ddProveedor" runat="server" CssClass="form-control"></asp:DropDownList>
+                        <asp:Label ID="lblProveedor" runat="server" Text="Proveedor:"></asp:Label>
+                        <asp:DropDownList ID="ddProveedor" runat="server" CssClass="form-control"></asp:DropDownList>
                     </div>
                 </div>
                     <div class="row">
@@ -30,7 +31,7 @@
                         </div>
                     
                     
-                        <div class="col form-group">
+                        <div class="col form-group mt-4">
                             <asp:Button ID="btnAgregar" runat="server" Text="Agregar Producto" OnClick="btnAgregar_Click" CssClass="btn btn-primary form-control"/>
                         </div>
                     </div>

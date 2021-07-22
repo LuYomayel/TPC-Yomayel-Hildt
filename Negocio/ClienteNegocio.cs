@@ -26,6 +26,7 @@ namespace Negocio
                     aux.Cuit = (string)datos.Lector["Cuit"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Apellido = (string)datos.Lector["Apellido"];
+                    aux.NombreCompleto = (string)datos.Lector["Apellido"] + ", " + (string)datos.Lector["Nombre"];
                     aux.FechaNac = (DateTime)datos.Lector["FechaNac"];
                     aux.Direccion = (string)datos.Lector["Direccion"];
                     aux.Telefono = (int)datos.Lector["Telefono"];

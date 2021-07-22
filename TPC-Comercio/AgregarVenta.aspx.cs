@@ -15,6 +15,11 @@ namespace TPC_Comercio
         public List<Producto> listaProductos;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["usuario"] == null)
+            {
+                Session.Add("error", "Debes iniciar sesión primero.");
+                Response.Redirect("Error.aspx", false);
+            }
             if (!IsPostBack)
             {
                 if (listaDetalles == null)
@@ -30,7 +35,7 @@ namespace TPC_Comercio
                 listaClientes = new List<Cliente>();
                 listaClientes = clienteNegocio.listar();
                 ddClientes.DataSource = listaClientes;
-                ddClientes.DataTextField = "Nombre";
+                ddClientes.DataTextField = "NombreCompleto";
                 ddClientes.DataValueField = "Cuit";
                 ddClientes.DataBind();
 
@@ -68,7 +73,8 @@ namespace TPC_Comercio
             int id = int.Parse(ddProductos.SelectedValue);
             producto = productoNegocio.GetProducto(id);
             var cantidad = txtCantidad.Text;
-            var precioUnitario = producto.UltPrecio;
+            decimal porcGanancia = Convert.ToDecimal(producto.PorcGanancia);
+            decimal precioUnitario = producto.UltPrecio * ((porcGanancia/100)+1);
             txtPrecioUnitario.Text = precioUnitario.ToString();
             if (cantidad != "")
             {
@@ -91,10 +97,15 @@ namespace TPC_Comercio
             ProductoNegocio productoNegocio = new ProductoNegocio();
             int id = int.Parse(ddProductos.SelectedValue);
             producto = productoNegocio.GetProducto(id);
-            if(int.Parse(txtCantidad.Text) > producto.StockActual)
+            if (txtCantidad.Text == "")
+            {
+                lblMessage.Text = "Debe ingresar una cantidad distinta de 0";
+            }
+            else if (int.Parse(txtCantidad.Text) > producto.StockActual)
             {
                 lblMessage.Text = "No se puede vender lo que no se tiene.";
             }
+            
             else
             {
                 detalle.Cantidad = int.Parse(txtCantidad.Text);
@@ -127,7 +138,7 @@ namespace TPC_Comercio
             Transaccion transaccion = new Transaccion();
             TransaccionNegocio transaccionNegocio = new TransaccionNegocio();
             List<Transaccion> listaTransacciones = new List<Transaccion>();
-            listaTransacciones = transaccionNegocio.listarTransacciones();
+            listaTransacciones = transaccionNegocio.listarTodasT();
             int idTransaccion = 1;
             foreach (Transaccion item in listaTransacciones)
             {
@@ -178,7 +189,8 @@ namespace TPC_Comercio
             int id = int.Parse(ddProductos.SelectedValue);
             producto = productoNegocio.GetProducto(id);
             var cantidad = txtCantidad.Text;
-            var precioUnitario = producto.UltPrecio;
+            decimal porcGanancia = Convert.ToDecimal(producto.PorcGanancia);
+            decimal precioUnitario = producto.UltPrecio * ((porcGanancia / 100) + 1);
             txtPrecioUnitario.Text = precioUnitario.ToString();
             if (cantidad != "")
             {

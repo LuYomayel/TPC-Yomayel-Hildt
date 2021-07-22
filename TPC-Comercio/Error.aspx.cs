@@ -13,5 +13,11 @@ namespace TPC_Comercio
         {
             Lblerror.Text = Session["Error"] == null ? "No hay error" : (string)Session["Error"];
         }
+
+        protected void btnCerrarSession_Click(object sender, EventArgs e)
+        {
+            Session.Remove("usuario");
+            Response.Redirect("index.aspx", false);
+        }
     }
 }

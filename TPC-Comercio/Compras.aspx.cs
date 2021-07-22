@@ -13,7 +13,11 @@ namespace TPC_Comercio
         public List<Transaccion> transacciones;
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (Session["usuario"] == null)
+            {
+                Session.Add("error", "Debes iniciar sesión primero.");
+                Response.Redirect("Error.aspx", false);
+            }
             TransaccionNegocio transaccionNegocio = new TransaccionNegocio();
             transacciones = transaccionNegocio.listarCompras();
             gvCompras.DataSource = transacciones;
@@ -40,6 +44,46 @@ namespace TPC_Comercio
         {
             Response.Redirect("AgregarCompra.aspx", false);
             Context.ApplicationInstance.CompleteRequest();
+        }
+
+        protected void gvCompras_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            if (Session["usuario"] != null && ((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.TipoUsuario.ADMIN)
+            {
+
+
+                try
+                {
+                    int index = e.RowIndex;
+                    TransaccionNegocio transaccionNegocio = new TransaccionNegocio();
+                    Transaccion transaccion = new Transaccion();
+                    transacciones = transaccionNegocio.listarCompras();
+                    transaccion = transacciones[index];
+
+                    DetalleNegocio detalleNegocio = new DetalleNegocio();
+                    List<Detalle> listaDetalle = new List<Detalle>();
+                    listaDetalle = detalleNegocio.listarComprasID(transaccion.Id);
+
+                    foreach (Detalle item in listaDetalle)
+                    {
+                        detalleNegocio.eliminar(item.Id);
+                    }
+                    transaccionNegocio.eliminar(transaccion.Id);
+                    transacciones = transaccionNegocio.listarCompras();
+                    gvCompras.DataSource = transacciones;
+                    gvCompras.DataBind();
+                }
+                catch (Exception ex)
+                {
+
+                    Session.Add("Error", ex.ToString());
+                    Response.Redirect("Error.aspx");
+                }
+            }
+            else
+            {
+                Message.Text = "Solo los administradores pueden eliminar Compras";
+            }
         }
     }
 }

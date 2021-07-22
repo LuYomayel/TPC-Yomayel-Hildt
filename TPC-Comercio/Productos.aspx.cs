@@ -13,6 +13,11 @@ namespace TPC_Comercio
         public List<Producto> listaProductos;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!(Session["usuario"] != null && ((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.TipoUsuario.ADMIN))
+            {
+                Session.Add("error", "Necesitas ser administrador.");
+                Response.Redirect("Error.aspx", false);
+            }
             ProductoNegocio productoNegocio = new ProductoNegocio();
             CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
             MarcaNegocio marcaNegocio = new MarcaNegocio();

@@ -12,7 +12,11 @@ namespace TPC_Comercio
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (Session["usuario"] != null)
+            {
+                Session.Add("error", "Ya iniciaste sesion. Si desea iniciar sesión en una cuenta distinta haga click en el botón de abajo.");
+                Response.Redirect("Error.aspx", false);
+            }
         }
 
         protected void btnIngresar_Click(object sender, EventArgs e)

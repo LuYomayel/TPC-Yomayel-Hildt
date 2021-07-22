@@ -14,9 +14,14 @@ namespace TPC_Comercio
     public partial class AgregarCompra : System.Web.UI.Page
     {
         public List<Detalle> listaDetalles;
+        public List<Producto> listaProductos;
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (Session["usuario"] == null)
+            {
+                Session.Add("error", "Debes iniciar sesión primero.");
+                Response.Redirect("Error.aspx", false);
+            }
             if (!IsPostBack)
             {   
                 if(listaDetalles == null)
@@ -26,7 +31,6 @@ namespace TPC_Comercio
                 detalle = (Detalle)Session["Detalle"];
 
                 List<Proveedor> listaProveedores;
-                List<Producto> listaProductos;
                 
                 ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
                 listaProveedores = proveedorNegocio.listar();
@@ -35,8 +39,19 @@ namespace TPC_Comercio
                 ddProveedor.DataValueField = "Cuit";
                 ddProveedor.DataBind();
 
+
                 ProductoNegocio productoNegocio = new ProductoNegocio();
-                listaProductos = productoNegocio.listar();
+
+                if (listaProductos == null)
+                {
+                    listaProductos = new List<Producto>();
+                    listaProductos = productoNegocio.listar();
+                    Session.Add("listaProductos", listaProductos);
+                }
+                else
+                {
+                    listaProductos = (List<Producto>)Session["listaProductos"];
+                }
                 ddProductos.DataSource = listaProductos;
                 ddProductos.DataTextField = "Nombre";
                 ddProductos.DataValueField = "Id";
@@ -54,29 +69,44 @@ namespace TPC_Comercio
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
-            
-            listaDetalles = (List<Detalle>)Session["listaDetalles"];
-            if (listaDetalles == null) listaDetalles = new List<Detalle>();
-            Detalle detalle = new Detalle();
-            Producto producto = new Producto();
-            ProductoNegocio productoNegocio = new ProductoNegocio();
-            int id = int.Parse(ddProductos.SelectedValue);
-            producto = productoNegocio.GetProducto(id);
-            producto.StockActual += int.Parse(txtCantidad.Text);
-            producto.UltPrecio = decimal.Parse(txtPrecioUnitario.Text);
-            
-            detalle.Cantidad = int.Parse(txtCantidad.Text);
-            detalle.Producto = new Producto();
-            detalle.Producto = producto;
-            detalle.PrecioParcial = decimal.Parse(txtSubtotal.Text);
-            detalle.PrecioUnitario = decimal.Parse(txtPrecioUnitario.Text);
-            listaDetalles.Add(detalle);
-            Session.Add("Detalle", detalle);
-            Session.Add("listaDetalles", listaDetalles);
-            txtCantidad.Text = "0";
-            txtSubtotal.Text = "0";
-            gvDetalle.DataSource = listaDetalles;
-            gvDetalle.DataBind();
+            if (txtCantidad.Text != "" && txtCantidad.Text != "0")
+            {
+                listaDetalles = (List<Detalle>)Session["listaDetalles"];
+                if (listaDetalles == null) listaDetalles = new List<Detalle>();
+                Detalle detalle = new Detalle();
+                Producto producto = new Producto();
+                ProductoNegocio productoNegocio = new ProductoNegocio();
+                int id = int.Parse(ddProductos.SelectedValue);
+                producto = productoNegocio.GetProducto(id);
+                producto.StockActual += int.Parse(txtCantidad.Text);
+                producto.UltPrecio = decimal.Parse(txtPrecioUnitario.Text);
+
+                detalle.Cantidad = int.Parse(txtCantidad.Text);
+                detalle.Producto = new Producto();
+                detalle.Producto = producto;
+                detalle.PrecioParcial = decimal.Parse(txtSubtotal.Text);
+                detalle.PrecioUnitario = decimal.Parse(txtPrecioUnitario.Text);
+                listaDetalles.Add(detalle);
+                Session.Add("Detalle", detalle);
+                Session.Add("listaDetalles", listaDetalles);
+
+                listaProductos = (List<Producto>)Session["listaProductos"];
+                listaProductos.Remove(listaProductos.Find(x => x.Id == producto.Id));
+                Session.Add("listaProductos", listaProductos);
+                ddProductos.DataSource = listaProductos;
+                ddProductos.DataTextField = "Nombre";
+                ddProductos.DataValueField = "Id";
+                ddProductos.DataBind();
+
+                txtCantidad.Text = "0";
+                txtSubtotal.Text = "0";
+                gvDetalle.DataSource = listaDetalles;
+                gvDetalle.DataBind();
+            }
+            else
+            {
+                lblMessage.Text = "Debe ingresar una cantidad distinta de cero";
+            }
         }
 
         protected void txtCantidad_TextChanged(object sender, EventArgs e)
@@ -106,7 +136,7 @@ namespace TPC_Comercio
             Transaccion transaccion = new Transaccion();
             TransaccionNegocio transaccionNegocio = new TransaccionNegocio();
             List<Transaccion> listaTransacciones = new List<Transaccion>();
-            listaTransacciones = transaccionNegocio.listarTransacciones();
+            listaTransacciones = transaccionNegocio.listarTodasT();
             int idTransaccion = 1;
             foreach(Transaccion item in listaTransacciones)
             {
@@ -133,8 +163,8 @@ namespace TPC_Comercio
             {
                 producto = item.Producto;
                 
-                producto.StockActual += item.Cantidad;
-                producto.UltPrecio = item.PrecioParcial;
+                //producto.StockActual += item.Cantidad;
+                producto.UltPrecio = item.PrecioUnitario;
                 
                 item.Transaccion = new Transaccion();
                 item.Transaccion.Id = idTransaccion;

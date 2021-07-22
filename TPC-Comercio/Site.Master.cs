@@ -13,5 +13,11 @@ namespace TPC_Comercio
         {
 
         }
+
+        protected void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            Session.Remove("usuario");
+            Response.Redirect("index.aspx", false);
+        }
     }
 }

@@ -14,6 +14,11 @@ namespace TPC_Comercio
         public List<Cliente> lista;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!(Session["usuario"] != null && ((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.TipoUsuario.ADMIN))
+            {
+                Session.Add("error", "Necesitas ser administrador.");
+                Response.Redirect("Error.aspx", false);
+            }
             ClienteNegocio negocio = new ClienteNegocio();
             try
             {
