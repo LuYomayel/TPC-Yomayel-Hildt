@@ -71,7 +71,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                string consulta = "set dateformat dmy update clientes set  nombre = '" + cliente.Nombre + "', apellido = '" + cliente.Apellido + "', FechaNac = CAST('" + cliente.FechaNac + "' AS DATE), Telefono = '" + cliente.Telefono + "', Direccion = '" + cliente.Direccion + "' where cuit = '" + cliente.Cuit + "';";
+                string consulta = "set dateformat dmy update clientes set  nombre = '" + cliente.Nombre + "', apellido = '" + cliente.Apellido + "', email = '" + cliente.Email + "', FechaNac = CAST('" + cliente.FechaNac + "' AS DATE), Telefono = '" + cliente.Telefono + "', Direccion = '" + cliente.Direccion + "' where cuit = '" + cliente.Cuit + "';";
                 datos.setearConsulta(consulta);
 
                 datos.ejectutarAccion();
