@@ -16,7 +16,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("select p.id, p.nombre, p.descripcion, p.urlimagen,p.PorcGanancia,p.StockMinimo, coalesce(p.StockActual, 0) StockActual, m.Nombre Marca,m.id idMarca, c.id idCategoria, c.Nombre Categoria from Productos p join Categorias c on c.id = p.idCategoria join Marcas m on m.id = p.IdMarca where p.estado = 1 ");
+                datos.setearConsulta("select p.id, p.nombre, p.descripcion, p.urlimagen,p.PorcGanancia,p.StockMinimo, coalesce(p.StockActual, 0) StockActual, m.Nombre Marca,m.id idMarca, c.id idCategoria, c.Nombre Categoria, coalesce(p.UltPrecio,0) UltPrecio from Productos p join Categorias c on c.id = p.idCategoria join Marcas m on m.id = p.IdMarca where p.estado = 1 ");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -29,6 +29,7 @@ namespace Negocio
                     aux.UrlImagen = (string)datos.Lector["UrlImagen"];
                     aux.StockMinimo = (int)datos.Lector["StockMinimo"];
                     aux.StockActual = (int)datos.Lector["StockActual"];
+                    aux.UltPrecio = (decimal)datos.Lector["UltPrecio"];
                     aux.PorcGanancia = (double)datos.Lector["PorcGanancia"];
                     aux.Marca = new Marca();
                     aux.Marca.Id = (int)datos.Lector["idMarca"];
@@ -154,7 +155,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("select id, nombre, descripcion, urlimagen, coalesce(ultprecio, 0) UltPrecio, coalesce(stockActual, 0) stockActual from Productos where estado = 1 and id= " + id );
+                datos.setearConsulta("select id, nombre, descripcion, urlimagen, coalesce(ultprecio, 0) UltPrecio, coalesce(stockActual, 0) stockActual, porcGanancia from Productos where estado = 1 and id= " + id );
                 datos.ejecutarLectura();
 
                 Producto producto = new Producto();
@@ -165,6 +166,7 @@ namespace Negocio
                     producto.Nombre = (string)datos.Lector["Nombre"];
                     producto.Descripcion = (string)datos.Lector["Descripcion"];
                     producto.StockActual = (int)datos.Lector["stockActual"];
+                    producto.PorcGanancia = (double)datos.Lector["porcGanancia"];
                     producto.UrlImagen = (string)datos.Lector["UrlImagen"];
                     producto.UltPrecio = (decimal)datos.Lector["UltPrecio"];
                 }

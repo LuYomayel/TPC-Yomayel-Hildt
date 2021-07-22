@@ -17,7 +17,7 @@ namespace Negocio
             {
                 datos.setearConsulta("select t.id IdTransaccion, coalesce(t.monto,0) Monto, t.IdProveedor IdProveedor, p.RazonSocial RazonSocial from Transacciones t " +
                                     "join Proveedores p on p.Cuit = t.idProveedor " +
-                                    "where t.Tipo = 'C' ");
+                                    "where t.Tipo = 'C' and t.Estado = 1");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -42,6 +42,34 @@ namespace Negocio
 
         }
         public List<Transaccion> listarTransacciones()
+        {
+            List<Transaccion> lista = new List<Transaccion>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("select id, coalesce(cast(monto as money),0) Monto from Transacciones where Estado = 1");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Transaccion aux = new Transaccion();
+
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Monto = (decimal)datos.Lector["Monto"];
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+        public List<Transaccion> listarTodasT()
         {
             List<Transaccion> lista = new List<Transaccion>();
             AccesoDatos datos = new AccesoDatos();
@@ -76,9 +104,9 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("select t.id IdTransaccion, coalesce(t.monto,0) Monto, t.IdCliente IdCliente, c.Nombre Nombre from Transacciones t " +
+                datos.setearConsulta("select t.id IdTransaccion, coalesce(t.monto,0) Monto, t.IdCliente IdCliente, c.Nombre Nombre, c.Apellido Apellido from Transacciones t " +
                                     "join Clientes c on c.Cuit=t.IdCliente " +
-                                    "where t.Tipo = 'V' ");
+                                    "where t.Tipo = 'V' and t.Estado = 1");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -89,7 +117,7 @@ namespace Negocio
                     aux.Monto = (decimal)datos.Lector["Monto"];
                     aux.Cliente = new Cliente();
                     aux.Cliente.Cuit = (string)datos.Lector["IdCliente"];
-                    aux.Cliente.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Cliente.NombreCompleto = (string)datos.Lector["Apellido"] + ", " + (string)datos.Lector["Nombre"];
                     lista.Add(aux);
                 }
 
@@ -191,6 +219,25 @@ namespace Negocio
                 throw ex;
             }
 
+        }
+        public void eliminar(int  id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("update Transacciones set estado = 0 where id=" + id );
+
+                datos.ejectutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
     }
 }

@@ -66,7 +66,8 @@ create table Transacciones(
 	Tipo char not null Check(Tipo = 'C' or Tipo = 'V'),
 	Monto money null,
 	IdProveedor varchar(20) null foreign key references Proveedores(Cuit),
-	IdCliente varchar(20) null foreign key references Clientes(Cuit)
+	IdCliente varchar(20) null foreign key references Clientes(Cuit),
+	Estado bit default 1
 )
 
 
@@ -76,7 +77,8 @@ create table Detalle(
 	IdProducto int not null  foreign key references Productos(id),
 	Cantidad int not null,
 	IdTransaccion int not null foreign key references Transacciones(Id),
-	PrecioUnitario money not null
+	PrecioUnitario money not null,
+	Estado bit default 1
 )
 use Yomayel_Hildt_DB
 create table Usuarios(
@@ -138,42 +140,11 @@ insert into Proveedores (RazonSocial,Descripcion,Email,Cuit) values('Solja','Tec
 insert into Proveedores (RazonSocial,Descripcion,Email,Cuit) values('Delz1k','Mouse y teclados','Delz1k@gmail.com','23-40238597-9')
 
 
---update categorias set estado = 1 
---update Marcas set estado = 1
---update Clientes set estado = 1
---update Proveedores set estado = 1
---update Productos set estado = 1
-
---insert into Transacciones (Tipo)values('C') 
---insert into Transacciones (Tipo)values('C') 
---insert into Transacciones (Tipo)values('V') 
---insert into Transacciones (Tipo)values('V') 
---select * from Transacciones
-
-insert into Transacciones(Tipo,Monto,IdProveedor,IdCliente) values ('C',Null,'23-17606071-9',null)
-insert into Transacciones(Tipo,Monto,IdProveedor,IdCliente) values ('C',Null,'20-40485816-6',null)
-insert into Transacciones(Tipo,Monto,IdProveedor,IdCliente) values ('V',Null,null,'20-38508234-8')
-insert into Transacciones(Tipo,Monto,IdProveedor,IdCliente) values ('V',Null,null,'20-33581386-4')
-
-insert into Detalle(IdProducto,Cantidad,IdTransaccion,PrecioUnitario) values (3,20,1,5000)
-insert into Detalle(IdProducto,Cantidad,IdTransaccion,PrecioUnitario) values (4,4,1,20000)
-insert into Detalle(IdProducto,Cantidad,IdTransaccion,PrecioUnitario) values (5,11,1,50000)
-insert into Detalle(IdProducto,Cantidad,IdTransaccion,PrecioUnitario) values (10,3,2,10000)
-insert into Detalle(IdProducto,Cantidad,IdTransaccion,PrecioUnitario) values (11,6,2,11500)
-insert into Detalle(IdProducto,Cantidad,IdTransaccion,PrecioUnitario) values (12,9,2,37000)
-insert into Detalle(IdProducto,Cantidad,IdTransaccion,PrecioUnitario) values (3,5,3,5000)
-insert into Detalle(IdProducto,Cantidad,IdTransaccion,PrecioUnitario) values (4,3,3,20000)
 
 
 
 
-select D.Id Id, d.IdProducto IdProducto, p.Nombre NombreP, d.Cantidad Cantidad, d.IdTransaccion IdTransaccion, d.PrecioUnitario PrecioUnitario, 
-(d.Cantidad * d.PrecioUnitario) PrecioParcial from Detalle D 
-join Productos p on p.Id=d.IdProducto 
 
-where IdTransaccion=21
-group by d.Id
 
-select * from Productos
-select t.id IdTransaccion, coalesce(t.monto,0) Monto, t.IdProveedor IdProveedor, p.RazonSocial RazonSocial from Transacciones t join Proveedores p on p.Cuit = t.idProveedor where t.Tipo = 'C'
+
 
