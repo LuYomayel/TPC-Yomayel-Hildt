@@ -36,7 +36,7 @@ namespace TPC_Comercio
                 transaccion = transacciones[index];
                 int id = transaccion.Id;
                 Session.Add("idTransaccion", id);
-                Response.Redirect("DetalleTransaccion.aspx", false);
+                Response.Redirect("Factura.aspx", false);
                 Context.ApplicationInstance.CompleteRequest();
             }
             Message.Text = "";
@@ -85,6 +85,11 @@ namespace TPC_Comercio
             {
                 Message.Text = "Solo los administradores pueden eliminar Ventas.";
             }
+        }
+
+        protected void btnFactura_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

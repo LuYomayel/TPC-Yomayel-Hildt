@@ -23,9 +23,13 @@ namespace TPC_Comercio
             
             try
             {
-                int id = (int)Session["idMarca"];
-                marca = marcaNegocio.GetMarca(id);
-                txtNombre.Text = marca.Nombre;
+                if (!IsPostBack)
+                {
+                    int id = (int)Session["idMarca"];
+                    marca = marcaNegocio.GetMarca(id);
+                    txtNombre.Text = marca.Nombre;
+                }
+                
             }
             catch (Exception ex)
             {
@@ -41,6 +45,7 @@ namespace TPC_Comercio
         {
             Marca marca = new Marca();
             MarcaNegocio marcaNegocio = new MarcaNegocio();
+            //txtNombre.Text = "hola";
             try
             {
                 marca.Id = (int)Session["idMarca"];

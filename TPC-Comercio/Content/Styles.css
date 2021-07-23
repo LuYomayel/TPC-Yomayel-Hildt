@@ -2,4 +2,65 @@
     padding: 0 !important;
     margin: 0 !important;
 }
+@import url(http://fonts.googleapis.com/css?family=Bree+Serif);
+
+body, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Bree Serif', serif;
+}
+
+span, h4, .letra {
+    font-family: "Times New Roman";
+    font-size: 10px;
+}
+
+.titulo {
+    font-family: "Arial Narrow", Arial, sans-serif;
+    font-size: 12px;
+    white-space: pre;
+}
+
+.titulopie {
+    font-family: Tahoma, Verdana, Segoe, sans-serif;
+    font-size: 12px;
+    white-space: pre;
+}
+
+.row > .sinespacio {
+    display: inline-block;
+    margin: 0;
+    float: left;
+    white-space: nowrap;
+}
+
+.row > .limpiar {
+    clear: both;
+}
+
+table {
+    border: 0px;
+    border-spacing: 0px;
+    border-collapse: collapse;
+}
+
+td, th {
+    padding: 0px;
+    border: 0px;
+    margin: 0px;
+}
+
+.izq {
+    text-align: right;
+}
+
+.borde {
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    padding-bottom: 3px;
+}
+
+@page {
+    size: 8.5in 11in;
+    margin: 1cm
+}
 

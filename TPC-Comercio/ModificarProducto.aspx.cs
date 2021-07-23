@@ -36,6 +36,8 @@ namespace TPC_Comercio
                 {
                     txtNombre.Text = producto.Nombre;
                     txtDescripcion.Text = producto.Descripcion;
+                    txtPrecio.Text = producto.UltPrecio.ToString();
+                    txtStockActual.Text = producto.StockActual.ToString();
                     txtPorc.Text = producto.PorcGanancia.ToString();
                     txtStock.Text = producto.StockMinimo.ToString();
                     txtUrl.Text = producto.UrlImagen;
@@ -78,7 +80,9 @@ namespace TPC_Comercio
                 producto.Nombre = txtNombre.Text;
                 producto.Descripcion = txtDescripcion.Text;
                 producto.PorcGanancia = int.Parse(txtPorc.Text);
+                producto.UltPrecio = decimal.Parse(txtPrecio.Text);
                 producto.StockMinimo = int.Parse(txtStock.Text);
+                producto.StockActual = int.Parse(txtStockActual.Text);
                 producto.UrlImagen = txtUrl.Text;
                 producto.Marca = new Marca();
                 producto.Categoria = new Categoria();

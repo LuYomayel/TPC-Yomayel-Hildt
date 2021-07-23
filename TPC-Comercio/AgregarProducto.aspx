@@ -23,6 +23,12 @@
             
         </div>
         <div class="form-group">
+            <label >Precio   <span class="font-italic text-muted">Separe los decimales con ,</span></label>
+            
+            <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control"></asp:TextBox>
+            
+        </div>
+        <div class="form-group">
             <label >Porcentaje de ganancia</label>
             
             <asp:TextBox ID="txtPorc" runat="server" CssClass="form-control"></asp:TextBox>
@@ -31,6 +37,11 @@
             <label >Stock Minimo</label>
             
             <asp:TextBox ID="txtStock" runat="server" CssClass="form-control"></asp:TextBox>
+        </div>
+        <div class="form-group">
+            <label >Stock Actual</label>
+            
+            <asp:TextBox ID="txtStockActual" runat="server" CssClass="form-control"></asp:TextBox>
         </div>
         <div class="form-group" runat="server">
             <label >Marca</label>

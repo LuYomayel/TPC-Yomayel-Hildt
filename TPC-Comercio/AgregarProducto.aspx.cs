@@ -54,8 +54,9 @@ namespace TPC_Comercio
             var nombre = txtNombre.Text;
             var descripcion = txtDescripcion.Text;
             var urlImagen = txtUrl.Text;
-
+            var precio = txtPrecio.Text;
             var stock = txtStock.Text;
+            var stockActual = txtStockActual.Text;
             var porcGanancia = txtPorc.Text;
             var idMarca = ddMarcas.SelectedValue;
             var idCategoria = ddCategorias.SelectedValue;
@@ -63,7 +64,9 @@ namespace TPC_Comercio
             if (!(nombre != null && nombre != "")) hola = false;
             if (!(descripcion != null && descripcion != "")) hola = false;
             if (!(urlImagen != null && urlImagen!="")) hola = false;
+            if (!(precio != null && precio != "")) hola = false;
             if (!(stock != null && stock != "")) hola = false;
+            if (!(stockActual != null && stockActual != "")) hola = false;
             if (!(porcGanancia != null && porcGanancia != "")) hola = false;
             if (!(idMarca != null && idMarca != "")) hola = false;
             if (!(idCategoria != null && idCategoria != "")) hola = false;
@@ -80,8 +83,9 @@ namespace TPC_Comercio
             var nombre = txtNombre.Text;
             var descripcion = txtDescripcion.Text;
             var urlImagen = txtUrl.Text;
-
+            var precio = txtPrecio.Text;
             var stock = txtStock.Text;
+            var stockActual = txtStockActual.Text;
             var porcGanancia = txtPorc.Text;
             var idMarca = ddMarcas.SelectedValue;
             var idCategoria = ddCategorias.SelectedValue;
@@ -94,8 +98,9 @@ namespace TPC_Comercio
                     nuevo.Descripcion = descripcion;
                     nuevo.UrlImagen = urlImagen;
                     nuevo.StockMinimo = int.Parse(stock);
+                    nuevo.StockActual = int.Parse(stockActual);
                     nuevo.PorcGanancia = int.Parse(porcGanancia);
-
+                    nuevo.UltPrecio = decimal.Parse(precio);
                     nuevo.Marca = new Marca(idMarca);
                     nuevo.Categoria = new Categoria(idCategoria);
 

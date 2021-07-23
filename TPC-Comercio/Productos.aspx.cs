@@ -41,14 +41,17 @@ namespace TPC_Comercio
 
         protected void gvProductos_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
+            ProductoNegocio productoNegocio = new ProductoNegocio();
+            Producto producto = new Producto();
             try
             {
+                int index = e.RowIndex;
+                listaProductos = productoNegocio.listar();
+                producto = listaProductos[index];
 
-                int id = Convert.ToInt32(e.Values[0]);
-                ProductoNegocio productoNegocio = new ProductoNegocio();
-                
-                if (id != 0)
-                productoNegocio.eliminar(id);
+
+
+                productoNegocio.eliminar(producto.Id);
                 listaProductos = productoNegocio.listar();
                 gvProductos.DataSource = listaProductos;
                 gvProductos.DataBind();
@@ -63,13 +66,14 @@ namespace TPC_Comercio
 
         protected void gvProductos_RowEditing(object sender, GridViewEditEventArgs e)
         {
+            ProductoNegocio productoNegocio = new ProductoNegocio();
+            Producto producto = new Producto();
             try
             {
-
-                //gvClientes.EditIndex = e.NewEditIndex;
-                //gvClientes.DataBind();
-                int id = int.Parse(gvProductos.Rows[e.NewEditIndex].Cells[0].Text);
-                Session.Add("idProducto", id);
+                int index = e.NewEditIndex;
+                listaProductos = productoNegocio.listar();
+                producto = listaProductos[index];
+                Session.Add("idProducto", producto.Id);
                 Response.Redirect("ModificarProducto.aspx", false);
                 Context.ApplicationInstance.CompleteRequest();
             }

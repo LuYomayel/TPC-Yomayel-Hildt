@@ -15,7 +15,11 @@
 
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <script src="Scripts/boostrap_prince.js"></script>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/boostrap_prince.css" rel="stylesheet" />
     <link href="Content/Styles.css" rel="stylesheet" />
+    
 </head>
 <body>
     <form runat="server">
@@ -88,6 +92,9 @@
                                 <asp:Button ID="btnCerrarSesion" runat="server" Text="Cerrar Sesion" OnClick="btnCerrarSesion_Click" CssClass="btn btn-outline-success my-2 my-sm-0"/>
                                 
                         <% } %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Factura.aspx">Factura</a>
+                        </li>
                     </ul>
                     <%--<form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

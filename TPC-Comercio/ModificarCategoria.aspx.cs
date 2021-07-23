@@ -21,9 +21,13 @@ namespace TPC_Comercio
             Categoria categoria = new Categoria();
             try
             {
-                int id = (int)Session["idCategoria"];
-                categoria = categoriaNegocio.GetCategoria(id);
-                txtNombre.Text = categoria.Nombre;
+                if (!IsPostBack)
+                {
+                    int id = (int)Session["idCategoria"];
+                    categoria = categoriaNegocio.GetCategoria(id);
+                    txtNombre.Text = categoria.Nombre;
+                }
+                
             }
             catch (Exception ex)
             {

@@ -54,8 +54,8 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                string valores = "values( '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "', '" + nuevo.UrlImagen + "', " + nuevo.PorcGanancia + ", " + nuevo.Marca + ", " + nuevo.Categoria + ", "+ nuevo.StockMinimo +")";
-                datos.setearConsulta("insert into Productos (Nombre, Descripcion, UrlImagen, PorcGanancia, IdMarca, IdCategoria, StockMinimo) " + valores);
+                string valores = "values( '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "', '" + nuevo.UrlImagen + "', " + nuevo.PorcGanancia + ", " + nuevo.Marca + ", " + nuevo.Categoria + ", "+ nuevo.StockMinimo +", replace('"+nuevo.UltPrecio+"', ',' , '.'), "+ nuevo.StockActual +")";
+                datos.setearConsulta("insert into Productos (Nombre, Descripcion, UrlImagen, PorcGanancia, IdMarca, IdCategoria, StockMinimo, UltPrecio, StockActual) " + valores);
 
                 datos.ejectutarAccion();
 
@@ -75,7 +75,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                string consulta = "update Productos set nombre = '" + producto.Nombre + "', Descripcion = '" + producto.Descripcion + "', UrlImagen = '" + producto.UrlImagen + "', PorcGanancia = '" + producto.PorcGanancia + "', IdMarca = '" + producto.Marca.Id + "', IdCategoria = '" + producto.Categoria.Id + "', StockMinimo = '" + producto.StockMinimo + "' where id = " + producto.Id + ";";
+                string consulta = "update Productos set nombre = '" + producto.Nombre + "', Descripcion = '" + producto.Descripcion + "', UrlImagen = '" + producto.UrlImagen + "', PorcGanancia = '" + producto.PorcGanancia + "', IdMarca = '" + producto.Marca.Id + "', IdCategoria = '" + producto.Categoria.Id + "', StockMinimo = '" + producto.StockMinimo + "', ultPrecio = replace('"+ producto.UltPrecio +"' , ',' , '.'), stockActual = " + producto.StockActual + " where id = " + producto.Id + ";";
                 datos.setearConsulta(consulta);
 
                 datos.ejectutarAccion();

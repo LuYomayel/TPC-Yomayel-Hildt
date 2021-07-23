@@ -43,8 +43,13 @@ namespace TPC_Comercio
 
                 //gvClientes.EditIndex = e.NewEditIndex;
                 //gvClientes.DataBind();
-                int id = int.Parse(gvMarcas.Rows[e.NewEditIndex].Cells[0].Text);
-                Session.Add("idMarca", id);
+                MarcaNegocio marcaNegocio = new MarcaNegocio();
+                Marca marca = new Marca();
+
+                int index = e.NewEditIndex;
+                listaMarcas = marcaNegocio.listar();
+                marca = listaMarcas[index];
+                Session.Add("idMarca", marca.Id);
                 Response.Redirect("ModificarMarca.aspx", false);
                 Context.ApplicationInstance.CompleteRequest();
             }
@@ -60,19 +65,20 @@ namespace TPC_Comercio
         protected void gvMarcas_RowDeleting(object sender, GridViewDeleteEventArgs e)
         { 
             MarcaNegocio marcaNegocio = new MarcaNegocio();
-            int id = 0;
+            Marca marca = new Marca();
             try
             {
+                int index = e.RowIndex;
+                listaMarcas = marcaNegocio.listar();
+                marca = listaMarcas[index];
                 
-                id = Convert.ToInt32(e.Values[0]);
                 
-                if (id != 0)
-                {
-                    marcaNegocio.eliminar(id);
+                
+                    marcaNegocio.eliminar(marca.Id);
                     listaMarcas = marcaNegocio.listar();
                     gvMarcas.DataSource = listaMarcas;
                     gvMarcas.DataBind();
-                }
+                
             }
             catch (Exception ex)
             {

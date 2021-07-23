@@ -4,8 +4,6 @@
         <ContentTemplate>
             <asp:GridView ID="gvMarcas" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered" OnRowEditing="gvMarcas_RowEditing" OnRowDeleting="gvMarcas_RowDeleting">
                 <Columns>
-            
-                    <asp:BoundField DataField="Id" HeaderText="Id" />
                     <asp:BoundField DataField="Nombre" HeaderText="Marca" />
                     <asp:ButtonField CommandName="Delete" ButtonType="Button"  Text="Eliminar" ControlStyle-CssClass="btn btn-primary" HeaderText="Eliminar"/>
                     <asp:ButtonField CommandName="Edit" ButtonType="Button" Text="Editar" ControlStyle-CssClass="btn btn-primary" HeaderText="Editar"/>

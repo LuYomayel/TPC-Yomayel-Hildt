@@ -204,12 +204,42 @@ namespace Negocio
             {
                 datos.setearConsulta(" select * from Transacciones where id= " + id);
                 datos.ejecutarLectura();
-                transaccion.Id = (int)datos.Lector["IdTransaccion"];
-                transaccion.Monto = (decimal)datos.Lector["Monto"];
-                transaccion.Proveedor = new Proveedor();
-                transaccion.Proveedor.Cuit = (string)datos.Lector["IdProveedor"];
-                transaccion.Proveedor.RazonSocial = (string)datos.Lector["RazonSocial"];
-                    
+                while (datos.Lector.Read())
+                {
+                    transaccion.Id = (int)datos.Lector["IdTransaccion"];
+                    transaccion.Monto = (decimal)datos.Lector["Monto"];
+                    transaccion.Proveedor = new Proveedor();
+                    transaccion.Proveedor.Cuit = (string)datos.Lector["IdProveedor"];
+                    transaccion.Proveedor.RazonSocial = (string)datos.Lector["RazonSocial"];
+                }
+
+                return transaccion;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+        public Transaccion GetVenta(int id)
+        {
+            Transaccion transaccion = new Transaccion();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(" select * from Transacciones where id= " + id);
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    transaccion.Id = (int)datos.Lector["Id"];
+                    transaccion.Monto = (decimal)datos.Lector["Monto"];
+                    transaccion.Cliente = new Cliente();
+                    transaccion.Cliente.Cuit = (string)datos.Lector["IdCliente"];
+                }
+                
+
 
                 return transaccion;
             }

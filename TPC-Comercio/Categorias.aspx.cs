@@ -41,7 +41,14 @@ namespace TPC_Comercio
 
                 //gvClientes.EditIndex = e.NewEditIndex;
                 //gvClientes.DataBind();
-                int id = int.Parse(gvCategorias.Rows[e.NewEditIndex].Cells[0].Text);
+                int index = e.NewEditIndex;
+                CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
+                Categoria categoria = new Categoria();
+
+                listaCategorias = categoriaNegocio.listar();
+                categoria = listaCategorias[index];
+                int id = categoria.Id;
+
                 Session.Add("idCategoria", id);
                 Response.Redirect("ModificarCategoria.aspx", false);
                 Context.ApplicationInstance.CompleteRequest();
@@ -58,19 +65,18 @@ namespace TPC_Comercio
         protected void gvCategorias_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
-            int id = 0;
+            Categoria categoria = new Categoria();
             try
             {
-                
-                    id = Convert.ToInt32(e.Values[0]);
 
-                if (id != 0)
-                {
-                    categoriaNegocio.eliminar(id);
-                    listaCategorias = categoriaNegocio.listar();
-                    gvCategorias.DataSource = listaCategorias;
-                    gvCategorias.DataBind();
-                }
+                int index = e.RowIndex;
+                listaCategorias = categoriaNegocio.listar();
+                categoria = listaCategorias[index];
+                categoriaNegocio.eliminar(categoria.Id);
+                listaCategorias = categoriaNegocio.listar();
+                gvCategorias.DataSource = listaCategorias;
+                gvCategorias.DataBind();
+               
             }
             catch (Exception ex)
             {
