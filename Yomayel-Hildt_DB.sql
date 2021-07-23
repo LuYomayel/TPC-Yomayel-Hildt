@@ -1,5 +1,6 @@
 --go
 --drop database Yomayel_Hildt_DB
+
 create database Yomayel_Hildt_DB
 go 
 use Yomayel_Hildt_DB

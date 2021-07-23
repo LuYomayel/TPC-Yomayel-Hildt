@@ -18,16 +18,42 @@ namespace TPC_Comercio
                 Session.Add("error", "Debes iniciar sesión primero.");
                 Response.Redirect("Error.aspx", false);
             }
-            int id = (int)Session["idTransaccion"];
-            TransaccionNegocio transaccionNegocio = new TransaccionNegocio();
-            Transaccion transaccion = new Transaccion();
-            DetalleNegocio detalleNegocio = new DetalleNegocio();
-            listaDetalles = detalleNegocio.listarComprasID(id);
-            transaccion = transaccionNegocio.GetVenta(id);
-            if (!IsPostBack)
+            try
             {
-                lblNroFactura.Text = transaccion.Id.ToString();
+                int id = (int)Session["idTransaccion"];
+                TransaccionNegocio transaccionNegocio = new TransaccionNegocio();
+                Transaccion transaccion = new Transaccion();
+                DetalleNegocio detalleNegocio = new DetalleNegocio();
+                listaDetalles = detalleNegocio.listarComprasID(id);
+                transaccion = transaccionNegocio.GetVenta(id);
+                Cliente cliente = new Cliente();
+                ClienteNegocio clienteNegocio = new ClienteNegocio();
+                cliente = clienteNegocio.getCliente(transaccion.Cliente.Cuit); 
+                if (!IsPostBack)
+                {
+                    lblNroFactura.Text = transaccion.Id.ToString();
+                    lblCuit.Text = cliente.Cuit;
+                    lblDireccion.Text = cliente.Direccion;
+                    lblTelefono.Text = cliente.Telefono.ToString();
+                    lblFechaHoy.Text = "23/07/2021";
+
+                    gvDetalle.DataSource = listaDetalles;
+                    gvDetalle.DataBind();
+                    decimal total = 0;
+                    foreach (Detalle item in listaDetalles)
+                    {
+                        total += item.PrecioParcial;
+                    }
+
+                    lblTotal.Text = total.ToString();
+                }
             }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
     }
 }
