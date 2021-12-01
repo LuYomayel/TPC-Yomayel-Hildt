@@ -83,7 +83,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="Categorias.aspx">Categorias</a>
                         </li>
-                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="Vendedores.aspx">Vendedores</a>
+                        </li>
                         
                         
                         <% } %>

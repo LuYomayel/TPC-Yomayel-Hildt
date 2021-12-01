@@ -97,16 +97,16 @@ namespace Negocio
             }
 
         }
-        public List<Transaccion> listarVentas()
+        public List<Transaccion> listarVentas(Usuario usuario)
         {
             List<Transaccion> lista = new List<Transaccion>();
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                datos.setearConsulta("select t.id IdTransaccion, coalesce(t.monto,0) Monto, t.IdCliente IdCliente, c.Nombre Nombre, c.Apellido Apellido from Transacciones t " +
-                                    "join Clientes c on c.Cuit=t.IdCliente " +
-                                    "where t.Tipo = 'V' and t.Estado = 1");
+                datos.setearConsulta("select t.id IdTransaccion, coalesce(t.monto,0) Monto, t.IdCliente IdCliente, c.Nombre Nombre, c.Apellido Apellido, u.Usuario Vendedor from Transacciones t " +
+                                    "join Clientes c on c.Cuit=t.IdCliente join Usuarios u on u.Id = t.IdUsuario " +
+                                    "where t.Tipo = 'V' and t.Estado = 1 and t.idUsuario=" + usuario.Id);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -118,6 +118,42 @@ namespace Negocio
                     aux.Cliente = new Cliente();
                     aux.Cliente.Cuit = (string)datos.Lector["IdCliente"];
                     aux.Cliente.NombreCompleto = (string)datos.Lector["Apellido"] + ", " + (string)datos.Lector["Nombre"];
+                    aux.Vendedor = new Usuario();
+                    aux.Vendedor.User = (string)datos.Lector["Vendedor"];
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+
+        public List<Transaccion> listarTodasV()
+        {
+            List<Transaccion> lista = new List<Transaccion>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("select t.id IdTransaccion, coalesce(t.monto,0) Monto, t.IdCliente IdCliente, c.Nombre Nombre, c.Apellido Apellido, u.Usuario Vendedor from Transacciones t join Clientes c on c.Cuit= t.IdCliente join Usuarios u on u.Id = t.IdUsuario where t.Tipo = 'V' and t.Estado = 1 ");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Transaccion aux = new Transaccion();
+
+                    aux.Id = (int)datos.Lector["IdTransaccion"];
+                    aux.Monto = (decimal)datos.Lector["Monto"];
+                    aux.Cliente = new Cliente();
+                    aux.Cliente.Cuit = (string)datos.Lector["IdCliente"];
+                    aux.Cliente.NombreCompleto = (string)datos.Lector["Apellido"] + ", " + (string)datos.Lector["Nombre"];
+                    aux.Vendedor = new Usuario();
+                    aux.Vendedor.User = (string)datos.Lector["Vendedor"];
                     lista.Add(aux);
                 }
 
@@ -158,8 +194,8 @@ namespace Negocio
             try
             {
 
-                string valores = "values(" + transaccion.Id + ",'" + transaccion.Tipo + "', '" + transaccion.Cliente.Cuit + "' )";
-                datos.setearConsulta("SET IDENTITY_INSERT [Transacciones] ON Insert into Transacciones (Id, Tipo, IdCliente) " + valores);
+                string valores = "values(" + transaccion.Id + ",'" + transaccion.Tipo + "', '" + transaccion.Cliente.Cuit + "', " + transaccion.Vendedor.Id +" )";
+                datos.setearConsulta("SET IDENTITY_INSERT [Transacciones] ON Insert into Transacciones (Id, Tipo, IdCliente, IdUsuario) " + valores);
 
                 datos.ejectutarAccion();
 
@@ -229,7 +265,9 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta(" select * from Transacciones where id= " + id);
+                datos.setearConsulta(" select t.Id Id,t.IdCliente IdCliente, t.Monto Monto, u.Usuario Vendedor from Transacciones t " +
+
+                                    "join Usuarios u on u.Id = t.idUsuario where t.Id =" + id);
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
@@ -237,6 +275,8 @@ namespace Negocio
                     transaccion.Monto = (decimal)datos.Lector["Monto"];
                     transaccion.Cliente = new Cliente();
                     transaccion.Cliente.Cuit = (string)datos.Lector["IdCliente"];
+                    transaccion.Vendedor = new Usuario();
+                    transaccion.Vendedor.User = (string)datos.Lector["Vendedor"];
                 }
                 
 

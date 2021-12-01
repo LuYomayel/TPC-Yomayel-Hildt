@@ -19,7 +19,7 @@ namespace TPC_Comercio
                 Response.Redirect("Error.aspx", false);
             }
             TransaccionNegocio transaccionNegocio = new TransaccionNegocio();
-            transacciones = transaccionNegocio.listarVentas();
+            transacciones = transaccionNegocio.listarVentas((Usuario)Session["usuario"]);
             gvVentas.DataSource = transacciones;
             gvVentas.DataBind();
             Message.Text = "";
@@ -29,7 +29,7 @@ namespace TPC_Comercio
         {
             TransaccionNegocio transaccionNegocio = new TransaccionNegocio();
             Transaccion transaccion = new Transaccion();
-            transacciones = transaccionNegocio.listarVentas();
+            transacciones = transaccionNegocio.listarVentas((Usuario)Session["usuario"]);
             if (e.CommandName == "Detalle")
             {
                 int index = Convert.ToInt32(e.CommandArgument);
@@ -58,7 +58,7 @@ namespace TPC_Comercio
                     int index = e.RowIndex;
                     TransaccionNegocio transaccionNegocio = new TransaccionNegocio();
                     Transaccion transaccion = new Transaccion();
-                    transacciones = transaccionNegocio.listarVentas();
+                    transacciones = transaccionNegocio.listarVentas((Usuario)Session["usuario"]);
                     transaccion = transacciones[index];
 
                     DetalleNegocio detalleNegocio = new DetalleNegocio();
@@ -70,7 +70,7 @@ namespace TPC_Comercio
                         detalleNegocio.eliminar(item.Id);
                     }
                     transaccionNegocio.eliminar(transaccion.Id);
-                    transacciones = transaccionNegocio.listarVentas();
+                    transacciones = transaccionNegocio.listarVentas((Usuario)Session["usuario"]);
                     gvVentas.DataSource = transacciones;
                     gvVentas.DataBind();
                 }

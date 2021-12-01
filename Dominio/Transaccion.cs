@@ -14,5 +14,15 @@ namespace Dominio
         public Cliente Cliente { get; set; }
         public Proveedor Proveedor { get; set; }
         public List<Detalle> listaDetalles { get; set; }
+        public Usuario Vendedor { get; set; }
+
+        public double Comision { get; set; }
+
+        public Transaccion()
+        {
+            Cliente cliente = new Cliente();
+            Proveedor proveedor = new Proveedor();
+            Usuario usuario = new Usuario();
+        }
     }
 }

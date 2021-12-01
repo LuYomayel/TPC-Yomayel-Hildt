@@ -1,5 +1,6 @@
---go
---drop database Yomayel_Hildt_DB
+use master
+go
+drop database Yomayel_Hildt_DB
 
 create database Yomayel_Hildt_DB
 go 
@@ -62,14 +63,7 @@ create table Proveedores_X_Producto(
 )
 ALTER table Proveedores_X_Producto ADD PRIMARY KEY (IdProveedores, IdProducto)
 
-create table Transacciones(
-	Id int not null identity(1,1) primary key,
-	Tipo char not null Check(Tipo = 'C' or Tipo = 'V'),
-	Monto money null,
-	IdProveedor varchar(20) null foreign key references Proveedores(Cuit),
-	IdCliente varchar(20) null foreign key references Clientes(Cuit),
-	Estado bit default 1
-)
+
 
 
 
@@ -88,7 +82,23 @@ create table Usuarios(
 	Pass varchar(50) null,
 	TipoUser int null
 )
+
+create table Transacciones(
+	Id int not null identity(1,1) primary key,
+	Tipo char not null Check(Tipo = 'C' or Tipo = 'V'),
+	Monto money null,
+	IdProveedor varchar(20) null foreign key references Proveedores(Cuit),
+	IdCliente varchar(20) null foreign key references Clientes(Cuit),
+	IdUsuario int null foreign key references Usuarios(Id),
+	Estado bit default 1
+)
+
+
+
 insert into USUARIOS Values ('test', 'test', 1)
+insert into USUARIOS Values ('Vendedor1', '123', 1)
+insert into USUARIOS Values ('Vendedor2', '123', 1)
+insert into USUARIOS Values ('Vendedor3', '123', 1)
 insert into USUARIOS Values ('admin', 'admin', 2)
 use Yomayel_Hildt_DB
 insert into Marcas (Nombre) values('Samsung')
@@ -142,10 +152,20 @@ insert into Proveedores (RazonSocial,Descripcion,Email,Cuit) values('Delz1k','Mo
 
 
 
+select t.id IdTransaccion, coalesce(t.monto,0) Monto, t.IdCliente IdCliente, c.Nombre Nombre, c.Apellido Apellido, u.Usuario Vendedor from Transacciones t 
+                                    join Clientes c on c.Cuit= t.IdCliente
+                                    join Usuarios u on u.Id = t.IdUsuario
+                                    where t.Tipo = 'V' and t.Estado = 1
 
 
+									select t.Id Id,t.IdCliente IdCliente, t.Monto Monto, u.Usuario from Transacciones t
+									join Usuarios u on u.Id = t.idUsuario
+
+									select t.Id Id,t.IdCliente IdCliente, t.Monto Monto, u.Usuario Vendedor from Transacciones t
+
+                                    join Usuarios u on u.Id = t.idUsuario where t.Id = 7
 
 
-
+select * from Transacciones
 
 

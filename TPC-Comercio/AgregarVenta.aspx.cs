@@ -135,7 +135,12 @@ namespace TPC_Comercio
 
         protected void btnAgregarTransaccion_Click(object sender, EventArgs e)
         {
+            Usuario usuario = new Usuario();
+            usuario = (Usuario)Session["usuario"];
+            
             Transaccion transaccion = new Transaccion();
+            transaccion.Vendedor = new Usuario();
+            transaccion.Vendedor = usuario;
             TransaccionNegocio transaccionNegocio = new TransaccionNegocio();
             List<Transaccion> listaTransacciones = new List<Transaccion>();
             listaTransacciones = transaccionNegocio.listarTodasT();
@@ -145,6 +150,7 @@ namespace TPC_Comercio
                 idTransaccion = item.Id + 1;
             }
             transaccion.Tipo = "V";
+            
             if (idTransaccion != 0)
                 transaccion.Id = idTransaccion;
             Cliente cliente = new Cliente();

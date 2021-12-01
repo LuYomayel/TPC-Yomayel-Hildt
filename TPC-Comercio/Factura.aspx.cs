@@ -36,6 +36,7 @@ namespace TPC_Comercio
                     lblDireccion.Text = cliente.Direccion;
                     lblTelefono.Text = cliente.Telefono.ToString();
                     lblFechaHoy.Text = "23/07/2021";
+                    lblVendedor.Text = transaccion.Vendedor.User;
 
                     gvDetalle.DataSource = listaDetalles;
                     gvDetalle.DataBind();

@@ -16,3 +16,9 @@ C:\Users\Migra\OneDrive\Escritorio\TSP\TpComercio\Dominio\obj\Debug\Dominio.cspr
 C:\Users\Migra\OneDrive\Escritorio\TSP\TpComercio\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
 C:\Users\Migra\OneDrive\Escritorio\TSP\TpComercio\Dominio\obj\Debug\Dominio.dll
 C:\Users\Migra\OneDrive\Escritorio\TSP\TpComercio\Dominio\obj\Debug\Dominio.pdb
+D:\Luciano\UTN\OneDrive - frgp.utn.edu.ar\TSP\3er Cuatri\Programacion 3\Comercio\Dominio\bin\Debug\Dominio.dll
+D:\Luciano\UTN\OneDrive - frgp.utn.edu.ar\TSP\3er Cuatri\Programacion 3\Comercio\Dominio\bin\Debug\Dominio.pdb
+D:\Luciano\UTN\OneDrive - frgp.utn.edu.ar\TSP\3er Cuatri\Programacion 3\Comercio\Dominio\obj\Debug\Dominio.csprojAssemblyReference.cache
+D:\Luciano\UTN\OneDrive - frgp.utn.edu.ar\TSP\3er Cuatri\Programacion 3\Comercio\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
+D:\Luciano\UTN\OneDrive - frgp.utn.edu.ar\TSP\3er Cuatri\Programacion 3\Comercio\Dominio\obj\Debug\Dominio.dll
+D:\Luciano\UTN\OneDrive - frgp.utn.edu.ar\TSP\3er Cuatri\Programacion 3\Comercio\Dominio\obj\Debug\Dominio.pdb

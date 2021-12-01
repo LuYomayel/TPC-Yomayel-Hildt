@@ -43,7 +43,14 @@
                 <div id="direccion"><asp:Label ID="lblDireccion" runat="server" ></asp:Label></div>
             </div>
         </div>          
-          
+        <div class="row">
+            <div class="col-xs-2">
+                <div class="titulo">Vendedor:      </div>
+            </div>
+            <div class="col-xs-2">
+                <div id="vendedor"><asp:Label ID="lblVendedor" runat="server" ></asp:Label></div>
+            </div>   
+        </div>
         <asp:GridView ID="gvDetalle" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered mt-5">
             <Columns>
                 <asp:BoundField DataField="Producto.Nombre" HeaderText="Producto"/>
