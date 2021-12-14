@@ -11,53 +11,89 @@ namespace TPC_Comercio
 {
 
 
-    public partial class Vendedores
+    public partial class Comisiones
     {
 
         /// <summary>
-        /// Control lblVendedor.
+        /// Control txtCantVentas1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblVendedor;
+        protected global::System.Web.UI.WebControls.TextBox txtCantVentas1;
 
         /// <summary>
-        /// Control ddlVendedores.
+        /// Control txtCantVentas2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlVendedores;
+        protected global::System.Web.UI.WebControls.TextBox txtCantVentas2;
 
         /// <summary>
-        /// Control gvVentas.
+        /// Control txtComision1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvVentas;
+        protected global::System.Web.UI.WebControls.TextBox txtComision1;
 
         /// <summary>
-        /// Control Label1.
+        /// Control txtCantVentas3.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.TextBox txtCantVentas3;
 
         /// <summary>
-        /// Control lblTotal.
+        /// Control txtCantVentas4.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotal;
+        protected global::System.Web.UI.WebControls.TextBox txtCantVentas4;
+
+        /// <summary>
+        /// Control txtComision2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtComision2;
+
+        /// <summary>
+        /// Control txtCantVentas5.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCantVentas5;
+
+        /// <summary>
+        /// Control txtCantVentas6.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCantVentas6;
+
+        /// <summary>
+        /// Control txtComision3.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtComision3;
 
         /// <summary>
         /// Control btnComisiones.

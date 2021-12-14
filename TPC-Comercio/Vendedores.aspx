@@ -26,6 +26,8 @@
             
             <asp:Label ID="Label1" runat="server" Text="Total"></asp:Label>
             <asp:Label ID="lblTotal" runat="server" ></asp:Label>
+            <asp:Button ID="btnComisiones" runat="server" Text="Modificar Comisiones" Class="btn btn-primary" OnClick="btnComisiones_Click"/>
+
             
 
         </ContentTemplate>

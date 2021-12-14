@@ -21,68 +21,6 @@ namespace TPC_Comercio
             }
             if (!Page.IsPostBack)
             {
-                /*TransaccionNegocio transaccionNegocio = new TransaccionNegocio();
-                transacciones = transaccionNegocio.listarTodasV();
-                gvVentas.DataSource = transacciones;
-                gvVentas.DataBind();
-
-
-                UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-                Usuario usuario1 = new Usuario(-1);
-                List<Usuario> listaUsuarios = new List<Usuario>();
-                listaUsuarios = usuarioNegocio.listarVendedores();
-                listaUsuarios.Add(usuario1);
-                ddlVendedores.DataSource = listaUsuarios;
-
-                
-                ddlVendedores.DataTextField = "User";
-                ddlVendedores.DataValueField = "Id";
-                ddlVendedores.DataBind();
-
-
-                int[] CantVentas;
-                CantVentas = new int[listaUsuarios.Count];
-
-                for (int i = 0; i < 3; i++) CantVentas[i] = 0;
-                double comisionPorc = 0, comisionTotal;
-
-                foreach (Transaccion venta in transacciones)
-                {
-                    if (venta.Vendedor.User == "Vendedor1") CantVentas[0]++;
-                    if (venta.Vendedor.User == "Vendedor2") CantVentas[1]++;
-                    if (venta.Vendedor.User == "Vendedor3") CantVentas[2]++;
-                }
-
-                for (int j = 0; j < 3; j++)
-                {
-                    if (CantVentas[j] < 5) comisionPorc = 0.03;
-                    else if (CantVentas[j] >= 5 && CantVentas[j] < 10) comisionPorc = 0.05;
-                    else comisionPorc = 0.1;
-
-                    listaUsuarios[j].ComisionPorc = comisionPorc;
-                }
-
-                for (int x = 0; x < transacciones.Count; x++)
-                {
-                    for (int j = 0; j < listaUsuarios.Count; j++) {
-                        if (transacciones[x].Vendedor.User == listaUsuarios[j].User) transacciones[x].Vendedor.ComisionPorc = listaUsuarios[j].ComisionPorc;
-                     }
-                }
-
-                double TotalComisiones=0;
-
-                foreach (Transaccion venta in transacciones)
-                {
-
-                    comisionTotal = decimal.ToDouble(venta.Monto) * venta.Vendedor.ComisionPorc;
-                    venta.Comision = comisionTotal;
-
-                    TotalComisiones += comisionTotal;
-
-                }
-
-                lblTotal.Text = TotalComisiones.ToString();
-                gvVentas.DataBind();*/
                 mostrarTodasV();
                 mostrarDdlVendedores();
             }
@@ -100,6 +38,11 @@ namespace TPC_Comercio
 
                 int CantVentas = 0;
                 double comisionPorc, comisionTotal;
+                ComisionNegocio comisionNegocio = new ComisionNegocio();
+                List<Comision> listacomisiones = new List<Comision>();
+
+                listacomisiones = comisionNegocio.listarComisiones();
+
                 TransaccionNegocio transaccionNegocio = new TransaccionNegocio();
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
                 Usuario usuario = new Usuario();
@@ -108,21 +51,33 @@ namespace TPC_Comercio
 
                 foreach (Transaccion venta in transacciones)
                 {
+                    usuario.CantVentas++;
                     CantVentas++;
                 }
-                if (CantVentas < 5) comisionPorc = 0.03;
-                else if (CantVentas >= 5 && CantVentas < 10) comisionPorc = 0.05;
-                else comisionPorc = 0.1;
 
-                double TotalComisiones = 0;
-
-                foreach (Transaccion venta in transacciones)
+                bool entre = false;
+                foreach (Comision comision in listacomisiones)
                 {
-                    comisionTotal = decimal.ToDouble(venta.Monto) * comisionPorc;
-                    venta.Comision = comisionTotal;
 
-                    TotalComisiones += comisionTotal;
+                    if (usuario.CantVentas <= comision.CantVentas && entre == false)
+                    {
+                        usuario.ComisionPorc = comision.Porcentaje;
+                        entre = true;
+                        
+                    }
                 }
+                  
+                double TotalComisiones = 0;
+                foreach (Transaccion transaccion in transacciones)
+                {
+                    
+                    
+                    transaccion.Comision = ((usuario.ComisionPorc) * Convert.ToDouble(transaccion.Monto)) / 100;
+                    
+                    
+                    TotalComisiones += transaccion.Comision;
+                }
+                
 
                 lblTotal.Text = TotalComisiones.ToString();
 
@@ -136,61 +91,63 @@ namespace TPC_Comercio
         {
             TransaccionNegocio transaccionNegocio = new TransaccionNegocio();
             
-            Usuario usuario = new Usuario();
-            
             transacciones = transaccionNegocio.listarTodasV();
             UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-            //Usuario usuario1 = new Usuario(-1);
             List<Usuario> listaUsuarios = new List<Usuario>();
             listaUsuarios = usuarioNegocio.listarVendedores();
             
-
-            int[] CantVentas;
-            CantVentas = new int[listaUsuarios.Count];
-
-            for (int i = 0; i < 3; i++) CantVentas[i] = 0;
-            double comisionPorc = 0, comisionTotal;
+            double comisionTotal;
 
             foreach (Transaccion venta in transacciones)
             {
-                if (venta.Vendedor.User == "Vendedor1") CantVentas[0]++;
-                if (venta.Vendedor.User == "Vendedor2") CantVentas[1]++;
-                if (venta.Vendedor.User == "Vendedor3") CantVentas[2]++;
-            }
-
-            for (int j = 0; j < 3; j++)
-            {
-                if (CantVentas[j] < 5) comisionPorc = 0.03;
-                else if (CantVentas[j] >= 5 && CantVentas[j] < 10) comisionPorc = 0.05;
-                else comisionPorc = 0.1;
-
-                listaUsuarios[j].ComisionPorc = comisionPorc;
-            }
-
-            for (int x = 0; x < transacciones.Count; x++)
-            {
-                for (int j = 0; j < listaUsuarios.Count; j++)
+                foreach(Usuario usuario in listaUsuarios)
                 {
-                    if (transacciones[x].Vendedor.User == listaUsuarios[j].User) transacciones[x].Vendedor.ComisionPorc = listaUsuarios[j].ComisionPorc;
+                    if (venta.Vendedor.User == usuario.User) usuario.CantVentas++;
                 }
+                
+            }
+
+            ComisionNegocio comisionNegocio = new ComisionNegocio();
+            List<Comision> listacomisiones = new List<Comision>();
+
+            listacomisiones = comisionNegocio.listarComisiones();
+
+
+            bool entre = false;
+            foreach (Usuario usuario1 in listaUsuarios)
+            {
+                foreach(Comision comision in listacomisiones)
+                {
+                    
+                    if(usuario1.CantVentas <= comision.CantVentas && entre == false)
+                    {
+                        usuario1.ComisionPorc = comision.Porcentaje;
+                        entre = true;
+                    }
+                }
+                entre = false;
             }
 
             double TotalComisiones = 0;
-
-            foreach (Transaccion venta in transacciones)
+            foreach (Transaccion transaccion in transacciones)
             {
-
-                comisionTotal = decimal.ToDouble(venta.Monto) * venta.Vendedor.ComisionPorc;
-                venta.Comision = comisionTotal;
-
-                TotalComisiones += comisionTotal;
-
+                foreach(Usuario usuario1 in listaUsuarios)
+                {
+                    if(transaccion.Vendedor.User == usuario1.User)
+                    {
+                        transaccion.Comision = ((usuario1.ComisionPorc) * Convert.ToDouble(transaccion.Monto))/100;
+                    }
+                }
+                TotalComisiones += transaccion.Comision;
             }
+            
 
             lblTotal.Text = TotalComisiones.ToString();
             gvVentas.DataSource = transacciones;
             
             gvVentas.DataBind();
+
+
         }
 
         public void mostrarDdlVendedores()
@@ -199,13 +156,19 @@ namespace TPC_Comercio
             Usuario usuario1 = new Usuario(-1);
             List<Usuario> listaUsuarios = new List<Usuario>();
             listaUsuarios = usuarioNegocio.listarVendedores();
-            listaUsuarios.Add(usuario1);
+            //listaUsuarios.Add(usuario1);
+            listaUsuarios.Insert(0, usuario1);
             ddlVendedores.DataSource = listaUsuarios;
 
 
             ddlVendedores.DataTextField = "User";
             ddlVendedores.DataValueField = "Id";
             ddlVendedores.DataBind();
+        }
+
+        protected void btnComisiones_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Comisiones.aspx", false);
         }
     }
 }

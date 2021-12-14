@@ -62,7 +62,7 @@ create table Proveedores_X_Producto(
 	IdProducto int not null  foreign key references Productos(id)
 )
 ALTER table Proveedores_X_Producto ADD PRIMARY KEY (IdProveedores, IdProducto)
-
+alter table Comisiones add primary key(CantVentas)
 
 
 
@@ -80,7 +80,8 @@ create table Usuarios(
 	Id int not null identity(1,1) primary key,
 	Usuario varchar(50) null,
 	Pass varchar(50) null,
-	TipoUser int null
+	TipoUser int null,
+	CantVentas int null foreign key references Comisiones(CantVentas)
 )
 
 create table Transacciones(
@@ -93,8 +94,14 @@ create table Transacciones(
 	Estado bit default 1
 )
 
+create table Comisiones(
+	
+	CantVentas int not null primary key,
+	Porcentaje float null
+)
 
-
+--alter table Comisiones drop COlumn TipoComision
+--alter table Comisiones add TipoComision int not null
 insert into USUARIOS Values ('test', 'test', 1)
 insert into USUARIOS Values ('Vendedor1', '123', 1)
 insert into USUARIOS Values ('Vendedor2', '123', 1)
