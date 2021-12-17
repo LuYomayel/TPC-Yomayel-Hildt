@@ -78,15 +78,6 @@ namespace TPC_Comercio
         protected global::System.Web.UI.WebControls.TextBox txtCantVentas5;
 
         /// <summary>
-        /// Control txtCantVentas6.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCantVentas6;
-
-        /// <summary>
         /// Control txtComision3.
         /// </summary>
         /// <remarks>

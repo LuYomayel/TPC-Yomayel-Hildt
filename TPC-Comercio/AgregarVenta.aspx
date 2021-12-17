@@ -47,8 +47,19 @@
                     </Columns>
                 </asp:GridView>
                 </div>
-            <asp:Label ID="lblMessage" runat="server" CssClass="text-danger"></asp:Label>
-            <asp:Button ID="btnAgregarTransaccion" runat="server" Text="Agregar Venta" OnClick="btnAgregarTransaccion_Click" CssClass="btn btn-primary " Visible="false"/>
+            <div class="row">
+                <asp:Label ID="lblMessage" runat="server" CssClass="text-danger"></asp:Label>
+            </div>
+            <div class="row">
+                <div class="col-9">
+                    <asp:Button ID="btnAgregarTransaccion" runat="server" Text="Agregar Venta" OnClick="btnAgregarTransaccion_Click" CssClass="btn btn-primary " Visible="false"/>
+                </div>
+                <div class="col-3">
+                    <asp:Label ID="Label1" runat="server" Text="Total: " CssClass="h3"></asp:Label><asp:Label ID="lblTotal" runat="server"  CssClass="h3"></asp:Label>
+                </div>
+            </div>
+            
+            
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

@@ -32,14 +32,15 @@ namespace TPC_Comercio
                 if (!IsPostBack)
                 {
                     lblNroFactura.Text = transaccion.Id.ToString();
-                    lblCuit.Text = cliente.Cuit;
+                    lblCuit.Text = cliente.NombreCompleto;
                     lblDireccion.Text = cliente.Direccion;
-                    lblTelefono.Text = cliente.Telefono.ToString();
-                    lblFechaHoy.Text = transaccion.Fecha.ToString("dd/MM/YYYY");
+                    
+                    lblFechaVenta.Text = transaccion.Fecha.ToString("dd/MM/yyyy");
                     lblVendedor.Text = transaccion.Vendedor.User;
-
-                    gvDetalle.DataSource = listaDetalles;
-                    gvDetalle.DataBind();
+                    DateTime fech = transaccion.Fecha.AddDays(15);
+                    lblFechaVencimiento.Text = fech.ToString("dd/MM/yyyy");
+                    gvProductos.DataSource = listaDetalles;
+                    gvProductos.DataBind();
                     decimal total = 0;
                     foreach (Detalle item in listaDetalles)
                     {

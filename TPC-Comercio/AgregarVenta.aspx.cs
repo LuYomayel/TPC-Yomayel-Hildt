@@ -167,6 +167,12 @@ namespace TPC_Comercio
                     ddProductos.DataValueField = "Id";
                     ddProductos.DataBind();
                     lblMessage.Text = "";
+                    decimal montoTotal = 0;
+                    foreach(Detalle detalle1 in listaDetalles)
+                    {
+                        montoTotal += detalle1.PrecioParcial;
+                    }
+                    lblTotal.Text = montoTotal.ToString();
                 }
 
                 txtCantidad.Text = "0";
@@ -272,15 +278,19 @@ namespace TPC_Comercio
                 else
                 {
                     txtFecha.BorderColor = System.Drawing.Color.Red;
-                    lblMessage.Text = "Debe completar este campo.";
+                    lblMessage.Text = "Debe completar el campo de la fecha.";
                 }
             }
             catch (Exception ex)
             {
 
                 int valor;
-
-                if (ex.Message.ToString() == ("La cadena de entrada no tiene el formato correcto."))
+                if(ex.Message.ToString() == "No se puede reconocer la cadena como valor DateTime válido.")
+                {
+                    txtFecha.BorderColor = System.Drawing.Color.Red;
+                    lblMessage.Text = "Debe completar el campo de la fecha.";
+                }
+                else if (ex.Message.ToString() == ("La cadena de entrada no tiene el formato correcto."))
                 {
                     if (!int.TryParse(txtCantidad.Text, out valor))
                     {
@@ -365,6 +375,7 @@ namespace TPC_Comercio
 
         protected void gvDetalle_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
+            decimal montoTotal = 0;
             txtFecha.BorderColor = System.Drawing.Color.Gray;
             txtCantidad.BorderColor = System.Drawing.Color.Gray;
             try
@@ -379,6 +390,21 @@ namespace TPC_Comercio
                 Session.Add("detalleVenta", listaDetalles);
                 gvDetalle.DataSource = listaDetalles;
                 gvDetalle.DataBind();
+                if (listaDetalles.Count == 0)
+                {
+                    btnAgregarTransaccion.Visible = false;
+                    lblTotal.Text = montoTotal.ToString();
+                }
+                else
+                {
+                    
+                    foreach (Detalle detalle1 in listaDetalles)
+                    {
+                        montoTotal += detalle1.PrecioParcial;
+                    }
+                    lblTotal.Text = montoTotal.ToString();
+                }
+                
             }
             catch (Exception ex)
             {

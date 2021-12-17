@@ -126,6 +126,7 @@ namespace Negocio
                     cliente.Direccion = (string)datos.Lector["Direccion"];
                     cliente.Telefono = (int)datos.Lector["Telefono"];
                     cliente.Email = (string)datos.Lector["Email"];
+                    cliente.NombreCompleto = (string)datos.Lector["Apellido"] + ", " + (string)datos.Lector["Nombre"];
                 }
 
                 if(cliente.Cuit != "" || cliente.Cuit != null)

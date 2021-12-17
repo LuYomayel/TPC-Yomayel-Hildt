@@ -95,6 +95,10 @@ create table Transacciones(
 	Estado bit default 1
 )
 
+select t.Id Id,t.IdCliente IdCliente, t.Monto Monto, u.Usuario Vendedor, coalesce(t.Fecha,'15/12/2021') Fecha  from Transacciones t join Usuarios u on u.Id = t.idUsuario where t.Id =22
+SET IDENTITY_INSERT [Transacciones] ON Insert into Transacciones (Id, Tipo, IdCliente, IdUsuario, Fecha) 
+values(61 ,'V', '20-38508234-8',4, CAST('17-12-2021' AS DATETIME) )
+select * from usuarios
 create table Comisiones(
 	
 	CantVentas int not null primary key,

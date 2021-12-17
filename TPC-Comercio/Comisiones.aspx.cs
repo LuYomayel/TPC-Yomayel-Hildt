@@ -38,7 +38,7 @@ namespace TPC_Comercio
                 comision.CantVentas = int.Parse(txtCantVentas4.Text);
                 comision.Porcentaje = float.Parse(txtComision2.Text);
                 comisionNegocio.cargarComisiones(comision);
-                comision.CantVentas = int.Parse(txtCantVentas6.Text);
+                comision.CantVentas = int.Parse(txtCantVentas5.Text);
                 comision.Porcentaje = float.Parse(txtComision3.Text);
                 comisionNegocio.cargarComisiones(comision);
             }
@@ -60,7 +60,7 @@ namespace TPC_Comercio
             {
                 int cantVentas2 = int.Parse(txtCantVentas4.Text) + 1;
                 txtCantVentas5.Text = cantVentas2.ToString();
-                txtCantVentas6.ReadOnly = false;
+                
             }
         }
         public bool validarCampos()
@@ -72,7 +72,7 @@ namespace TPC_Comercio
             if (txtCantVentas3.Text == "") xd = false;
             if (txtCantVentas4.Text == "") xd = false;
             if (txtCantVentas5.Text == "") xd = false;
-            if (txtCantVentas6.Text == "") xd = false;
+            
             if (txtComision1.Text == "") xd = false;
             if (txtComision1.Text == "") xd = false;
             if (txtComision1.Text == "") xd = false;

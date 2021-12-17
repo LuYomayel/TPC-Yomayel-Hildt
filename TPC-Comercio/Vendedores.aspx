@@ -23,10 +23,16 @@
                     <asp:ButtonField CommandName="Delete" ButtonType="Button" ControlStyle-CssClass="btn btn-primary" Text="Eliminar" HeaderText="Eliminar" />--%>
                 </Columns>
             </asp:GridView>
+            <div class ="row">
+                <div class="col-9">
+                    <asp:Button ID="btnComisiones" runat="server" Text="Modificar Comisiones" Class="btn btn-primary" OnClick="btnComisiones_Click"/>
+                </div>
+                <div class="col-3">
+                    <asp:Label ID="Label1" runat="server" Text="Total: " CssClass="h2 text-right"> </asp:Label><asp:Label ID="lblTotal" runat="server"  CssClass="h2 text-right"></asp:Label>
+                </div>
+            </div>
             
-            <asp:Label ID="Label1" runat="server" Text="Total"></asp:Label>
-            <asp:Label ID="lblTotal" runat="server" ></asp:Label>
-            <asp:Button ID="btnComisiones" runat="server" Text="Modificar Comisiones" Class="btn btn-primary" OnClick="btnComisiones_Click"/>
+            
 
             
 

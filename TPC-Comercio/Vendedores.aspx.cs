@@ -37,7 +37,7 @@ namespace TPC_Comercio
 
 
                 int CantVentas = 0;
-                double comisionPorc, comisionTotal;
+                
                 ComisionNegocio comisionNegocio = new ComisionNegocio();
                 List<Comision> listacomisiones = new List<Comision>();
 
@@ -64,6 +64,10 @@ namespace TPC_Comercio
                         usuario.ComisionPorc = comision.Porcentaje;
                         entre = true;
                         
+                    }
+                    else if (usuario.CantVentas >= listacomisiones[2].CantVentas)
+                    {
+                        usuario.ComisionPorc = comision.Porcentaje;
                     }
                 }
                   
@@ -96,7 +100,7 @@ namespace TPC_Comercio
             List<Usuario> listaUsuarios = new List<Usuario>();
             listaUsuarios = usuarioNegocio.listarVendedores();
             
-            double comisionTotal;
+            
 
             foreach (Transaccion venta in transacciones)
             {
@@ -123,6 +127,10 @@ namespace TPC_Comercio
                     {
                         usuario1.ComisionPorc = comision.Porcentaje;
                         entre = true;
+                    }
+                    else if(usuario1.CantVentas > listacomisiones[2].CantVentas)
+                    {
+                        usuario1.ComisionPorc = comision.Porcentaje;
                     }
                 }
                 entre = false;

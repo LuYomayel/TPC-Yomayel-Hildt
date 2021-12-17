@@ -103,6 +103,12 @@ namespace TPC_Comercio
                     ddProductos.DataValueField = "Id";
                     ddProductos.DataBind();
 
+                    decimal montoTotal = 0;
+                    foreach(Detalle detalle1 in listaDetalles)
+                    {
+                        montoTotal += detalle1.PrecioParcial;
+                    }
+                    lblTotal.Text = montoTotal.ToString();
                     txtCantidad.Text = "0";
                     txtSubtotal.Text = "0";
                     gvDetalle.DataSource = listaDetalles;
@@ -361,6 +367,7 @@ namespace TPC_Comercio
 
         protected void gvDetalle_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
+            decimal montoTotal = 0;
             lblMessage.Text = "";
             try
             {
@@ -372,7 +379,21 @@ namespace TPC_Comercio
                 Session.Add("listaDetalles", listaDetalles);
                 gvDetalle.DataSource = listaDetalles;
                 gvDetalle.DataBind();
-                if (listaDetalles.Count == 0) btnAgregarTransaccion.Visible = false;
+                if (listaDetalles.Count == 0)
+                {
+                    btnAgregarTransaccion.Visible = false;
+                    lblTotal.Text = montoTotal.ToString();
+                }
+
+                else
+                {
+                    
+                    foreach (Detalle detalle1 in listaDetalles)
+                    {
+                        montoTotal += detalle1.PrecioParcial;
+                    }
+                    lblTotal.Text = montoTotal.ToString();
+                }
             }
             catch (Exception ex)
             {
