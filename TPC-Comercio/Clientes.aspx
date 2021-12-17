@@ -10,10 +10,10 @@
             <asp:GridView ID="gvClientes" runat="server" OnRowDeleting="gvClientes_RowDeleting" CssClass="table table-bordered" AutoGenerateColumns="False" OnRowEditing="gvClientes_RowEditing">
                 <Columns>
                     <asp:BoundField HeaderText="Cuit" DataField="Cuit" />
-                    <asp:BoundField HeaderText="Nombre Completo" DataField="NombreCompleto"/>
+                    <asp:BoundField HeaderText="Nombre Completo" DataField="NombreCompleto" ControlStyle-CssClass="text-capitalize"/>
                     <asp:BoundField HeaderText="Direccion" DataField="Direccion"/>
                     <asp:BoundField HeaderText="Telefono" DataField="Telefono"/>
-                    <asp:BoundField HeaderText="Email" DataField="Email"/>
+                    <asp:BoundField HeaderText="Email" DataField="Email" ControlStyle-CssClass="text-lowercase"/>
                     <asp:ButtonField ButtonType="Button" CommandName="Delete" Text="Eliminar" ControlStyle-CssClass="btn btn-primary" HeaderText="Eliminar">
                     
                     <ControlStyle CssClass="btn btn-primary"></ControlStyle>

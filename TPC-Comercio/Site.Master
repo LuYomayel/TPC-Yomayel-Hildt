@@ -18,7 +18,7 @@
     <script src="Scripts/boostrap_prince.js"></script>
     <link href="Content/bootstrap.css" rel="stylesheet" />
     <link href="Content/boostrap_prince.css" rel="stylesheet" />
-    <link href="Content/Styles.css" rel="stylesheet" />
+    <link href="content/styles.css" rel="stylesheet" />
     
 </head>
 <body>
@@ -106,9 +106,9 @@
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
-            <footer>
+            <%--<footer>
                 <p>&copy; <%: DateTime.Now.Year %> - Mi aplicación ASP.NET</p>
-            </footer>
+            </footer>--%>
         </div>
 
     </form>

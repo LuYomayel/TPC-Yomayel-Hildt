@@ -3,9 +3,11 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-        <div class="form-group">
+        <div class="form-group ">
+            
             <label >Cuit</label>
             <asp:TextBox ID="txtCuit" runat="server" class="form-control"></asp:TextBox>
+            
         </div>
         <div class="form-group">
             <label >Razon Social</label>
@@ -23,6 +25,6 @@
             <asp:Button ID="btnAgregar" runat="server" Text="Agregar" OnClick="btnAgregar_Click" CssClass="btn btn-primary"/>
         </div> 
         <div>
-            <asp:Label ID="lblError" runat="server" ></asp:Label>
+            <asp:Label ID="lblError" runat="server" CssClass="text-danger"></asp:Label>
         </div>
 </asp:Content>

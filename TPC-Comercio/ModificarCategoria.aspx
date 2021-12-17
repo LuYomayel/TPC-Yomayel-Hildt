@@ -3,6 +3,10 @@
     <div class="form-group">
         <label >Nombre</label>
         <asp:TextBox ID="txtNombre" runat="server" class="form-control"></asp:TextBox> 
+        <asp:Label ID="lblError" runat="server" CssClass="text-danger"></asp:Label>
+    </div>
+    <div>
+        
     </div>
     <div>
         <asp:Button ID="btnModificar" runat="server" Text="Modificar" OnClick="btnModificar_Click" CssClass="btn btn-primary"/>

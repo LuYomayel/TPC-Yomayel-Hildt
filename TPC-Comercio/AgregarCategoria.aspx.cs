@@ -21,6 +21,8 @@ namespace TPC_Comercio
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
+            txtNombre.BorderColor = System.Drawing.Color.Gray;
+            lblError.Text = "";
             Categoria categoria = new Categoria();
             CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
             try
@@ -29,6 +31,7 @@ namespace TPC_Comercio
                 
                 if(txtNombre.Text == "")
                 {
+                    txtNombre.BorderColor = System.Drawing.Color.Red;
                     lblError.Text = "Este campo no puede ir vacío.";
                 }
                 else

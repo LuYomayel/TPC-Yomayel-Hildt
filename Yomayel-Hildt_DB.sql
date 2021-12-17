@@ -91,6 +91,7 @@ create table Transacciones(
 	IdProveedor varchar(20) null foreign key references Proveedores(Cuit),
 	IdCliente varchar(20) null foreign key references Clientes(Cuit),
 	IdUsuario int null foreign key references Usuarios(Id),
+	Fecha date null,
 	Estado bit default 1
 )
 

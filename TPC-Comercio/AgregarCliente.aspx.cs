@@ -28,22 +28,51 @@ namespace TPC_Comercio
             var fechaNac = txtFecha.Text;
             var telefono = txtTelefono.Text;
             var direccion = txtDireccion.Text;
+            var email = txtEmail.Text;
 
-            if (!(cuit != null && cuit != "")) hola = false;
-            if (!(nombre != null && nombre != "")) hola = false;
-            if (!(apellido != null && apellido != "")) hola = false;
-            if (!(fechaNac != null && fechaNac != "")) hola = false;
-            if (!(telefono != null && telefono != "")) hola = false;
-            if (!(direccion != null && direccion != "")) hola = false;
-            
-
-
+            if (!(cuit != null && cuit != ""))
+            {
+                hola = false;
+                txtCuit.BorderColor = System.Drawing.Color.Red;
+            }
+            if (!(nombre != null && nombre != ""))
+            {
+                hola = false;
+                txtNombre.BorderColor = System.Drawing.Color.Red;
+            }
+            if (!(apellido != null && apellido != ""))
+            {
+                hola = false;
+                txtApellido.BorderColor = System.Drawing.Color.Red;
+            }
+            if (!(fechaNac != null && fechaNac != ""))
+            {
+                hola = false;
+                txtFecha.BorderColor = System.Drawing.Color.Red;
+            }
+            if (!(telefono != null && telefono != ""))
+            {
+                hola = false;
+                txtTelefono.BorderColor = System.Drawing.Color.Red;
+            }
+            if (!(direccion != null && direccion != ""))
+            {
+                hola = false;
+                txtDireccion.BorderColor = System.Drawing.Color.Red;
+            }
+            if (!(email != null && email != ""))
+            {
+                hola = false;
+                txtEmail.BorderColor = System.Drawing.Color.Red;
+            }
 
             return hola;
         }
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
+            lblError.Text = "";
+            volverBordes();
             ClienteNegocio clienteNegocio = new ClienteNegocio();
             Cliente cliente = new Cliente();
             var cuit = txtCuit.Text;
@@ -75,9 +104,23 @@ namespace TPC_Comercio
             }
             catch (Exception ex)
             {
-                if (ex.Message.ToString() == ("La cadena de entrada no tiene el formato correcto."))
+                int valor;
+                if(ex.Message.ToString() == "Violation of PRIMARY KEY constraint 'PK__Clientes__AFA917879D116E53'. Cannot insert duplicate key in object 'dbo.Clientes'. The duplicate key value is (2042886854).\r\nThe statement has been terminated.")
                 {
-                    lblError.Text = "Los datos ingresados no tienen el formato correcto. Asegurese de ingresar solamente numeros donde así se solicita.";
+                    txtCuit.BorderColor = System.Drawing.Color.Red;
+                    lblError.Text = "Ese cuit ya ha sido ingresado.";
+                }
+                else if (ex.Message.ToString() == ("La cadena de entrada no tiene el formato correcto."))
+                {
+                    if (!int.TryParse(txtTelefono.Text, out valor))
+                    {
+                        txtTelefono.BorderColor = System.Drawing.Color.Red;
+                        lblError.Text = "El telefono no puede contener letras.";
+                    }
+                    else
+                    {
+                        lblError.Text = "Los datos ingresados no tienen el formato correcto. Asegurese de ingresar solamente numeros donde así se solicita.";
+                    }
                 }
                 else
                 {
@@ -85,6 +128,15 @@ namespace TPC_Comercio
                     Response.Redirect("Error.aspx");
                 }
             }
+        }
+        public void volverBordes()
+        {
+            txtNombre.BorderColor = System.Drawing.Color.Gray;
+            txtApellido.BorderColor = System.Drawing.Color.Gray;
+            txtFecha.BorderColor = System.Drawing.Color.Gray;
+            txtTelefono.BorderColor = System.Drawing.Color.Gray;
+            txtDireccion.BorderColor = System.Drawing.Color.Gray;
+            txtEmail.BorderColor = System.Drawing.Color.Gray;
         }
     }
 }

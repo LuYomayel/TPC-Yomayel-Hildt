@@ -40,13 +40,13 @@
             
             <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox>
         </div>
-        
+        <div class="form-group">
+            <asp:Label ID="lblError" runat="server"  CssClass="text-danger"></asp:Label>
+        </div>
         <div>
             <asp:Button ID="btnAgregar" runat="server" Text="Agregar" CssClass="btn btn-primary" OnClick="btnAgregar_Click"/>
         </div> 
-        <div>
-            <asp:Label ID="lblError" runat="server" ></asp:Label>
-        </div>
+        
 
         
 </asp:Content>

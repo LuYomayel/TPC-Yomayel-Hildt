@@ -44,7 +44,7 @@
                     </Columns>
                 </asp:GridView>
                 </div>
-            <asp:Label ID="lblMessage" runat="server" ></asp:Label>
+            <asp:Label ID="lblMessage" runat="server"  CssClass="text-danger"></asp:Label>
             <asp:Button ID="btnAgregarTransaccion" runat="server" Text="Agregar Compra" OnClick="btnAgregarTransaccion_Click" CssClass="btn btn-primary" Visible="false"/>
         </ContentTemplate>
     </asp:UpdatePanel>

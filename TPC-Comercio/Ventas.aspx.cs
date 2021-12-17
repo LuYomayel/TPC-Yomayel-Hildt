@@ -49,43 +49,43 @@ namespace TPC_Comercio
             Context.ApplicationInstance.CompleteRequest();
         }
 
-        protected void gvVentas_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        /*protected void gvventas_rowdeleting(object sender, gridviewdeleteeventargs e)
         {
-            if (Session["usuario"] != null && ((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.TipoUsuario.ADMIN)
+            if (session["usuario"] != null && ((dominio.usuario)session["usuario"]).tipousuario == dominio.tipousuario.admin)
             {
                 try
                 {
-                    int index = e.RowIndex;
-                    TransaccionNegocio transaccionNegocio = new TransaccionNegocio();
-                    Transaccion transaccion = new Transaccion();
-                    transacciones = transaccionNegocio.listarVentas((Usuario)Session["usuario"]);
+                    int index = e.rowindex;
+                    transaccionnegocio transaccionnegocio = new transaccionnegocio();
+                    transaccion transaccion = new transaccion();
+                    transacciones = transaccionnegocio.listarventas((usuario)session["usuario"]);
                     transaccion = transacciones[index];
 
-                    DetalleNegocio detalleNegocio = new DetalleNegocio();
-                    List<Detalle> listaDetalle = new List<Detalle>();
-                    listaDetalle = detalleNegocio.listarComprasID(transaccion.Id);
+                    detallenegocio detallenegocio = new detallenegocio();
+                    list<detalle> listadetalle = new list<detalle>();
+                    listadetalle = detallenegocio.listarcomprasid(transaccion.id);
 
-                    foreach (Detalle item in listaDetalle)
+                    foreach (detalle item in listadetalle)
                     {
-                        detalleNegocio.eliminar(item.Id);
+                        detallenegocio.eliminar(item.id);
                     }
-                    transaccionNegocio.eliminar(transaccion.Id);
-                    transacciones = transaccionNegocio.listarVentas((Usuario)Session["usuario"]);
-                    gvVentas.DataSource = transacciones;
-                    gvVentas.DataBind();
+                    transaccionnegocio.eliminar(transaccion.id);
+                    transacciones = transaccionnegocio.listarventas((usuario)session["usuario"]);
+                    gvventas.datasource = transacciones;
+                    gvventas.databind();
                 }
-                catch (Exception ex)
+                catch (exception ex)
                 {
 
-                    Session.Add("Error", ex.ToString());
-                    Response.Redirect("Error.aspx");
+                    session.add("error", ex.tostring());
+                    response.redirect("error.aspx");
                 }
             }
             else
             {
-                Message.Text = "Solo los administradores pueden eliminar Ventas.";
+                message.text = "solo los administradores pueden eliminar ventas.";
             }
-        }
+        }*/
 
         protected void btnFactura_Click(object sender, EventArgs e)
         {

@@ -5,16 +5,16 @@
 @import url(http://fonts.googleapis.com/css?family=Bree+Serif);
 
 body, h1, h2, h3, h4, h5, h6 {
-    font-family: 'Bree Serif', serif;
+    font-family: 'Arial', arial;
 }
 
 span, h4, .letra {
-    font-family: "Times New Roman";
-    font-size: 10px;
+    font-family: "Arial";
+    font-size: 1.2rem;
 }
 
 .titulo {
-    font-family: "Arial Narrow", Arial, sans-serif;
+    font-family: "Arial", Arial, sans-serif;
     font-size: 12px;
     white-space: pre;
 }

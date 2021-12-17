@@ -194,8 +194,8 @@ namespace Negocio
             try
             {
 
-                string valores = "values(" + transaccion.Id + ",'" + transaccion.Tipo + "', '" + transaccion.Cliente.Cuit + "', " + transaccion.Vendedor.Id +" )";
-                datos.setearConsulta("SET IDENTITY_INSERT [Transacciones] ON Insert into Transacciones (Id, Tipo, IdCliente, IdUsuario) " + valores);
+                string valores = "values(" + transaccion.Id + ",'" + transaccion.Tipo + "', '" + transaccion.Cliente.Cuit + "', " + transaccion.Vendedor.Id + ", CAST('" + transaccion.Fecha + "' AS DATE) )";
+                datos.setearConsulta("SET IDENTITY_INSERT [Transacciones] ON Insert into Transacciones (Id, Tipo, IdCliente, IdUsuario, Fecha) " + valores);
 
                 datos.ejectutarAccion();
 
@@ -265,7 +265,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta(" select t.Id Id,t.IdCliente IdCliente, t.Monto Monto, u.Usuario Vendedor from Transacciones t " +
+                datos.setearConsulta(" select t.Id Id,t.IdCliente IdCliente, t.Monto Monto, u.Usuario Vendedor, coalesce(t.Fecha,'15/12/2021') Fecha  from Transacciones t " +
 
                                     "join Usuarios u on u.Id = t.idUsuario where t.Id =" + id);
                 datos.ejecutarLectura();
@@ -273,6 +273,7 @@ namespace Negocio
                 {
                     transaccion.Id = (int)datos.Lector["Id"];
                     transaccion.Monto = (decimal)datos.Lector["Monto"];
+                    transaccion.Fecha = (DateTime)datos.Lector["Fecha"];
                     transaccion.Cliente = new Cliente();
                     transaccion.Cliente.Cuit = (string)datos.Lector["IdCliente"];
                     transaccion.Vendedor = new Usuario();

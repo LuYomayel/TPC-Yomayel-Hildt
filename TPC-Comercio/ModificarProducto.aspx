@@ -10,11 +10,7 @@
             <asp:TextBox ID="txtDescripcion" runat="server" class="form-control"></asp:TextBox>
             
         </div>
-        <div class="form-group">
-            <label >Url Imagen</label>
-            <asp:TextBox ID="txtUrl" runat="server" class="form-control"></asp:TextBox>
-            
-        </div>
+        
         <div class="form-group">
             <label >Porcentaje de ganancia</label>
             <asp:TextBox ID="txtPorc" runat="server" class="form-control"></asp:TextBox>
@@ -43,7 +39,9 @@
             <label >Categoria</label>
             <asp:DropDownList ID="Categorias" runat="server" CssClass="form-control"></asp:DropDownList>
         </div>
-        
+        <div class="form-group">
+            <asp:Label ID="lblError" runat="server" CssClass="text-danger"></asp:Label>
+        </div>
         <div>
             <asp:Button ID="btnModificar" runat="server" Text="Modificar" OnClick="btnModificar_Click" CssClass="btn btn-primary"/>
         </div> 

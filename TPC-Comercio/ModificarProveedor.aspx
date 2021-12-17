@@ -21,6 +21,9 @@
             
             <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox>
         </div>
+        <div class="form-group">
+            <asp:Label ID="lblError" runat="server" CssClass="text-danger"></asp:Label>
+        </div>
         <div>
             
             <asp:Button ID="btnModificar" runat="server" Text="Modificar" OnClick="btnModificar_Click" CssClass="btn btn-primary"/>

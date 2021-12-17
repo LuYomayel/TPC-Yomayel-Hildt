@@ -46,7 +46,7 @@ namespace TPC_Comercio
             Context.ApplicationInstance.CompleteRequest();
         }
 
-        protected void gvCompras_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        /*protected void gvCompras_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             if (Session["usuario"] != null && ((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.TipoUsuario.ADMIN)
             {
@@ -84,6 +84,6 @@ namespace TPC_Comercio
             {
                 Message.Text = "Solo los administradores pueden eliminar Compras";
             }
-        }
+        }*/
     }
 }

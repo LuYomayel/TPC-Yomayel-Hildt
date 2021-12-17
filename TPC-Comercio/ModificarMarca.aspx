@@ -5,6 +5,7 @@
             <div class="form-group">
             <label >Nombre</label>
             <asp:TextBox ID="txtNombre" runat="server" class="form-control" AutoPostBack="true"></asp:TextBox> 
+                <asp:Label ID="lblError" runat="server" CssClass="text-danger"></asp:Label>
         </div>
         </ContentTemplate>
     </asp:UpdatePanel>

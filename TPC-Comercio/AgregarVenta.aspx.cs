@@ -68,161 +68,347 @@ namespace TPC_Comercio
         }
         protected void txtCantidad_TextChanged(object sender, EventArgs e)
         {
-            ProductoNegocio productoNegocio = new ProductoNegocio();
-            Producto producto = new Producto();
-            int id = int.Parse(ddProductos.SelectedValue);
-            producto = productoNegocio.GetProducto(id);
-            var cantidad = txtCantidad.Text;
-            decimal porcGanancia = Convert.ToDecimal(producto.PorcGanancia);
-            decimal precioUnitario = producto.UltPrecio * ((porcGanancia/100)+1);
-            txtPrecioUnitario.Text = precioUnitario.ToString();
-            if (cantidad != "")
+            txtFecha.BorderColor = System.Drawing.Color.Gray;
+            lblMessage.Text = "";
+            try
             {
-                decimal subtotal = precioUnitario * decimal.Parse(txtCantidad.Text);
+                ProductoNegocio productoNegocio = new ProductoNegocio();
+                Producto producto = new Producto();
+                int id = int.Parse(ddProductos.SelectedValue);
+                producto = productoNegocio.GetProducto(id);
+                var cantidad = txtCantidad.Text;
+                decimal porcGanancia = Convert.ToDecimal(producto.PorcGanancia);
+                decimal precioUnitario = producto.UltPrecio * ((porcGanancia / 100) + 1);
+                txtPrecioUnitario.Text = precioUnitario.ToString();
+                if (cantidad != "")
+                {
+                    decimal subtotal = precioUnitario * decimal.Parse(txtCantidad.Text);
 
-                txtSubtotal.Text = subtotal.ToString();
+                    txtSubtotal.Text = subtotal.ToString();
+                }
+                else
+                {
+                    txtSubtotal.Text = "0";
+                }
             }
-            else
+            catch (Exception ex)
             {
-                txtSubtotal.Text = "0";
+
+                int valor;
+
+                if (ex.Message.ToString() == ("La cadena de entrada no tiene el formato correcto."))
+                {
+                    if (!int.TryParse(txtCantidad.Text, out valor))
+                    {
+                        txtCantidad.BorderColor = System.Drawing.Color.Red;
+                        lblMessage.Text = "La cantidad no puede contener letras.";
+                    }
+                    if (!int.TryParse(txtPrecioUnitario.Text, out valor))
+                    {
+                        txtPrecioUnitario.BorderColor = System.Drawing.Color.Red;
+                        lblMessage.Text = "El precio unitario no puede contener letras.";
+                    }
+                    else
+                    {
+                        lblMessage.Text = "Los datos ingresados no tienen el formato correcto. Asegurese de ingresar solamente numeros donde así se solicita.";
+                    }
+                }
+                else
+                {
+                    Session.Add("Error", ex.ToString());
+                    Response.Redirect("Error.aspx");
+                }
             }
+            
         }
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
-            listaDetalles = (List<Detalle>)Session["detalleVenta"];
-            if (listaDetalles == null) listaDetalles = new List<Detalle>();
-            Detalle detalle = new Detalle();
-            Producto producto = new Producto();
-            ProductoNegocio productoNegocio = new ProductoNegocio();
-            int id = int.Parse(ddProductos.SelectedValue);
-            producto = productoNegocio.GetProducto(id);
-            if (txtCantidad.Text == "" || txtCantidad.Text == "0" || int.Parse(txtCantidad.Text) < 0)
+            txtFecha.BorderColor = System.Drawing.Color.Gray;
+            txtCantidad.BorderColor = System.Drawing.Color.Gray;
+            lblMessage.Text = "";
+            try
             {
-                lblMessage.Text = "Debe ingresar una cantidad mayor a 0";
+                listaDetalles = (List<Detalle>)Session["detalleVenta"];
+                if (listaDetalles == null) listaDetalles = new List<Detalle>();
+                Detalle detalle = new Detalle();
+                Producto producto = new Producto();
+                ProductoNegocio productoNegocio = new ProductoNegocio();
+                int id = int.Parse(ddProductos.SelectedValue);
+                producto = productoNegocio.GetProducto(id);
+                if (txtCantidad.Text == "" || txtCantidad.Text == "0" || int.Parse(txtCantidad.Text) < 0)
+                {
+                    txtCantidad.BorderColor = System.Drawing.Color.Red;
+                    lblMessage.Text = "Debe ingresar una cantidad mayor a 0";
+                }
+                else if (int.Parse(txtCantidad.Text) > producto.StockActual)
+                {
+                    txtCantidad.BorderColor = System.Drawing.Color.Red;
+                    lblMessage.Text = "No se puede vender lo que no se tiene.";
+                }
+
+
+                else
+                {
+                    detalle.Cantidad = int.Parse(txtCantidad.Text);
+                    detalle.Producto = new Producto();
+                    detalle.Producto = producto;
+                    detalle.PrecioParcial = decimal.Parse(txtSubtotal.Text);
+                    detalle.PrecioUnitario = decimal.Parse(txtPrecioUnitario.Text);
+                    listaDetalles.Add(detalle);
+                    Session.Add("vDetalle", detalle);
+                    Session.Add("detalleVenta", listaDetalles);
+                    listaProductos = (List<Producto>)Session["listaProductos"];
+                    listaProductos.Remove(listaProductos.Find(x => x.Id == producto.Id));
+
+                    Session.Add("listaProductos", listaProductos);
+                    ddProductos.DataSource = listaProductos;
+                    ddProductos.DataTextField = "Nombre";
+                    ddProductos.DataValueField = "Id";
+                    ddProductos.DataBind();
+                    lblMessage.Text = "";
+                }
+
+                txtCantidad.Text = "0";
+                txtSubtotal.Text = "0";
+                gvDetalle.DataSource = listaDetalles;
+                gvDetalle.DataBind();
+                btnAgregarTransaccion.Visible = true;
             }
-            else if (int.Parse(txtCantidad.Text) > producto.StockActual)
+            catch (Exception ex)
             {
-                lblMessage.Text = "No se puede vender lo que no se tiene.";
+
+                int valor;
+
+                if (ex.Message.ToString() == ("La cadena de entrada no tiene el formato correcto."))
+                {
+                    if (!int.TryParse(txtCantidad.Text, out valor))
+                    {
+                        txtCantidad.BorderColor = System.Drawing.Color.Red;
+                        lblMessage.Text = "La cantidad no puede contener letras.";
+                    }
+                    if (!int.TryParse(txtPrecioUnitario.Text, out valor))
+                    {
+                        txtPrecioUnitario.BorderColor = System.Drawing.Color.Red;
+                        lblMessage.Text = "El precio unitario no puede contener letras.";
+                    }
+                    else
+                    {
+                        lblMessage.Text = "Los datos ingresados no tienen el formato correcto. Asegurese de ingresar solamente numeros donde así se solicita.";
+                    }
+                }
+                else
+                {
+                    Session.Add("Error", ex.ToString());
+                    Response.Redirect("Error.aspx");
+                }
             }
             
-            
-            else
-            {
-                detalle.Cantidad = int.Parse(txtCantidad.Text);
-                detalle.Producto = new Producto();
-                detalle.Producto = producto;
-                detalle.PrecioParcial = decimal.Parse(txtSubtotal.Text);
-                detalle.PrecioUnitario = decimal.Parse(txtPrecioUnitario.Text);
-                listaDetalles.Add(detalle);
-                Session.Add("vDetalle", detalle);
-                Session.Add("detalleVenta", listaDetalles);
-                listaProductos = (List<Producto>)Session["listaProductos"];
-                listaProductos.Remove(listaProductos.Find(x => x.Id == producto.Id));
-                
-                Session.Add("listaProductos", listaProductos);
-                ddProductos.DataSource = listaProductos;
-                ddProductos.DataTextField = "Nombre";
-                ddProductos.DataValueField = "Id";
-                ddProductos.DataBind();
-                lblMessage.Text = "";
-            }
-            
-            txtCantidad.Text = "0";
-            txtSubtotal.Text = "0";
-            gvDetalle.DataSource = listaDetalles;
-            gvDetalle.DataBind();
-            btnAgregarTransaccion.Visible = true;
         }
 
         protected void btnAgregarTransaccion_Click(object sender, EventArgs e)
         {
-            Usuario usuario = new Usuario();
-            usuario = (Usuario)Session["usuario"];
-            
-            Transaccion transaccion = new Transaccion();
-            transaccion.Vendedor = new Usuario();
-            transaccion.Vendedor = usuario;
-            TransaccionNegocio transaccionNegocio = new TransaccionNegocio();
-            List<Transaccion> listaTransacciones = new List<Transaccion>();
-            listaTransacciones = transaccionNegocio.listarTodasT();
-            int idTransaccion = 1;
-            foreach (Transaccion item in listaTransacciones)
+            txtCantidad.BorderColor = System.Drawing.Color.Gray;
+            txtFecha.BorderColor = System.Drawing.Color.Gray;
+            try
             {
-                idTransaccion = item.Id + 1;
-            }
-            transaccion.Tipo = "V";
-            
-            if (idTransaccion != 0)
-                transaccion.Id = idTransaccion;
-            Cliente cliente = new Cliente();
-            ClienteNegocio clienteNegocio = new ClienteNegocio();
-            string id = ddClientes.SelectedValue;
-            cliente = clienteNegocio.getCliente(id);
-            transaccion.Cliente = cliente;
-            transaccionNegocio.agregarVenta(transaccion);
-            DetalleNegocio detalleNegocio = new DetalleNegocio();
+                if (txtFecha.Text != null)
+                {
+                    Usuario usuario = new Usuario();
+                    usuario = (Usuario)Session["usuario"];
+                    var fecha = txtFecha.Text;
+                    Transaccion transaccion = new Transaccion();
+                    transaccion.Vendedor = new Usuario();
+                    transaccion.Vendedor = usuario;
+                    TransaccionNegocio transaccionNegocio = new TransaccionNegocio();
+                    List<Transaccion> listaTransacciones = new List<Transaccion>();
+                    listaTransacciones = transaccionNegocio.listarTodasT();
+                    int idTransaccion = 1;
+                    foreach (Transaccion item in listaTransacciones)
+                    {
+                        idTransaccion = item.Id + 1;
+                    }
+                    transaccion.Tipo = "V";
 
-            transaccion.listaDetalles = (List<Detalle>)Session["detalleVenta"];
-            listaDetalles = (List<Detalle>)Session["detalleVenta"];
-            Producto producto = new Producto();
-            ProductoNegocio productoNegocio = new ProductoNegocio();
+                    if (idTransaccion != 0)
+                        transaccion.Id = idTransaccion;
+                    Cliente cliente = new Cliente();
+                    ClienteNegocio clienteNegocio = new ClienteNegocio();
+                    string id = ddClientes.SelectedValue;
+                    cliente = clienteNegocio.getCliente(id);
+                    transaccion.Cliente = cliente;
+
+                    transaccion.Fecha = DateTime.Parse(fecha);
+                    transaccionNegocio.agregarVenta(transaccion);
+                    DetalleNegocio detalleNegocio = new DetalleNegocio();
+
+                    transaccion.listaDetalles = (List<Detalle>)Session["detalleVenta"];
+                    listaDetalles = (List<Detalle>)Session["detalleVenta"];
+                    Producto producto = new Producto();
+                    ProductoNegocio productoNegocio = new ProductoNegocio();
+
+                    foreach (Detalle item in listaDetalles)
+                    {
+                        producto = item.Producto;
+                        producto.StockActual -= item.Cantidad;
+                        if (producto.StockActual < 0) producto.StockActual = 0;
+                        productoNegocio.stock(producto);
+                        item.Transaccion = new Transaccion();
+                        item.Transaccion.Id = idTransaccion;
+                        detalleNegocio.agregar(item);
+                    }
+                    decimal PrecioTotal = 0;
+                    foreach (Detalle item in listaDetalles)
+                    {
+                        PrecioTotal += item.PrecioParcial;
+                    }
+                    transaccion.Monto = PrecioTotal;
+
+                    transaccionNegocio.update(transaccion, idTransaccion);
+                    Session.Remove("detalleVenta");
+                    Response.Redirect("Ventas.aspx", false);
+                    Context.ApplicationInstance.CompleteRequest();
+                }
+                else
+                {
+                    txtFecha.BorderColor = System.Drawing.Color.Red;
+                    lblMessage.Text = "Debe completar este campo.";
+                }
+            }
+            catch (Exception ex)
+            {
+
+                int valor;
+
+                if (ex.Message.ToString() == ("La cadena de entrada no tiene el formato correcto."))
+                {
+                    if (!int.TryParse(txtCantidad.Text, out valor))
+                    {
+                        txtCantidad.BorderColor = System.Drawing.Color.Red;
+                        lblMessage.Text = "La cantidad no puede contener letras.";
+                    }
+                    if (!int.TryParse(txtPrecioUnitario.Text, out valor))
+                    {
+                        txtPrecioUnitario.BorderColor = System.Drawing.Color.Red;
+                        lblMessage.Text = "El precio unitario no puede contener letras.";
+                    }
+                    else
+                    {
+                        lblMessage.Text = "Los datos ingresados no tienen el formato correcto. Asegurese de ingresar solamente numeros donde así se solicita.";
+                    }
+                }
+                else
+                {
+                    Session.Add("Error", ex.ToString());
+                    Response.Redirect("Error.aspx");
+                }
+            }
             
-            foreach (Detalle item in listaDetalles)
-            {
-                producto = item.Producto;
-                producto.StockActual -= item.Cantidad;
-                if (producto.StockActual < 0) producto.StockActual = 0;
-                productoNegocio.stock(producto);
-                item.Transaccion = new Transaccion();
-                item.Transaccion.Id = idTransaccion;
-                detalleNegocio.agregar(item);
-            }
-            decimal PrecioTotal = 0;
-            foreach (Detalle item in listaDetalles)
-            {
-                PrecioTotal += item.PrecioParcial;
-            }
-            transaccion.Monto = PrecioTotal;
-            transaccionNegocio.update(transaccion, idTransaccion);
-            Session.Remove("detalleVenta");
-            Response.Redirect("Ventas.aspx", false);
-            Context.ApplicationInstance.CompleteRequest();
         }
 
         protected void ddProductos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProductoNegocio productoNegocio = new ProductoNegocio();
-            Producto producto = new Producto();
-            int id = int.Parse(ddProductos.SelectedValue);
-            producto = productoNegocio.GetProducto(id);
-            var cantidad = txtCantidad.Text;
-            decimal porcGanancia = Convert.ToDecimal(producto.PorcGanancia);
-            decimal precioUnitario = producto.UltPrecio * ((porcGanancia / 100) + 1);
-            txtPrecioUnitario.Text = precioUnitario.ToString();
-            if (cantidad != "")
+            txtFecha.BorderColor = System.Drawing.Color.Gray;
+            txtCantidad.BorderColor = System.Drawing.Color.Gray;
+            try
             {
-                decimal subtotal = precioUnitario * decimal.Parse(txtCantidad.Text);
+                lblMessage.Text = "";
+                ProductoNegocio productoNegocio = new ProductoNegocio();
+                Producto producto = new Producto();
+                int id = int.Parse(ddProductos.SelectedValue);
+                producto = productoNegocio.GetProducto(id);
+                var cantidad = txtCantidad.Text;
+                decimal porcGanancia = Convert.ToDecimal(producto.PorcGanancia);
+                decimal precioUnitario = producto.UltPrecio * ((porcGanancia / 100) + 1);
+                txtPrecioUnitario.Text = precioUnitario.ToString();
+                if (cantidad != "")
+                {
+                    decimal subtotal = precioUnitario * decimal.Parse(txtCantidad.Text);
 
-                txtSubtotal.Text = subtotal.ToString();
+                    txtSubtotal.Text = subtotal.ToString();
+                }
+                else
+                {
+                    txtSubtotal.Text = "0";
+                }
             }
-            else
+            catch (Exception ex)
             {
-                txtSubtotal.Text = "0";
+
+                int valor;
+
+                if (ex.Message.ToString() == ("La cadena de entrada no tiene el formato correcto."))
+                {
+                    if (!int.TryParse(txtCantidad.Text, out valor))
+                    {
+                        txtCantidad.BorderColor = System.Drawing.Color.Red;
+                        lblMessage.Text = "La cantidad no puede contener letras.";
+                    }
+                    if (!int.TryParse(txtPrecioUnitario.Text, out valor))
+                    {
+                        txtPrecioUnitario.BorderColor = System.Drawing.Color.Red;
+                        lblMessage.Text = "El precio unitario no puede contener letras.";
+                    }
+                    else
+                    {
+                        lblMessage.Text = "Los datos ingresados no tienen el formato correcto. Asegurese de ingresar solamente numeros donde así se solicita.";
+                    }
+                }
+                else
+                {
+                    Session.Add("Error", ex.ToString());
+                    Response.Redirect("Error.aspx");
+                }
             }
+            
         }
 
         protected void gvDetalle_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            int index = Convert.ToInt32(e.RowIndex);
-            listaDetalles = (List<Detalle>)Session["detalleVenta"];
-            Detalle detalle = new Detalle();
-            detalle = listaDetalles[index];
-            listaDetalles.Remove(detalle);
-            if (listaDetalles.Count == 0) btnAgregarTransaccion.Visible = false;
-            Session.Add("detalleVenta", listaDetalles);
-            gvDetalle.DataSource = listaDetalles;
-            gvDetalle.DataBind();
+            txtFecha.BorderColor = System.Drawing.Color.Gray;
+            txtCantidad.BorderColor = System.Drawing.Color.Gray;
+            try
+            {
+                lblMessage.Text = "";
+                int index = Convert.ToInt32(e.RowIndex);
+                listaDetalles = (List<Detalle>)Session["detalleVenta"];
+                Detalle detalle = new Detalle();
+                detalle = listaDetalles[index];
+                listaDetalles.Remove(detalle);
+                if (listaDetalles.Count == 0) btnAgregarTransaccion.Visible = false;
+                Session.Add("detalleVenta", listaDetalles);
+                gvDetalle.DataSource = listaDetalles;
+                gvDetalle.DataBind();
+            }
+            catch (Exception ex)
+            {
+                int valor;
+
+                if (ex.Message.ToString() == ("La cadena de entrada no tiene el formato correcto."))
+                {
+                    if (!int.TryParse(txtCantidad.Text, out valor))
+                    {
+                        txtCantidad.BorderColor = System.Drawing.Color.Red;
+                        lblMessage.Text = "La cantidad no puede contener letras.";
+                    }
+                    if (!int.TryParse(txtPrecioUnitario.Text, out valor))
+                    {
+                        txtPrecioUnitario.BorderColor = System.Drawing.Color.Red;
+                        lblMessage.Text = "El precio unitario no puede contener letras.";
+                    }
+                    else
+                    {
+                        lblMessage.Text = "Los datos ingresados no tienen el formato correcto. Asegurese de ingresar solamente numeros donde así se solicita.";
+                    }
+                }
+                else
+                {
+                    Session.Add("Error", ex.ToString());
+                    Response.Redirect("Error.aspx");
+                }
+
+            }
+            
         }
     }
 }

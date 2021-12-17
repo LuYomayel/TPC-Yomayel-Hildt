@@ -53,7 +53,7 @@ namespace TPC_Comercio
             bool hola = true;
             var nombre = txtNombre.Text;
             var descripcion = txtDescripcion.Text;
-            var urlImagen = txtUrl.Text;
+            
             var precio = txtPrecio.Text;
             var stock = txtStock.Text;
             var stockActual = txtStockActual.Text;
@@ -61,28 +61,74 @@ namespace TPC_Comercio
             var idMarca = ddMarcas.SelectedValue;
             var idCategoria = ddCategorias.SelectedValue;
 
-            if (!(nombre != null && nombre != "")) hola = false;
-            if (!(descripcion != null && descripcion != "")) hola = false;
-            if (!(urlImagen != null && urlImagen!="")) hola = false;
-            if (!(precio != null && precio != "")) hola = false;
-            if (!(stock != null && stock != "")) hola = false;
-            if (!(stockActual != null && stockActual != "")) hola = false;
-            if (!(porcGanancia != null && porcGanancia != "")) hola = false;
-            if (!(idMarca != null && idMarca != "")) hola = false;
-            if (!(idCategoria != null && idCategoria != "")) hola = false;
+            if (!(nombre != null && nombre != ""))
+            {
+                hola = false;
+                txtNombre.BorderColor = System.Drawing.Color.Red;
+            }
+            if (!(descripcion != null && descripcion != ""))
+            {
+                hola = false;
+                txtDescripcion.BorderColor = System.Drawing.Color.Red;
+            }
+            
+            if (!(precio != null && precio != "")) 
+            { 
+                hola = false;
+                txtPrecio.BorderColor = System.Drawing.Color.Red;
+            }
+            if (!(stock != null && stock != ""))
+            {
+                hola = false;
+                txtStock.BorderColor = System.Drawing.Color.Red;
+            }
+            if (!(stockActual != null && stockActual != ""))
+            {
+                hola = false;
+                txtStockActual.BorderColor = System.Drawing.Color.Red;
+            }
+            if (!(porcGanancia != null && porcGanancia != ""))
+            {
+                hola = false;
+                txtPorc.BorderColor = System.Drawing.Color.Red;
+            }
+            if (!(idMarca != null && idMarca != ""))
+            {
+                hola = false;
+                ddMarcas.BorderColor = System.Drawing.Color.Red;
+            }
+            if (!(idCategoria != null && idCategoria != ""))
+            {
+                hola = false;
+                ddCategorias.BorderColor = System.Drawing.Color.Red;
+            }
 
             
 
             return hola;
         }
+        public void volverBordes()
+        {
+            txtNombre.BorderColor = System.Drawing.Color.Gray;
+            txtDescripcion.BorderColor = System.Drawing.Color.Gray;
+            
+            txtPrecio.BorderColor = System.Drawing.Color.Gray;
+            txtStock.BorderColor = System.Drawing.Color.Gray;
+            txtStockActual.BorderColor = System.Drawing.Color.Gray;
+            txtPorc.BorderColor = System.Drawing.Color.Gray;
+            ddMarcas.BorderColor = System.Drawing.Color.Gray;
+            ddCategorias.BorderColor = System.Drawing.Color.Gray;
+        }
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
+            lblError.Text = "";
+            volverBordes();
             ProductoNegocio producto = new ProductoNegocio();
             Producto nuevo = new Producto();
             var nombre = txtNombre.Text;
             var descripcion = txtDescripcion.Text;
-            var urlImagen = txtUrl.Text;
+            
             var precio = txtPrecio.Text;
             var stock = txtStock.Text;
             var stockActual = txtStockActual.Text;
@@ -96,7 +142,7 @@ namespace TPC_Comercio
                     
                     nuevo.Nombre = nombre;
                     nuevo.Descripcion = descripcion;
-                    nuevo.UrlImagen = urlImagen;
+                   
                     nuevo.StockMinimo = int.Parse(stock);
                     nuevo.StockActual = int.Parse(stockActual);
                     nuevo.PorcGanancia = int.Parse(porcGanancia);
@@ -116,8 +162,29 @@ namespace TPC_Comercio
             }
             catch (Exception ex)
             {
+                int valor;
                 if (ex.Message.ToString() == ("La cadena de entrada no tiene el formato correcto."))
                 {
+                    if (!int.TryParse(txtStock.Text, out valor))
+                    {
+                        txtStock.BorderColor = System.Drawing.Color.Red;
+                        lblError.Text = "El stock minimo no puede contener letras.";
+                    }
+                    if (!int.TryParse(txtStockActual.Text, out valor))
+                    {
+                        txtStockActual.BorderColor = System.Drawing.Color.Red;
+                        lblError.Text = "El stock actual no puede contener letras.";
+                    }
+                    if (!int.TryParse(txtPorc.Text, out valor))
+                    {
+                        txtPorc.BorderColor = System.Drawing.Color.Red;
+                        lblError.Text = "El porcentaje de ganancia no puede contener letras.";
+                    }
+                    if (!int.TryParse(txtPrecio.Text, out valor))
+                    {
+                        txtPrecio.BorderColor = System.Drawing.Color.Red;
+                        lblError.Text = "El precio no puede contener letras.";
+                    }
                     lblError.Text = "Los datos ingresados no tienen el formato correcto. Asegurese de ingresar solamente numeros donde así se solicita.";
                 }
                 else

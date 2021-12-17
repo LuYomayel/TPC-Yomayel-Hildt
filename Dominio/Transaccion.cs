@@ -17,6 +17,7 @@ namespace Dominio
         public Usuario Vendedor { get; set; }
 
         public double Comision { get; set; }
+        public DateTime Fecha { get; set; }
 
         public Transaccion()
         {

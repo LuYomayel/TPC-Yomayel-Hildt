@@ -16,12 +16,7 @@
             
             <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control"></asp:TextBox>
         </div>
-        <div class="form-group">
-            <label >Url Imagen</label>
-            
-            <asp:TextBox ID="txtUrl" runat="server" CssClass="form-control"></asp:TextBox>
-            
-        </div>
+        
         <div class="form-group">
             <label >Precio   <span class="font-italic text-muted">Separe los decimales con ,</span></label>
             
@@ -59,7 +54,7 @@
         </div> 
 
         <div>
-            <asp:Label ID="lblError" runat="server" ></asp:Label>
+            <asp:Label ID="lblError" runat="server" CssClass="text-danger"></asp:Label>
 
         </div>
         

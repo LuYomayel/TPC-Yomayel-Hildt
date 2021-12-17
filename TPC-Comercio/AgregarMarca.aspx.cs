@@ -21,6 +21,8 @@ namespace TPC_Comercio
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
+            lblError.Text = "";
+            txtNombre.BorderColor = System.Drawing.Color.Gray;
             Marca marca = new Marca();
             MarcaNegocio marcaNegocio = new MarcaNegocio();
             try
@@ -28,6 +30,7 @@ namespace TPC_Comercio
                 marca.Nombre = txtNombre.Text;
                 if (txtNombre.Text == "")
                 {
+                    txtNombre.BorderColor = System.Drawing.Color.Red;
                     lblError.Text = "Este campo no puede ir vacío.";
                 }
                 else

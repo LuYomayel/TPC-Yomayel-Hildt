@@ -41,26 +41,77 @@ namespace TPC_Comercio
 
         protected void btnModificar_Click(object sender, EventArgs e)
         {
+            lblError.Text = "";
+            volverBordes();
             Proveedor proveedor = new Proveedor();
             ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
             try
             {
-                proveedor.Cuit = (string)Session["cuitProveedor"];
-                proveedor.RazonSocial = txtRazon.Text;
-                proveedor.Descripcion = txtDescripcion.Text;
-                proveedor.Email = txtEmail.Text;
-                proveedorNegocio.actualizar(proveedor);
-                Response.Redirect("Proveedores.aspx", false);
-                Context.ApplicationInstance.CompleteRequest();
+                if (validarCampos())
+                {
+                    proveedor.Cuit = (string)Session["cuitProveedor"];
+                    proveedor.RazonSocial = txtRazon.Text;
+                    proveedor.Descripcion = txtDescripcion.Text;
+                    proveedor.Email = txtEmail.Text;
+                    proveedorNegocio.actualizar(proveedor);
+                    Response.Redirect("Proveedores.aspx", false);
+                    Context.ApplicationInstance.CompleteRequest();
+                }
+                else
+                {
+                    lblError.Text = "Todos los campos son obligatorios";
+                }
             }
             catch (Exception ex)
             {
 
-                Session.Add("Error", ex.ToString());
-                Response.Redirect("Error.aspx");
+                if (ex.Message.ToString() == ("La cadena de entrada no tiene el formato correcto."))
+                {
+                    lblError.Text = "Los datos ingresados no tienen el formato correcto. Asegurese de ingresar solamente numeros donde así se solicita.";
+                }
+                else
+                {
+                    Session.Add("Error", ex.ToString());
+                    Response.Redirect("Error.aspx");
+                }
             }
             
 
+        }
+
+        public bool validarCampos()
+        {
+            bool hola = true;
+            
+            var razonSocial = txtRazon.Text;
+            var descripcion = txtDescripcion.Text;
+            var email = txtEmail.Text;
+
+            
+            if (razonSocial == null || razonSocial == "")
+            {
+                hola = false;
+                txtRazon.BorderColor = System.Drawing.Color.Red;
+            }
+            if (email == null || email == "")
+            {
+                hola = false;
+                txtDescripcion.BorderColor = System.Drawing.Color.Red;
+            }
+            if (descripcion == null || descripcion == "")
+            {
+                hola = false;
+                txtEmail.BorderColor = System.Drawing.Color.Red;
+            }
+
+            return hola;
+        }
+        public void volverBordes()
+        {
+            
+            txtRazon.BorderColor = System.Drawing.Color.Gray;
+            txtDescripcion.BorderColor = System.Drawing.Color.Gray;
+            txtEmail.BorderColor = System.Drawing.Color.Gray;
         }
     }
 }

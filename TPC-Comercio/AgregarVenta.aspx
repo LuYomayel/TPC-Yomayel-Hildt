@@ -9,6 +9,11 @@
                             <asp:Label ID="lblProveedor" runat="server" Text="Cliente:"></asp:Label>
                             <asp:DropDownList ID="ddClientes" runat="server" CssClass="form-control"></asp:DropDownList>
                     </div>
+                    <div class="form-group">
+                        <label >Fecha de Nacimiento</label>
+            
+                        <asp:TextBox ID="txtFecha" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+                    </div>
                 </div>
                     <div class="row">
                         <div class="col form-group">
@@ -42,7 +47,7 @@
                     </Columns>
                 </asp:GridView>
                 </div>
-            <asp:Label ID="lblMessage" runat="server"></asp:Label>
+            <asp:Label ID="lblMessage" runat="server" CssClass="text-danger"></asp:Label>
             <asp:Button ID="btnAgregarTransaccion" runat="server" Text="Agregar Venta" OnClick="btnAgregarTransaccion_Click" CssClass="btn btn-primary " Visible="false"/>
         </ContentTemplate>
     </asp:UpdatePanel>

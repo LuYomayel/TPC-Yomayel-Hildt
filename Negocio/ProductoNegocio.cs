@@ -16,7 +16,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("select p.id, p.nombre, p.descripcion, p.urlimagen,p.PorcGanancia,p.StockMinimo, coalesce(p.StockActual, 0) StockActual, m.Nombre Marca,m.id idMarca, c.id idCategoria, c.Nombre Categoria, coalesce(p.UltPrecio,0) UltPrecio from Productos p join Categorias c on c.id = p.idCategoria join Marcas m on m.id = p.IdMarca where p.estado = 1 ");
+                datos.setearConsulta("select p.id, p.nombre, p.descripcion, p.PorcGanancia,p.StockMinimo, coalesce(p.StockActual, 0) StockActual, m.Nombre Marca,m.id idMarca, c.id idCategoria, c.Nombre Categoria, coalesce(p.UltPrecio,0) UltPrecio from Productos p join Categorias c on c.id = p.idCategoria join Marcas m on m.id = p.IdMarca where p.estado = 1 ");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -26,7 +26,7 @@ namespace Negocio
                     
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    aux.UrlImagen = (string)datos.Lector["UrlImagen"];
+                    
                     aux.StockMinimo = (int)datos.Lector["StockMinimo"];
                     aux.StockActual = (int)datos.Lector["StockActual"];
                     aux.UltPrecio = (decimal)datos.Lector["UltPrecio"];
@@ -54,8 +54,8 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                string valores = "values( '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "', '" + nuevo.UrlImagen + "', " + nuevo.PorcGanancia + ", " + nuevo.Marca + ", " + nuevo.Categoria + ", "+ nuevo.StockMinimo +", replace('"+nuevo.UltPrecio+"', ',' , '.'), "+ nuevo.StockActual +")";
-                datos.setearConsulta("insert into Productos (Nombre, Descripcion, UrlImagen, PorcGanancia, IdMarca, IdCategoria, StockMinimo, UltPrecio, StockActual) " + valores);
+                string valores = "values( '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "', " + nuevo.PorcGanancia + ", " + nuevo.Marca + ", " + nuevo.Categoria + ", "+ nuevo.StockMinimo +", replace('"+nuevo.UltPrecio+"', ',' , '.'), "+ nuevo.StockActual +")";
+                datos.setearConsulta("insert into Productos (Nombre, Descripcion, PorcGanancia, IdMarca, IdCategoria, StockMinimo, UltPrecio, StockActual) " + valores);
 
                 datos.ejectutarAccion();
 
@@ -75,7 +75,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                string consulta = "update Productos set nombre = '" + producto.Nombre + "', Descripcion = '" + producto.Descripcion + "', UrlImagen = '" + producto.UrlImagen + "', PorcGanancia = '" + producto.PorcGanancia + "', IdMarca = '" + producto.Marca.Id + "', IdCategoria = '" + producto.Categoria.Id + "', StockMinimo = '" + producto.StockMinimo + "', ultPrecio = replace('"+ producto.UltPrecio +"' , ',' , '.'), stockActual = " + producto.StockActual + " where id = " + producto.Id + ";";
+                string consulta = "update Productos set nombre = '" + producto.Nombre + "', Descripcion = '" + producto.Descripcion + "', PorcGanancia = '" + producto.PorcGanancia + "', IdMarca = '" + producto.Marca.Id + "', IdCategoria = '" + producto.Categoria.Id + "', StockMinimo = '" + producto.StockMinimo + "', ultPrecio = replace('"+ producto.UltPrecio +"' , ',' , '.'), stockActual = " + producto.StockActual + " where id = " + producto.Id + ";";
                 datos.setearConsulta(consulta);
 
                 datos.ejectutarAccion();
@@ -155,7 +155,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("select id, nombre, descripcion, urlimagen, coalesce(ultprecio, 0) UltPrecio, coalesce(stockActual, 0) stockActual, porcGanancia from Productos where estado = 1 and id= " + id );
+                datos.setearConsulta("select id, nombre, descripcion, coalesce(ultprecio, 0) UltPrecio, coalesce(stockActual, 0) stockActual, porcGanancia from Productos where estado = 1 and id= " + id );
                 datos.ejecutarLectura();
 
                 Producto producto = new Producto();
@@ -167,7 +167,7 @@ namespace Negocio
                     producto.Descripcion = (string)datos.Lector["Descripcion"];
                     producto.StockActual = (int)datos.Lector["stockActual"];
                     producto.PorcGanancia = (double)datos.Lector["porcGanancia"];
-                    producto.UrlImagen = (string)datos.Lector["UrlImagen"];
+                    
                     producto.UltPrecio = (decimal)datos.Lector["UltPrecio"];
                 }
 

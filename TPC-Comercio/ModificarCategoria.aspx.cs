@@ -39,16 +39,26 @@ namespace TPC_Comercio
 
         protected void btnModificar_Click(object sender, EventArgs e)
         {
+            txtNombre.BorderColor = System.Drawing.Color.Gray;
+            lblError.Text = "";
             Categoria categoria = new Categoria();
             CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
             try
             {
                 categoria.Id = (int)Session["idCategoria"];
                 categoria.Nombre = txtNombre.Text;
-
-                categoriaNegocio.actualizar(categoria);
-                Response.Redirect("Categorias.aspx",false);
-                Context.ApplicationInstance.CompleteRequest();
+                if(txtNombre.Text != "")
+                {
+                    categoriaNegocio.actualizar(categoria);
+                    Response.Redirect("Categorias.aspx", false);
+                    Context.ApplicationInstance.CompleteRequest();
+                }
+                else
+                {
+                    txtNombre.BorderColor = System.Drawing.Color.Red;
+                    lblError.Text = "No puedes dejar campos vacios.";
+                }
+                
             }
             catch (Exception ex)
             {
