@@ -17,6 +17,23 @@ namespace TPC_Comercio
                 Response.Redirect("Error.aspx", false);
             }
             txtCantVentas1.Text = "1";
+            List<Comision> listaComisiones = new List<Comision>();
+            ComisionNegocio comisionNegocio = new ComisionNegocio();
+            if(comisionNegocio.listarComisiones() != null)
+            {
+                listaComisiones = comisionNegocio.listarComisiones();
+                txtCantVentas1.Text = "1";
+                
+                txtCantVentas2.Text = listaComisiones[0].CantVentas.ToString();
+                txtCantVentas3.Text = listaComisiones[0].CantVentas++.ToString();
+                txtCantVentas4.Text = listaComisiones[1].CantVentas.ToString();
+                txtCantVentas5.Text = listaComisiones[2].CantVentas.ToString();
+                txtComision1.Text = listaComisiones[0].Porcentaje.ToString();
+                txtComision2.Text = listaComisiones[1].Porcentaje.ToString();
+                txtComision3.Text = listaComisiones[2].Porcentaje.ToString();
+            }
+            
+
         }
 
         protected void btnPrueba_Click(object sender, EventArgs e)
