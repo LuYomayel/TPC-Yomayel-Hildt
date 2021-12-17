@@ -69,7 +69,7 @@ namespace TPC_Comercio
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
-            if (txtCantidad.Text != "" && txtCantidad.Text != "0")
+            if (txtCantidad.Text != "" && txtCantidad.Text != "0" && txtPrecioUnitario.Text != "" && txtPrecioUnitario.Text != "0")
             {
                 listaDetalles = (List<Detalle>)Session["listaDetalles"];
                 if (listaDetalles == null) listaDetalles = new List<Detalle>();
@@ -102,10 +102,22 @@ namespace TPC_Comercio
                 txtSubtotal.Text = "0";
                 gvDetalle.DataSource = listaDetalles;
                 gvDetalle.DataBind();
+                btnAgregarTransaccion.Visible = true;
             }
             else
             {
-                lblMessage.Text = "Debe ingresar una cantidad distinta de cero";
+                if (txtCantidad.Text == "" || txtCantidad.Text == "0")
+                {
+                    lblMessage.Text = "Debe ingresar una cantidad distinta de cero.";
+                }
+                if (txtPrecioUnitario.Text == "" || txtPrecioUnitario.Text == "0")
+                {
+                    lblMessage.Text = "Debe ingresar precio unitario distinto de cero.";
+                }
+                if ((txtPrecioUnitario.Text == "" || txtPrecioUnitario.Text == "0") && (txtCantidad.Text == "" || txtCantidad.Text == "0"))
+                {
+                    lblMessage.Text = "Todos los campos son obligatorios.";
+                }
             }
         }
 
@@ -214,6 +226,7 @@ namespace TPC_Comercio
                 Session.Add("listaDetalles", listaDetalles);
                 gvDetalle.DataSource = listaDetalles;
                 gvDetalle.DataBind();
+                if (listaDetalles.Count == 0) btnAgregarTransaccion.Visible = false;
             }
             catch (Exception ex)
             {

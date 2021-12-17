@@ -26,9 +26,18 @@ namespace TPC_Comercio
             try
             {
                 categoria.Nombre = txtNombre.Text;
-                categoriaNegocio.agregar(categoria);
-                Response.Redirect("Categorias.aspx",false);
-                Context.ApplicationInstance.CompleteRequest();
+                
+                if(txtNombre.Text == "")
+                {
+                    lblError.Text = "Este campo no puede ir vacío.";
+                }
+                else
+                {
+                    categoriaNegocio.agregar(categoria);
+                    Response.Redirect("Categorias.aspx", false);
+                    Context.ApplicationInstance.CompleteRequest();
+                }
+                
             }
             catch (Exception ex)
             {

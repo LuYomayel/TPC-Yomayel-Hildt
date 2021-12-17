@@ -11,5 +11,5 @@
             </asp:GridView>
         </ContentTemplate>
     </asp:UpdatePanel>
-    <asp:Button ID="btnAgregar" runat="server" Text="Agregar Categoria" CssClass="btn btn-primary" OnClick="btnAgregar_Click"/>
+    <asp:Button ID="btnAgregar" runat="server" Text="Agregar Marca" CssClass="btn btn-primary" OnClick="btnAgregar_Click"/>
 </asp:Content>

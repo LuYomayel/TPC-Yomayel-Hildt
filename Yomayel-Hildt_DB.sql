@@ -99,7 +99,8 @@ create table Comisiones(
 	CantVentas int not null primary key,
 	Porcentaje float null
 )
-
+select * from Comisiones
+delete from Comisiones
 --alter table Comisiones drop COlumn TipoComision
 --alter table Comisiones add TipoComision int not null
 insert into USUARIOS Values ('test', 'test', 1)

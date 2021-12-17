@@ -97,14 +97,15 @@ namespace TPC_Comercio
             ProductoNegocio productoNegocio = new ProductoNegocio();
             int id = int.Parse(ddProductos.SelectedValue);
             producto = productoNegocio.GetProducto(id);
-            if (txtCantidad.Text == "")
+            if (txtCantidad.Text == "" || txtCantidad.Text == "0" || int.Parse(txtCantidad.Text) < 0)
             {
-                lblMessage.Text = "Debe ingresar una cantidad distinta de 0";
+                lblMessage.Text = "Debe ingresar una cantidad mayor a 0";
             }
             else if (int.Parse(txtCantidad.Text) > producto.StockActual)
             {
                 lblMessage.Text = "No se puede vender lo que no se tiene.";
             }
+            
             
             else
             {
@@ -131,6 +132,7 @@ namespace TPC_Comercio
             txtSubtotal.Text = "0";
             gvDetalle.DataSource = listaDetalles;
             gvDetalle.DataBind();
+            btnAgregarTransaccion.Visible = true;
         }
 
         protected void btnAgregarTransaccion_Click(object sender, EventArgs e)
@@ -217,6 +219,7 @@ namespace TPC_Comercio
             Detalle detalle = new Detalle();
             detalle = listaDetalles[index];
             listaDetalles.Remove(detalle);
+            if (listaDetalles.Count == 0) btnAgregarTransaccion.Visible = false;
             Session.Add("detalleVenta", listaDetalles);
             gvDetalle.DataSource = listaDetalles;
             gvDetalle.DataBind();

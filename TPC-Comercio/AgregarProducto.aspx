@@ -58,7 +58,10 @@
             <asp:Button ID="btnAgregar" runat="server" Text="Agregar" CssClass="btn btn-primary" OnClick="btnAgregar_Click"/>
         </div> 
 
+        <div>
+            <asp:Label ID="lblError" runat="server" ></asp:Label>
 
+        </div>
         
 
         

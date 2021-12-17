@@ -26,9 +26,16 @@ namespace TPC_Comercio
             try
             {
                 marca.Nombre = txtNombre.Text;
-                marcaNegocio.agregar(marca);
-                Response.Redirect("Marcas.aspx",false);
-                Context.ApplicationInstance.CompleteRequest();
+                if (txtNombre.Text == "")
+                {
+                    lblError.Text = "Este campo no puede ir vacío.";
+                }
+                else
+                {
+                    marcaNegocio.agregar(marca);
+                    Response.Redirect("Marcas.aspx", false);
+                    Context.ApplicationInstance.CompleteRequest();
+                }
             }
             catch (Exception ex)
             {

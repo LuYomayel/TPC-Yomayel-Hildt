@@ -108,13 +108,23 @@ namespace TPC_Comercio
                     Response.Redirect("Productos.aspx", false);
                     Context.ApplicationInstance.CompleteRequest();
                 }
+                else
+                {
+                    lblError.Text = "Todos los campos son obligatorios.";
+                }
 
             }
             catch (Exception ex)
             {
-
-                Session.Add("Error", ex.ToString());
-                Response.Redirect("Error.aspx");
+                if (ex.Message.ToString() == ("La cadena de entrada no tiene el formato correcto."))
+                {
+                    lblError.Text = "Los datos ingresados no tienen el formato correcto. Asegurese de ingresar solamente numeros donde así se solicita.";
+                }
+                else
+                {
+                    Session.Add("Error", ex.ToString());
+                    Response.Redirect("Error.aspx");
+                }
             }
         }
     }
