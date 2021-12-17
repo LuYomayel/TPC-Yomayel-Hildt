@@ -34,8 +34,8 @@ namespace TPC_Comercio
                 }
                 else
                 {
-                    Session.Add("error", "user o pass incorrectos");
-                    Response.Redirect("Error.aspx", false);
+                    lblError.Text = "Usuario o Contraseña incorrectos";
+                    
                 }
 
             }
@@ -44,6 +44,16 @@ namespace TPC_Comercio
                 Session.Add("error", ex.ToString());
                 Response.Redirect("Error.aspx");
             }
+        }
+
+        protected void txtUser_TextChanged(object sender, EventArgs e)
+        {
+            lblError.Text = "";
+        }
+
+        protected void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+            lblError.Text = "";
         }
     }
 }

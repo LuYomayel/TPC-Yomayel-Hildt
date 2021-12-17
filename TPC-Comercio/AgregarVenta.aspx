@@ -10,7 +10,7 @@
                             <asp:DropDownList ID="ddClientes" runat="server" CssClass="form-control"></asp:DropDownList>
                     </div>
                     <div class="form-group">
-                        <label >Fecha de Nacimiento</label>
+                        <label >Fecha</label>
             
                         <asp:TextBox ID="txtFecha" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
                     </div>

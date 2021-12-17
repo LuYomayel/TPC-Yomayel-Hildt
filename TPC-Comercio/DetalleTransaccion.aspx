@@ -8,5 +8,11 @@
             <asp:BoundField DataField="PrecioParcial" HeaderText="Precio Parcial"/>
         </Columns>
     </asp:GridView>
-    <asp:Label ID="lblTotal" runat="server" Text="Label"></asp:Label>
+    <div class="row">
+        <div class="col-9"></div>
+        <div class="col-3">
+            <asp:Label ID="lblTotal" runat="server" Text="Label" CssClass="h3"></asp:Label>
+        </div>
+    </div>
+    
 </asp:Content>

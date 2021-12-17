@@ -10,9 +10,9 @@
     <div class="row my-3">
       <div class="col-10">
         <h1>MiComercio</h1>
-        <p>Direcion 123</p>
-        
-        <p>local 312</p>
+        <p>Direccion:           Av. San Martin 123, San Miguel</p>
+        <p>Cuit:                27-4610605-65</p>
+        <p>Inicio de actividad: 7/12/2020</p>
       </div>
       <div class="col-2">
         
@@ -67,7 +67,7 @@
             <h1>Total Factura</h1>
         </div>
         <div class="col-3">
-            <h1><asp:Label ID="lblTotal" runat="server" CssClass="h1"></asp:Label></h1>
+            <h1>$<asp:Label ID="lblTotal" runat="server" CssClass="h1"></asp:Label></h1>
         </div>
         
         

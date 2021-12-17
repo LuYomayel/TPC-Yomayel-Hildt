@@ -28,7 +28,7 @@
                     <asp:Button ID="btnComisiones" runat="server" Text="Modificar Comisiones" Class="btn btn-primary" OnClick="btnComisiones_Click"/>
                 </div>
                 <div class="col-3">
-                    <asp:Label ID="Label1" runat="server" Text="Total: " CssClass="h2 text-right"> </asp:Label><asp:Label ID="lblTotal" runat="server"  CssClass="h2 text-right"></asp:Label>
+                    <asp:Label ID="Label1" runat="server" Text="Total: $" CssClass="h2 text-right"> </asp:Label><asp:Label ID="lblTotal" runat="server"  CssClass="h2 text-right"></asp:Label>
                 </div>
             </div>
             
